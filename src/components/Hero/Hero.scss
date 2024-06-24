@@ -1,0 +1,30 @@
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('') no-repeat center center/cover; //find bg img
+
+    &__title {
+        font-size: 3rem;
+    }
+
+    &__subtitle {
+        font-size: 1.5rem;
+    }
+
+    &__button-link {
+        text-decoration: none;
+    }
+
+    &__button {
+        background-color: #e63946;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+}
