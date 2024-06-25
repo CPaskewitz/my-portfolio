@@ -2,6 +2,17 @@ import React from 'react';
 import './About.scss';
 
 const About: React.FC = () => {
+    const skills = [
+        { src: 'htmlicon.png', alt: 'HTML' },
+        { src: 'cssicon.png', alt: 'CSS' },
+        { src: 'javascripticon.png', alt: 'JavaScript' },
+        { src: 'reacticon.png', alt: 'React' },
+        { src: 'nodeicon.png', alt: 'Node.js' },
+        { src: 'mysqlicon.png', alt: 'MySQL' },
+        { src: 'mongodbicon.png', alt: 'MongoDB' },
+        { src: 'typescripticon.png', alt: 'TypeScript' },
+    ];
+
     return (
         <div className="about" id="about">
             <h1 className="about__title">About</h1>
@@ -14,14 +25,11 @@ const About: React.FC = () => {
                 Outside of coding, I enjoy horror movies, gaming, and fitness.
             </p>
             <div className="about__skills">
-                <div className="about__skill">HTML</div>
-                <div className="about__skill">CSS</div>
-                <div className="about__skill">JavaScript</div>
-                <div className="about__skill">React</div>
-                <div className="about__skill">Node.js</div>
-                <div className="about__skill">MySQL</div>
-                <div className="about__skill">MongoDB</div>
-                <div className="about__skill">TypeScript</div>
+                {skills.map((skill, index) => (
+                    <div key={index} className="about__skill">
+                        <img src={skill.src} alt={skill.alt} className="about__skill-icon" />
+                    </div>
+                ))}
             </div>
         </div>
     );
