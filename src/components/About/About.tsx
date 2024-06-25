@@ -11,7 +11,7 @@ const About: React.FC = () => {
                 My customer service and HR background enhances my communication and teamwork skills,
                 bridging gaps between technical and non-technical teams.
                 I thrive on innovative projects that push technological boundaries and enhance user engagement.
-                Outside of coding, I enjoy reading, staying fit, and exploring new hobbies.
+                Outside of coding, I enjoy horror movies, gaming, and fitness.
             </p>
             <div className="about__skills">
                 <div className="about__skill">HTML</div>
