@@ -2,10 +2,34 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Column from '../Column/Column';
 import './Hero.scss';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+    projectsRef: React.RefObject<HTMLDivElement>;
+}
+
+const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
     const [columns, setColumns] = useState<number[]>([]);
     const [directionX, setDirectionX] = useState(0);
     const placeholderRef = useRef<HTMLDivElement>(null);
+    const [currentTextIndex, setCurrentTextIndex] = useState(0);
+    const [animationKey, setAnimationKey] = useState(0);
+
+    const texts = [
+        { text: 'Corey Paskewitz', bgColor: '#20a7d8' },
+        { text: 'Full Stack App Developer', bgColor: '#CD921E' },
+        { text: 'Software Engineer', bgColor: '#c10528' },
+    ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+            setAnimationKey((prevKey) => prevKey + 1);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const currentText = texts[currentTextIndex].text;
+    const currentBgColor = texts[currentTextIndex].bgColor;
 
     const options = {
         imgSrc1: '/bg.jpg',
@@ -30,6 +54,12 @@ const Hero: React.FC = () => {
         };
     }, [handleMouseMove]);
 
+    const handleCenterClick = () => {
+        if (projectsRef.current) {
+            projectsRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className="hero">
             <div className="hero__placeholder" ref={placeholderRef}>
@@ -46,11 +76,17 @@ const Hero: React.FC = () => {
                 ))}
             </div>
             <div className="hero__content">
-                <h1 className="hero__title">I'm Corey, a Software Engineer.</h1>
-                <p className="hero__subtitle">I make full stack web applications!</p>
-                <a href="#projects" className="hero__button-link">
-                    <button className="hero__button">View My Work</button>
-                </a>
+                <div id="message" className="hero__center" onClick={handleCenterClick}>
+                    <div className="hero__outside"></div>
+                </div>
+                <div className="hero__text-container">
+                    <h1 className="hero__greeting">
+                        Hello I'm
+                        <span key={animationKey} className="hero__animation" style={{ backgroundColor: currentBgColor }}>
+                            {currentText}
+                        </span>
+                    </h1>
+                </div>
             </div>
         </div>
     );

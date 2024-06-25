@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
@@ -8,6 +8,7 @@ import './app.scss';
 
 const App: React.FC = () => {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+  const projectsRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = () => {
     if (window.scrollY > window.innerHeight) {
@@ -25,9 +26,11 @@ const App: React.FC = () => {
   return (
     <div>
       {isNavbarVisible && <Navbar />}
-      <Hero />
+      <Hero projectsRef={projectsRef} />
       <About />
-      <Projects />
+      <div ref={projectsRef}>
+        <Projects />
+      </div>
       <Contact />
     </div>
   );
