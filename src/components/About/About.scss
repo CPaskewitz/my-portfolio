@@ -1,5 +1,5 @@
 .about {
-    padding: 100px 20px;
+    padding: 100px 16px;
     background-color: #e5e4e2;
     display: flex;
     flex-direction: column;
@@ -8,7 +8,7 @@
 
     &__title {
         font-size: 2.5rem;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         text-align: center;
     }
 
@@ -19,6 +19,7 @@
         align-items: center;
         background-color: #fff;
         padding: 16px;
+        margin: 16px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         max-width: 800px;
@@ -32,6 +33,6 @@
 
     &__skills {
         display: flex;
-        gap: 16px;
+        gap: 8px;
     }
 }
