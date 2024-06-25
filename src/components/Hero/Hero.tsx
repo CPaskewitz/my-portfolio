@@ -15,7 +15,7 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
 
     const texts = [
         { text: 'Corey Paskewitz', bgColor: '#20a7d8' },
-        { text: 'Full Stack App Developer', bgColor: '#CD921E' },
+        { text: 'Web Developer', bgColor: '#CD921E' },
         { text: 'Software Engineer', bgColor: '#c10528' },
     ];
 
