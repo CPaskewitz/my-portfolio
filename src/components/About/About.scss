@@ -1,6 +1,10 @@
 .about {
     padding: 100px 20px;
     background-color: #e5e4e2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     &__title {
         font-size: 2.5rem;
@@ -8,61 +12,26 @@
         text-align: center;
     }
 
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 16px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+    }
+
     &__description {
         font-size: 1.2rem;
-        margin-bottom: 40px;
+        margin: 0 16px;
         text-align: center;
     }
 
     &__skills {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-    }
-
-    &__skill {
-        width: 100px;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        overflow: hidden;
-        position: relative;
-        transition: transform 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-        &:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        &:hover::before {
-            opacity: 1;
-        }
-
-        &-icon {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: filter 0.3s ease;
-
-            &:hover {
-                filter: brightness(1.2);
-            }
-        }
+        gap: 16px;
     }
 }
