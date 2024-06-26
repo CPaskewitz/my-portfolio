@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Projects.scss';
 
 const Projects: React.FC = () => {
@@ -6,16 +6,29 @@ const Projects: React.FC = () => {
         {
             title: 'QuestListRPG',
             description: 'A task manager app with RPG elements.',
-            imageUrl: '',
-            link: 'https://quest-list-rpg-5e0cf84376ef.herokuapp.com/'
+            images: ['/path/to/questlistrpg1.png', '/path/to/questlistrpg2.png'],
+            link: 'https://questlistrpg.com'
         },
         {
             title: 'PetAdoptr',
             description: 'A mobile app for finding animals available for adoption.',
-            imageUrl: '',
-            link: ''
+            images: ['/path/to/petadoptr1.png', '/path/to/petadoptr2.png'],
+            link: 'https://petadoptr.com'
         },
     ];
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentImages, setCurrentImages] = useState<string[]>([]);
+
+    const openModal = (images: string[]) => {
+        setCurrentImages(images);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setCurrentImages([]);
+    };
 
     return (
         <div className="projects" id="projects">
@@ -23,8 +36,8 @@ const Projects: React.FC = () => {
             <div className="projects__wrapper">
                 {projects.map((project, index) => (
                     <div key={index} className="projects__container">
-                        <div className="projects__image-wrapper">
-                            <img src={project.imageUrl} alt={project.title} className="projects__image" />
+                        <div className="projects__image-wrapper" onClick={() => openModal(project.images)}>
+                            <img src={project.images[0]} alt={project.title} className="projects__image" />
                         </div>
                         <div className="projects__info">
                             <h3 className="projects__card-title">{project.title}</h3>
@@ -34,8 +47,21 @@ const Projects: React.FC = () => {
                     </div>
                 ))}
             </div>
+
+            {isModalOpen && (
+                <div className="projects__modal">
+                    <div className="projects__modal-content">
+                        <span className="projects__modal-close" onClick={closeModal}>&times;</span>
+                        <div className="projects__modal-images">
+                            {currentImages.map((image, index) => (
+                                <img key={index} src={image} alt={`Project Image ${index + 1}`} className="projects__modal-image" />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
-}
+};
 
 export default Projects;
