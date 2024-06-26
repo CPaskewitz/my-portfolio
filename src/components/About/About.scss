@@ -39,7 +39,6 @@
     }
 
     @include tablet {
-
         &__title {
             font-size: 2.5rem;
         }
@@ -61,7 +60,6 @@
     }
 
     @include desktop {
-
         &__title {
             margin-top: 40px;
             font-size: 3rem;
