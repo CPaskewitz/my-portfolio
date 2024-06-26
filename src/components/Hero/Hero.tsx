@@ -10,7 +10,6 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
     const [columns, setColumns] = useState<number[]>([]);
     const placeholderRef = useRef<HTMLDivElement>(null);
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
-    const [animationKey, setAnimationKey] = useState(0);
 
     const texts = [
         { text: 'Corey Paskewitz', bgColor: '#20a7d8' },
@@ -21,7 +20,6 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-            setAnimationKey((prevKey) => prevKey + 1);
         }, 3000);
 
         return () => clearInterval(interval);
@@ -69,7 +67,7 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
                 <div className="hero__text-container">
                     <h1 className="hero__greeting">
                         Hello I'm
-                        <span key={animationKey} className="hero__animation" style={{ backgroundColor: currentBgColor }}>
+                        <span className="hero__animation" style={{ backgroundColor: currentBgColor }}>
                             {currentText}
                         </span>
                     </h1>

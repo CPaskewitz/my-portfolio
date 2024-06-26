@@ -1,3 +1,5 @@
+@use "../../partials/mixins" as *;
+
 $tokenClr: #16A085;
 $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
 
@@ -138,6 +140,9 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
         text-shadow: 0 0 7px rgba(0, 0, 0, 0.3), 0 0 3px rgba(0, 0, 0, 0.3);
         font-size: 2rem;
         margin-top: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__animation {
@@ -147,23 +152,125 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
         font-size: 1.125rem;
         text-transform: uppercase;
         color: #e5e4e2;
-        animation: slide-down 3s infinite;
+        animation: fade-slide 3s infinite;
+        position: absolute;
+        top: 68%;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+
+    @include tablet {
+        padding: 24px;
+
+        &__title {
+            margin: 32px 0;
+            font-size: 2.5rem;
+        }
+
+        &__content {
+            margin: 24px;
+        }
+
+        &__center {
+            width: 300px;
+            height: 300px;
+
+            &:hover {
+                .hero__outside {
+                    width: 300px;
+                    height: 300px;
+                    line-height: 300px;
+                    margin-top: -150px;
+                    margin-left: -150px;
+                }
+            }
+        }
+
+        &__outside {
+            line-height: 150px;
+            width: 150px;
+            height: 150px;
+            margin-top: -75px;
+            margin-left: -75px;
+        }
+
+        &__greeting {
+            font-size: 2.5rem;
+            margin-top: 24px;
+        }
+
+        &__animation {
+            font-size: 1.875rem;
+            top: 72%;
+        }
+    }
+
+    @include desktop {
+        padding: 32px;
+
+        &__title {
+            margin: 40px 0;
+            font-size: 3rem;
+        }
+
+        &__content {
+            margin: 32px;
+        }
+
+        &__center {
+            width: 350px;
+            height: 350px;
+
+            &:hover {
+                .hero__outside {
+                    width: 350px;
+                    height: 350px;
+                    line-height: 350px;
+                    margin-top: -175px;
+                    margin-left: -175px;
+                }
+            }
+        }
+
+        &__outside {
+            line-height: 175px;
+            width: 175px;
+            height: 175px;
+            margin-top: -87.5px;
+            margin-left: -87.5px;
+        }
+
+        &__greeting {
+            font-size: 3rem;
+            margin-top: 32px;
+        }
+
+        &__animation {
+            font-size: 2.25rem;
+            top: 76%;
+        }
     }
 }
 
-@keyframes slide-down {
+@keyframes fade-slide {
     0% {
-        transform: translateY(-50%);
         opacity: 0;
+        transform: translateX(-50%) translateY(-50%);
     }
 
-    50% {
-        transform: translateY(0);
+    25% {
         opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
     }
 
     100% {
-        transform: translateY(50%);
         opacity: 0;
+        transform: translateX(-50%) translateY(50%);
     }
 }
