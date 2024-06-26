@@ -6,14 +6,27 @@ const Projects: React.FC = () => {
         {
             title: 'QuestListRPG',
             description: 'A task manager app with RPG elements.',
-            images: ['/path/to/questlistrpg1.png', '/path/to/questlistrpg2.png'],
-            link: 'https://questlistrpg.com'
+            images: [
+                '/QuestListRPG_Home_Page.png',
+                '/QuestListRPG_Login.png',
+                '/QuestListRPG_Levelup.png',
+                '/QuestListRPG_Shop.png',
+                '/QuestListRPG_Stats.png',
+            ],
+            link: 'https://quest-list-rpg-5e0cf84376ef.herokuapp.com'
         },
         {
             title: 'PetAdoptr',
             description: 'A mobile app for finding animals available for adoption.',
-            images: ['/path/to/petadoptr1.png', '/path/to/petadoptr2.png'],
-            link: 'https://petadoptr.com'
+            images: [
+                '/PetAdoptr_Grid_Page.jpeg',
+                '/PetAdoptr_Pet_Profile.jpeg',
+                '/PetAdoptr_DM.jpeg',
+                '/PetAdoptr_LM.jpeg',
+                '/PetAdoptr_Web_Sockets.jpeg',
+                '/PetAdoptr_Knex.jpeg',
+            ],
+            link: ''
         },
     ];
 
