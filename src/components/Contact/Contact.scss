@@ -1,31 +1,38 @@
 @use "../../partials/mixins" as *;
 
 .contact {
+    padding: 80px 0;
     background-color: #e5e4e2;
-    padding: 50px 20px;
     text-align: center;
 
     &__title {
-        margin-top: 24px;
+        margin-bottom: 8px;
         font-size: 2rem;
+        text-align: center;
     }
 
     &__subtitle {
         font-size: 1.5rem;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        margin-inline: 16px;
     }
 
     &__form {
         max-width: 600px;
-        margin: 0 auto;
         background-color: #fff;
         padding: 16px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
     }
 
     &__form-group {
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         text-align: left;
 
         label {
@@ -74,6 +81,7 @@
 
     &__resume {
         margin-block: 16px;
+        text-align: center;
 
         &-icon {
             width: 100px;
@@ -88,8 +96,84 @@
         }
 
         &-text {
-            text-decoration: none;
             margin-bottom: 16px;
+        }
+    }
+
+    @include tablet {
+
+        &__title {
+            font-size: 2.5rem;
+        }
+
+        &__subtitle {
+            font-size: 2rem;
+            margin-block: 24px;
+        }
+
+        &__content {
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin-inline: 24px;
+        }
+
+        &__form {
+            padding: 24px;
+            margin: 24px 0 24px 24px;
+            min-width: 400px;
+        }
+
+        &__form-group {
+            margin-bottom: 24px;
+        }
+
+        &__button {
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        &__resume {
+            margin-left: 24px;
+            margin-block: 0;
+        }
+    }
+
+    @include desktop {
+
+        &__title {
+            font-size: 3rem;
+            margin-top: 40px;
+        }
+
+        &__subtitle {
+            font-size: 2.5rem;
+            margin-bottom: 32px;
+        }
+
+        &__content {
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        &__form {
+            padding: 32px;
+            margin: 32px;
+            width: 600px;
+        }
+
+        &__form-group {
+            margin-bottom: 32px;
+        }
+
+        &__button {
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        &__resume {
+            margin-left: 32px;
+            margin-block: 0;
         }
     }
 
@@ -104,64 +188,6 @@
 
         100% {
             transform: translateY(0);
-        }
-    }
-
-    @include tablet {
-
-        &__title {
-            margin-top: 32px;
-            font-size: 2.5rem;
-        }
-
-        &__subtitle {
-            font-size: 2rem;
-        }
-
-        &__form {
-            padding: 24px;
-        }
-
-        &__form-group {
-            margin-bottom: 24px;
-        }
-
-        input,
-        textarea {
-            padding: 12px;
-        }
-
-        &__button {
-            max-width: 300px;
-        }
-    }
-
-    @include desktop {
-
-        &__title {
-            margin-top: 40px;
-            font-size: 3rem;
-        }
-
-        &__subtitle {
-            font-size: 2.5rem;
-        }
-
-        &__form {
-            padding: 32px;
-        }
-
-        &__form-group {
-            margin-bottom: 28px;
-        }
-
-        input,
-        textarea {
-            padding: 14px;
-        }
-
-        &__button {
-            max-width: 400px;
         }
     }
 }
