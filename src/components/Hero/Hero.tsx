@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Column from '../Column/Column';
 import './Hero.scss';
 
@@ -8,7 +8,6 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
     const [columns, setColumns] = useState<number[]>([]);
-    const [directionX, setDirectionX] = useState(0);
     const placeholderRef = useRef<HTMLDivElement>(null);
     const [currentTextIndex, setCurrentTextIndex] = useState(0);
     const [animationKey, setAnimationKey] = useState(0);
@@ -43,17 +42,6 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
         setColumns(colsArray);
     }, [options.columns]);
 
-    const handleMouseMove = useCallback((event: MouseEvent) => {
-        setDirectionX(event.movementX || 0);
-    }, []);
-
-    useEffect(() => {
-        document.addEventListener('mousemove', handleMouseMove);
-        return () => {
-            document.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, [handleMouseMove]);
-
     const handleCenterClick = () => {
         if (projectsRef.current) {
             projectsRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -71,7 +59,6 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
                         margin={options.margin}
                         imgSrc1={options.imgSrc1}
                         imgSrc2={options.imgSrc2}
-                        directionX={directionX}
                     />
                 ))}
             </div>

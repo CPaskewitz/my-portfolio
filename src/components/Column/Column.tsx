@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import Blind from '../Blind/Blind';
 
@@ -8,14 +8,14 @@ interface ColumnProps {
     margin: number;
     imgSrc1: string;
     imgSrc2: string;
-    directionX: number;
 }
 
-const Column: React.FC<ColumnProps> = ({ col, cols, margin, imgSrc1, imgSrc2, directionX }) => {
+const Column: React.FC<ColumnProps> = ({ col, cols, margin, imgSrc1, imgSrc2 }) => {
     const columnRef = useRef<HTMLDivElement>(null);
     const [rotationY, setRotationY] = useState(0);
     const colW = (window.innerWidth / cols) - margin;
     const colL = (colW + margin) * col;
+    const [isImg1, setIsImg1] = useState(true);
 
     useEffect(() => {
         if (columnRef.current) {
@@ -23,9 +23,10 @@ const Column: React.FC<ColumnProps> = ({ col, cols, margin, imgSrc1, imgSrc2, di
         }
     }, []);
 
-    const handleMouseEnter = useCallback(() => {
-        const newRotationY = directionX > 0 ? rotationY + 90 : rotationY - 90;
+    const handleMouseEnter = () => {
+        const newRotationY = isImg1 ? rotationY + 180 : rotationY - 180;
         setRotationY(newRotationY);
+        setIsImg1(!isImg1);
         if (columnRef.current) {
             gsap.to(columnRef.current, {
                 duration: 1,
@@ -34,7 +35,7 @@ const Column: React.FC<ColumnProps> = ({ col, cols, margin, imgSrc1, imgSrc2, di
                 ease: 'back.out',
             });
         }
-    }, [directionX, rotationY, colW]);
+    };
 
     return (
         <div
@@ -43,8 +44,8 @@ const Column: React.FC<ColumnProps> = ({ col, cols, margin, imgSrc1, imgSrc2, di
             style={{ width: `${colW}px`, left: `${colL}px`, height: '100vh' }}
             onMouseEnter={handleMouseEnter}
         >
-            {[0, 1, 2, 3].map((j) => (
-                <Blind key={j} colL={colL} colW={colW} imgSrc1={imgSrc1} imgSrc2={imgSrc2} rotationY={j * 90} />
+            {[0, 1].map((j) => (
+                <Blind key={j} colL={colL} colW={colW} imgSrc1={imgSrc1} imgSrc2={imgSrc2} rotationY={j * 180} />
             ))}
         </div>
     );

@@ -11,7 +11,7 @@ interface BlindProps {
 
 const Blind: React.FC<BlindProps> = ({ colL, colW, imgSrc1, imgSrc2, rotationY }) => {
     const blindRef = useRef<HTMLDivElement>(null);
-    const bgImg = rotationY % 180 === 0 ? imgSrc1 : imgSrc2;
+    const bgImg = rotationY % 360 === 0 ? imgSrc1 : imgSrc2;
 
     useEffect(() => {
         if (blindRef.current) {
