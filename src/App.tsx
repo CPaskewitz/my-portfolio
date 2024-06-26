@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, Suspense } from 'react';
 import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Hero/Hero';
-import About from './components/About/About';
-import Projects from './components/Projects/Projects';
-import Contact from './components/Contact/Contact';
 import './app.scss';
+
+const Hero = React.lazy(() => import('./components/Hero/Hero'));
+const About = React.lazy(() => import('./components/About/About'));
+const Projects = React.lazy(() => import('./components/Projects/Projects'));
+const Contact = React.lazy(() => import('./components/Contact/Contact'));
 
 const App: React.FC = () => {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
@@ -26,12 +27,14 @@ const App: React.FC = () => {
   return (
     <div>
       {isNavbarVisible && <Navbar />}
-      <Hero projectsRef={projectsRef} />
-      <About />
-      <div ref={projectsRef}>
-        <Projects />
-      </div>
-      <Contact />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Hero projectsRef={projectsRef} />
+        <About />
+        <div ref={projectsRef}>
+          <Projects />
+        </div>
+        <Contact />
+      </Suspense>
     </div>
   );
 }
