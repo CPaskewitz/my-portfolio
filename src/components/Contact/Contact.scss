@@ -1,6 +1,7 @@
 .contact {
-    padding: 100px 20px;
-    background-color: #1a1a1a;
+    background-color: #e5e4e2;
+    padding: 50px 20px;
+    text-align: center;
 
     &__title {
         font-size: 2.5rem;
@@ -8,39 +9,89 @@
     }
 
     &__form {
-        display: flex;
-        flex-direction: column;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    &__label {
-        margin: 10px 0 5px;
-        font-size: 1rem;
-    }
+    &__form-group {
+        margin-bottom: 20px;
+        text-align: left;
 
-    &__input,
-    &__textarea {
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #333;
-        color: white;
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
 
-    &__textarea {
-        height: 100px;
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input.error,
+        textarea.error {
+            border-color: red;
+        }
+
+        .contact__error-text {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
     }
 
     &__button {
-        background-color: #e63946;
-        color: white;
+        background-color: #16A085;
+        color: #fff;
         border: none;
         padding: 10px 20px;
-        font-size: 1rem;
+        border-radius: 5px;
         cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        margin: 16px;
 
         &:hover {
-            background-color: #d32f2f;
+            background-color: darken(#16A085, 10%);
+            transform: scale(1.05);
+        }
+    }
+
+    &__resume {
+        margin-top: 20px;
+
+        &-icon {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.5s, box-shadow 0.5s;
+            animation: float 2s infinite;
+
+            &:hover {
+                transform: scale(1.2);
+                box-shadow: 0 0 20px 5px gold;
+            }
+        }
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0);
         }
     }
 }
