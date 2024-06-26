@@ -69,8 +69,8 @@
         margin-block: 16px;
 
         &-icon {
-            width: 50px;
-            height: 50px;
+            width: 100px;
+            height: 100px;
             transition: transform 0.5s, box-shadow 0.5s;
             animation: float 2s infinite;
 
@@ -79,6 +79,15 @@
                 box-shadow: 0 0 20px 5px gold;
             }
         }
+
+        &-text {
+            text-decoration: none;
+            margin-bottom: 16px;
+        }
+    }
+
+    &__subtitle {
+        margin-bottom: 16px;
     }
 
     @keyframes float {

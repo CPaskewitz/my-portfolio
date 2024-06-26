@@ -70,10 +70,12 @@ const Contact: React.FC = () => {
         <div className="contact" id="contact">
             <h1 className="contact__title">Contact</h1>
             <div className="contact__resume">
+                <p className="contact__resume-text">Download My Resume</p>
                 <a href="/Corey_Paskewitz_Resume.pdf" download>
                     <img src="/resumeicon.png" alt="Download Resume" className="contact__resume-icon" />
                 </a>
             </div>
+            <h2 className="contact__subtitle">Message Me</h2>
             <form className="contact__form" onSubmit={handleSubmit}>
                 <div className="contact__form-group">
                     <label htmlFor="name">Name</label>
