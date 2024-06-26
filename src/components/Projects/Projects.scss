@@ -30,14 +30,13 @@
         color: #ffffff;
 
         &:hover {
-            cursor: pointer;
             transform: rotate(0deg) scale(1) translateY(10px);
             z-index: 400;
         }
     }
 
     &__image-wrapper {
-        position: absolute;
+        position: relative;
         top: 0;
         left: 0;
         width: 100%;
@@ -50,7 +49,36 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
-        transition: transform 0.5s ease;
+        transition: transform 0.5s ease, width 0.5s ease, height 0.5s ease;
+        background-size: cover;
+        background-position: center;
+        cursor: zoom-in;
+    }
+
+    &__nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+        user-select: none;
+        transition: background-color 0.3s ease;
+
+        &--prev {
+            left: 10px;
+        }
+
+        &--next {
+            right: 10px;
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
     }
 
     &__info {
@@ -84,7 +112,7 @@
         }
     }
 
-    &__modal {
+    &__enlarged-image-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -95,38 +123,24 @@
         justify-content: center;
         align-items: center;
         z-index: 500;
+        cursor: zoom-out;
     }
 
-    &__modal-content {
-        background: #ffffff;
-        padding: 16px;
-        border-radius: 10px;
-        text-align: center;
-        position: relative;
-        width: 100%;
-        margin-inline: 16px;
+    &__enlarged-image {
+        max-width: 75%;
+        max-height: 75%;
+        object-fit: contain;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    &__modal-close {
+    &__close-enlarged-image {
         position: absolute;
-        top: 10px;
-        right: 16px;
-        font-size: 1.5rem;
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+        color: #ffffff;
         cursor: pointer;
-    }
-
-    &__modal-images {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 16px;
-    }
-
-    &__modal-image {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        transition: transform 0.5s ease;
+        z-index: 600;
     }
 
     @keyframes entry {
