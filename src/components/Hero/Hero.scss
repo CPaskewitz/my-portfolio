@@ -135,7 +135,7 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
     }
 
     &__greeting {
-        text-shadow: 0 0 7px rgba(255, 255, 255, .3), 0 0 3px rgba(255, 255, 255, .3);
+        text-shadow: 0 0 7px rgba(0, 0, 0, 0.3), 0 0 3px rgba(0, 0, 0, 0.3);
         font-size: 2rem;
         margin-top: 16px;
     }
