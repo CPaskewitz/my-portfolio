@@ -12,10 +12,11 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
     position: relative;
     overflow: hidden;
     background-color: black;
-
+    padding: 16px;
     &__title {
-        font-size: 3rem;
+        font-size: 2rem; 
         color: #e5e4e2;
+        margin: 16px 0; 
     }
 
     &__placeholder {
@@ -48,6 +49,7 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
     &__content {
         z-index: 3;
         color: white;
+        margin: 16px; 
     }
 
     &__center {
@@ -55,14 +57,14 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
         align-items: center;
         justify-content: center;
         position: relative;
-        width: 300px;
-        height: 300px;
+        width: 200px;
+        height: 200px;
         cursor: pointer;
         background: url('/myImage.png');
         background-size: 101%;
         background-position: top left;
         border-radius: 100%;
-        margin: 100px auto;
+        margin: 16px auto; 
         transition: $easing;
         box-shadow: 0px 5px 10px #000;
 
@@ -73,13 +75,13 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
             .hero__outside {
                 transform: rotate(-45deg) translate(0px) rotate(-315deg);
                 background: darken(rgba($tokenClr, 0.5), 10%);
-                width: 300px;
+                width: 200px;
                 letter-spacing: 10px;
                 padding-left: 10px;
-                line-height: 300px;
-                height: 300px;
-                margin-top: -150px;
-                margin-left: -150px;
+                line-height: 200px;
+                height: 200px;
+                margin-top: -100px;
+                margin-left: -100px;
                 transition: $easing, letter-spacing 1.5s ease-out;
 
                 &::after {
@@ -94,21 +96,21 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
         align-items: center;
         justify-content: center;
         position: absolute;
-        line-height: 150px;
+        line-height: 100px;
         text-align: center;
         letter-spacing: 4px;
         padding-left: 4px;
         font-weight: 300;
         color: #fff;
         border-radius: 100%;
-        width: 150px;
-        height: 150px;
+        width: 100px; 
+        height: 100px;
         background: $tokenClr;
         left: 50%;
         top: 50%;
-        margin-top: -75px;
-        margin-left: -75px;
-        transform: rotate(-135deg) translate(-150px) rotate(135deg);
+        margin-top: -50px;
+        margin-left: -50px;
+        transform: rotate(-135deg) translate(-100px) rotate(135deg);
         box-shadow: 0px 5px 10px rgba(#000, 0.5);
         transition: $easing;
 
@@ -124,22 +126,24 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
 
     &__text-container {
         display: flex;
+        flex-direction: column; 
         align-items: center;
         color: #e5e4e2;
-        width: 550px;
+        width: 100%; 
+        margin: 16px 0; 
     }
 
     &__greeting {
         text-shadow: 0 0 7px rgba(255, 255, 255, .3), 0 0 3px rgba(255, 255, 255, .3);
-        font-size: 3rem;
-        position: absolute;
+        font-size: 2.5rem;
+        margin-top: 16px;
     }
 
     &__animation {
         display: inline-block;
         padding: 0.25rem 0.75rem;
         margin-left: 1rem;
-        font-size: 2.5rem;
+        font-size: 1.125rem; 
         text-transform: uppercase;
         color: #e5e4e2;
         animation: slide-down 3s infinite;
