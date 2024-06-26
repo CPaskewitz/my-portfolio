@@ -9,14 +9,14 @@
     align-items: center;
 
     &__title {
-        margin-top: 24px;
+        margin-bottom: 8px;
         font-size: 2rem;
         text-align: center;
     }
 
     &__subtitle {
         font-size: 1.5rem;
-        margin-bottom: 16px;
+        margin-bottom: 24px;
     }
 
     &__description {
@@ -41,17 +41,22 @@
     @include tablet {
 
         &__title {
-            margin-top: 32px;
             font-size: 2.5rem;
         }
 
         &__subtitle {
             font-size: 2rem;
+            margin-bottom: 24px;
         }
 
         &__description {
             font-size: 1.25rem;
             padding: 24px;
+            margin: 24px;
+        }
+
+        &__skills {
+            gap: 24px;
         }
     }
 
@@ -64,11 +69,17 @@
 
         &__subtitle {
             font-size: 2.5rem;
+            margin-bottom: 32px;
         }
 
         &__description {
             font-size: 1.5rem;
             padding: 32px;
+            margin: 32px;
+        }
+
+        &__skills {
+            gap: 32px;
         }
     }
 }

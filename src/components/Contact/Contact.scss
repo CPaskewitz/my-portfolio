@@ -1,11 +1,18 @@
+@use "../../partials/mixins" as *;
+
 .contact {
     background-color: #e5e4e2;
     padding: 50px 20px;
     text-align: center;
 
     &__title {
-        font-size: 2.5rem;
-        margin-bottom: 40px;
+        margin-top: 24px;
+        font-size: 2rem;
+    }
+
+    &__subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 16px;
     }
 
     &__form {
@@ -86,10 +93,6 @@
         }
     }
 
-    &__subtitle {
-        margin-bottom: 16px;
-    }
-
     @keyframes float {
         0% {
             transform: translateY(0);
@@ -101,6 +104,64 @@
 
         100% {
             transform: translateY(0);
+        }
+    }
+
+    @include tablet {
+
+        &__title {
+            margin-top: 32px;
+            font-size: 2.5rem;
+        }
+
+        &__subtitle {
+            font-size: 2rem;
+        }
+
+        &__form {
+            padding: 24px;
+        }
+
+        &__form-group {
+            margin-bottom: 24px;
+        }
+
+        input,
+        textarea {
+            padding: 12px;
+        }
+
+        &__button {
+            max-width: 300px;
+        }
+    }
+
+    @include desktop {
+
+        &__title {
+            margin-top: 40px;
+            font-size: 3rem;
+        }
+
+        &__subtitle {
+            font-size: 2.5rem;
+        }
+
+        &__form {
+            padding: 32px;
+        }
+
+        &__form-group {
+            margin-bottom: 28px;
+        }
+
+        input,
+        textarea {
+            padding: 14px;
+        }
+
+        &__button {
+            max-width: 400px;
         }
     }
 }
