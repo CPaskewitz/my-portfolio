@@ -136,6 +136,11 @@
         &__resume {
             margin-left: 24px;
             margin-block: 0;
+
+            &-text {
+                margin-bottom: 24px;
+                font-size: 1.25rem;
+            }
         }
     }
 
@@ -174,6 +179,11 @@
         &__resume {
             margin-left: 32px;
             margin-block: 0;
+
+            &-text {
+                    margin-bottom: 32px;
+                    font-size: 1.5rem;
+                }
         }
     }
 
