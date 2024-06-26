@@ -69,6 +69,11 @@ const Contact: React.FC = () => {
     return (
         <div className="contact" id="contact">
             <h1 className="contact__title">Contact</h1>
+            <div className="contact__resume">
+                <a href="/Corey_Paskewitz_Resume.pdf" download>
+                    <img src="/resumeicon.png" alt="Download Resume" className="contact__resume-icon" />
+                </a>
+            </div>
             <form className="contact__form" onSubmit={handleSubmit}>
                 <div className="contact__form-group">
                     <label htmlFor="name">Name</label>
@@ -107,11 +112,6 @@ const Contact: React.FC = () => {
                 </div>
                 <button type="submit" className="contact__button">Submit</button>
             </form>
-            <div className="contact__resume">
-                <a href="/Corey_Paskewitz_Resume.pdf" download>
-                    <img src="/resumeicon.png" alt="Download Resume" className="contact__resume-icon" />
-                </a>
-            </div>
         </div>
     );
 };
