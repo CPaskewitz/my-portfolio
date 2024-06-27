@@ -15,7 +15,6 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 16px;
         perspective: 900px;
     }
 
@@ -164,10 +163,6 @@
             margin-bottom: 32px;
         }
 
-        &__wrapper {
-            gap: 24px;
-        }
-
         &__container {
             width: 400px;
             height: 500px;
@@ -199,10 +194,6 @@
         &__title {
             font-size: 3rem;
             margin-bottom: 40px;
-        }
-
-        &__wrapper {
-            gap: 32px;
         }
 
         &__container {
