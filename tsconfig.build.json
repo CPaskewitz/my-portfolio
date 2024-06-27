@@ -19,10 +19,11 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "outDir": "./dist",
-        "rootDir": "./src"
+        "rootDir": "."
     },
     "include": [
-        "src"
+        "src",
+        "server.ts"
     ],
     "exclude": [
         "node_modules",
