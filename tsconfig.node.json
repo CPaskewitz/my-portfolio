@@ -13,7 +13,8 @@
     "outDir": "./dist",
     "rootDir": ".",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "emitDeclarationOnly": true
   },
   "include": [
     "vite.config.ts",
