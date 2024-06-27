@@ -1,0 +1,35 @@
+@use "../../partials/mixins" as *;
+
+.about__skill {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    &-icon {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+        transition: filter 0.3s ease;
+    }
+
+    &-text {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #fff;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    }
+}
