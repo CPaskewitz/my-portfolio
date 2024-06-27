@@ -4,10 +4,10 @@ import path from 'path';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, '../../')));
+app.use(express.static(path.join(__dirname, '../../dist')));
 
 app.get('*', (_req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../../dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
