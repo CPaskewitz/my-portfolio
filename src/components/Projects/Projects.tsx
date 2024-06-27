@@ -28,6 +28,18 @@ const Projects: React.FC = () => {
             ],
             link: ''
         },
+        {
+            title: 'Leap Into Lessons',
+            description: 'A wordpress booking site for local summer swim lessons.',
+            images: [
+                'leapintolessons_hero.png',
+                'leapintolessons_map.png',
+                'leapintolessons_coaches.png',
+                'leapintolessons_faq.png',
+                'leapintolessons_booking.png',
+            ],
+            link: 'https://leapintolessons.com'
+        },
     ];
 
     const [currentImageIndex, setCurrentImageIndex] = useState<number[]>(projects.map(() => 0));
