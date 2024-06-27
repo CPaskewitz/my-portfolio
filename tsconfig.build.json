@@ -22,10 +22,10 @@
         "rootDir": "./src"
     },
     "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx"
+        "src"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "dist"
     ]
 }
