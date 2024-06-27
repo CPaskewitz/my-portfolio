@@ -11,22 +11,19 @@
         "skipLibCheck": true,
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "allowImportingTsExtensions": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
+        "noEmit": true,
         "jsx": "react-jsx",
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
-        "outDir": "./dist",
-        "rootDir": "."
+        "noFallthroughCasesInSwitch": true
     },
     "include": [
         "src",
         "server.ts"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist"
     ]
 }

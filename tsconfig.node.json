@@ -2,22 +2,17 @@
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "target": "ES2020",
-    "lib": [
-      "ES2020"
-    ],
-    "outDir": "./dist",
-    "rootDir": ".",
-    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "emitDeclarationOnly": true
+    "strict": true
   },
+  "resolveJsonModule": true,
+  "esModuleInterop": true,
+  "emitDeclarationOnly": true,
   "include": [
     "vite.config.ts",
-    "src/server/**/*.ts"
+    "server.ts"
   ]
 }
