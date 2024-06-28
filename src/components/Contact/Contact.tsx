@@ -88,6 +88,7 @@ const Contact: React.FC = () => {
                                 value={formData.name}
                                 onChange={handleChange}
                                 className={errors.name ? 'error' : ''}
+                                autoComplete="name"
                             />
                             {errors.name && <span className="contact__error-text">{errors.name}</span>}
                         </div>
@@ -100,6 +101,7 @@ const Contact: React.FC = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 className={errors.email ? 'error' : ''}
+                                autoComplete="email"
                             />
                             {errors.email && <span className="contact__error-text">{errors.email}</span>}
                         </div>
@@ -111,6 +113,7 @@ const Contact: React.FC = () => {
                                 value={formData.message}
                                 onChange={handleChange}
                                 className={errors.message ? 'error' : ''}
+                                autoComplete="off"
                             ></textarea>
                             {errors.message && <span className="contact__error-text">{errors.message}</span>}
                         </div>
