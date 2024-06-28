@@ -143,6 +143,7 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     &__animation {
@@ -154,9 +155,9 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
         color: #e5e4e2;
         animation: fade-slide 3s infinite;
         position: absolute;
-        top: 68%;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 100%;
+        /* Positioning directly under the greeting */
+        transform: translateY(0);
         white-space: nowrap;
     }
 
@@ -202,7 +203,6 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
 
         &__animation {
             font-size: 1.875rem;
-            top: 72%;
         }
     }
 
@@ -248,7 +248,6 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
 
         &__animation {
             font-size: 2.25rem;
-            top: 76%;
         }
     }
 }
@@ -256,21 +255,21 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
 @keyframes fade-slide {
     0% {
         opacity: 0;
-        transform: translateX(-50%) translateY(-50%);
+        transform: translateY(-50%);
     }
 
     25% {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
 
     75% {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateY(0);
     }
 
     100% {
         opacity: 0;
-        transform: translateX(-50%) translateY(50%);
+        transform: translateY(50%);
     }
 }
