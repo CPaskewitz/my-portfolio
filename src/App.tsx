@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, Suspense } from 'react';
 import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
 import './app.scss';
 
 const Hero = React.lazy(() => import('./components/Hero/Hero'));
@@ -35,6 +36,7 @@ const App: React.FC = () => {
         </div>
         <Contact />
       </Suspense>
+      <Footer />
     </div>
   );
 }
