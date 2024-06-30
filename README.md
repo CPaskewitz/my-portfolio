@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+# Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project is a personal portfolio website built using Vite, React, and TypeScript. It showcases various projects and includes a contact form integrated with EmailJS. The website is deployed on Heroku and utilizes custom DNS settings through Namecheap.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Responsive Design**: Adapts to different screen sizes (mobile, tablet, desktop).
+- **Project Showcase**: Displays projects with images, descriptions, and links.
+- **Contact Form**: Allows users to send messages directly through the website.
+- **Custom Animations**: Includes animated elements for a dynamic user experience.
+- **Custom Domain**: Hosted on Heroku with a custom domain from Namecheap.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend**: Vite, React, TypeScript, SCSS
+- **Deployment**: Heroku
+- **DNS & SSL**: Namecheap
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Contact
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+For any inquiries, please reach out via the contact form on the website or through [corey.paskewitz@gmail.com](mailto:corey.paskewitz@gmail.com).
