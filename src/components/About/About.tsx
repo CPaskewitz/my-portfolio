@@ -8,8 +8,8 @@ const About: React.FC = () => {
         { src: 'cssicon.png', alt: 'CSS', bgColor: '#2980B9' },
         { src: 'javascripticon.png', alt: 'JavaScript', bgColor: '#F1C40F' },
         { src: 'reacticon.png', alt: 'React', bgColor: '#61DAFB' },
-        { src: 'nodeicon.png', alt: 'Node.js', bgColor: '#68A063' },
-        { src: 'mysqlicon.png', alt: 'MySQL', bgColor: '#F29111' },
+        { src: 'nodeicon.png', alt: 'Node.js', bgColor: '#F29111' },
+        { src: 'mysqlicon.png', alt: 'MySQL', bgColor: '#68A063' },
         { src: 'mongodbicon.png', alt: 'MongoDB', bgColor: '#4DB33D' },
         { src: 'typescripticon.png', alt: 'TypeScript', bgColor: '#3178C6' },
     ];
