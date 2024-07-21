@@ -51,9 +51,9 @@ const Projects: React.FC = () => {
             ],
             link: 'https://leapintolessons.com',
             skills: [
-                { image: 'wordpress.png', name: 'WordPress' },
-                { image: 'php.png', name: 'PHP' },
-                { image: 'google-maps.png', name: 'Google Maps API' }
+                { image: 'wordpressicon.png', name: 'WordPress' },
+                { image: 'phpicon.png', name: 'PHP' },
+                { image: 'restapiicon.png', name: 'Google Maps API' }
             ]
         },
     ];
