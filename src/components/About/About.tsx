@@ -6,7 +6,7 @@ const About: React.FC = () => {
     const skills = [
         { src: 'htmlicon.png', alt: 'HTML', bgColor: '#FF5733' },
         { src: 'cssicon.png', alt: 'CSS', bgColor: '#2980B9' },
-        { src: 'javascripticon.png', alt: 'JavaScript', bgColor: '#F1C40F' },
+        { src: 'javascripticon.png', alt: 'JavaScript', bgColor: '#FFD700' },
         { src: 'reacticon.png', alt: 'React', bgColor: '#61DAFB' },
         { src: 'nodeicon.png', alt: 'Node.js', bgColor: '#F29111' },
         { src: 'mysqlicon.png', alt: 'MySQL', bgColor: '#68A063' },
