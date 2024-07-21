@@ -12,22 +12,36 @@
         margin-bottom: 8px;
         font-size: 2rem;
         text-align: center;
+        color: #333;
+    }
+
+    &__greeting {
+        font-size: 1.75rem;
+        color: #16A085;
+        text-align: center;
+
+        &-text {
+                margin: 16px 0;
+            }
     }
 
     &__subtitle {
         font-size: 1.5rem;
         margin-bottom: 24px;
+        color: #333;
     }
 
     &__description {
         font-size: 1rem;
-        text-align: center;
+        text-align: left;
         max-width: 1000px;
         margin: 16px auto;
         background-color: #fff;
-        padding: 16px;
+        padding: 24px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-inline: 5px solid #16A085;
+        line-height: 1.6;
     }
 
     &__skills {
@@ -50,7 +64,7 @@
 
         &__description {
             font-size: 1.25rem;
-            padding: 24px;
+            padding: 32px;
             margin: 24px;
         }
 
@@ -72,7 +86,7 @@
 
         &__description {
             font-size: 1.5rem;
-            padding: 32px;
+            padding: 40px;
             margin: 32px;
         }
 

@@ -22,13 +22,17 @@ const About: React.FC = () => {
         <div className="about" id="about">
             <h1 className="about__title">About</h1>
             <div className="about__description">
-                <p>
-                    Starting with Unity game development, I found a passion for turning ideas into interactive experiences.
-                    This led me to software engineering, mastering HTML, CSS, JavaScript, React, Express, and MySQL.
-                    My customer service and HR background enhances my communication and teamwork skills,
-                    bridging gaps between technical and non-technical teams.
-                    I thrive on innovative projects that push technological boundaries and enhance user engagement.
-                    Outside of coding, I enjoy horror movies, gaming, and fitness.
+                <h2 className="about__greeting">Hello, World!</h2>
+                <p className='about__greeting-text'>
+                    My journey into the tech world started with Unity game development, where I discovered a love for creating interactive experiences. 
+                    This passion evolved into a comprehensive career in software engineering, where I've mastered technologies like HTML, CSS, JavaScript, React, Express, and MySQL.
+                </p>
+                <p className='about__greeting-text'>
+                    With a strong foundation in customer service and HR, I bring exceptional communication and teamwork skills, bridging the gap between technical and non-technical stakeholders. 
+                    My projects push the boundaries of technology, aiming to enhance user engagement and create innovative solutions.
+                </p>
+                <p className='about__greeting-text'>
+                    When I'm not coding, you'll find me enjoying horror movies, gaming, and staying fit. Let's build something amazing together!
                 </p>
             </div>
             <h2 className="about__subtitle">My Skills</h2>
