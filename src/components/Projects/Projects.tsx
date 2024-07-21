@@ -16,9 +16,12 @@ const Projects: React.FC = () => {
             ],
             link: 'https://quest-list-rpg-5e0cf84376ef.herokuapp.com',
             skills: [
+                { image: 'mongodbicon.png', name: 'MongoDB'},
                 { image: 'reacticon.png', name: 'React' },
+                { image: 'nodeicon.png', name: 'Node.js' },
                 { image: 'typescripticon.png', name: 'TypeScript' },
-                { image: 'nodeicon.png', name: 'Node.js' }
+                { image: 'restapiicon.png', name: 'Dall-E 3 API'},
+                { image: 'herokuicon.png', name: 'Heroku' }
             ]
         },
         {
@@ -34,9 +37,10 @@ const Projects: React.FC = () => {
             ],
             link: '',
             skills: [
-                { image: 'reacticon.png', name: 'React' },
+                { image: 'mysqlicon.png', name: 'MySQL' },
+                { image: 'reacticon.png', name: 'React Native' },
                 { image: 'nodeicon.png', name: 'Node.js' },
-                { image: 'mysqlicon.png', name: 'MySQL' }
+                { image: 'typescripticon.png', name: 'TypeScript' },
             ]
         },
         {
