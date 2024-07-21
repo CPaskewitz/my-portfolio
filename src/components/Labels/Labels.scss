@@ -1,27 +1,71 @@
+@use "../../partials/mixins" as *;
+
 .labels {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 16px;
+    margin-top: 8px;
 }
 
 .label {
     display: flex;
     align-items: center;
-    margin: 8px;
-    padding: 8px;
+    margin: 4px;
+    padding: 4px;
     border: 1px solid #16A085;
     border-radius: 5px;
     background-color: #fff;
     color: #16A085;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 
     &__image {
         width: 24px;
         height: 24px;
-        margin-right: 8px;
+        margin-right: 4px;
     }
 
     &__name {
         font-size: 0.875rem;
         font-weight: 600;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        background-color: #16A085;
+        color: #fff;
+
+        &__image {
+            filter: invert(1);
+        }
+    }
+}
+
+@include tablet {
+    .label {
+        padding: 8px;
+        margin: 8px;
+
+        &__image {
+            width: 28px;
+            height: 28px;
+        }
+
+        &__name {
+            font-size: 1rem;
+        }
+    }
+}
+
+@include desktop {
+    .label {
+
+        &__image {
+            width: 32px;
+            height: 32px;
+        }
+
+        &__name {
+            font-size: 1.125rem;
+        }
     }
 }
