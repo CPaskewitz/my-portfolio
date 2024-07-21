@@ -58,14 +58,6 @@
         width: 40%;
         height: 100%;
         overflow: hidden;
-
-        &:nth-child(odd) {
-            background: linear-gradient(to left, #333 30%, #222 100%);
-        }
-
-        &:nth-child(even) {
-            background: linear-gradient(to right, #333 30%, #222 100%);
-        }
     }
 
     &__image {
