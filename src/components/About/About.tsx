@@ -12,6 +12,10 @@ const About: React.FC = () => {
         { src: 'mysqlicon.png', alt: 'MySQL', bgColor: '#68A063' },
         { src: 'mongodbicon.png', alt: 'MongoDB', bgColor: '#4DB33D' },
         { src: 'typescripticon.png', alt: 'TypeScript', bgColor: '#3178C6' },
+        { src: 'wordpressicon.png', alt: 'WordPress', bgColor: '#21759B' },
+        { src: 'phpicon.png', alt: 'PHP', bgColor: '#4F5B93' },
+        { src: 'restapiicon.png', alt: 'Rest API', bgColor: '#FF6F61' },
+        { src: 'herokuicon.png', alt: 'Heroku', bgColor: '#79589F' },
     ];
 
     return (
