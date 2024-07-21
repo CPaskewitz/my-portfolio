@@ -70,8 +70,8 @@ const Projects: React.FC = () => {
             <h1 className="projects__title">Projects</h1>
             <div className="projects__wrapper">
                 {projects.map((project, index) => (
-                    <div key={index} className="projects__container">
-                        <div className="projects__image-wrapper">
+                    <div key={index} className={`projects__container ${index % 2 === 0 ? 'rotate-left' : 'rotate-right'}`}>
+                        <div className={`projects__image-wrapper ${index % 2 === 0 ? 'left' : 'right'}`}>
                             <img
                                 src={project.images[currentImageIndex[index]]}
                                 alt={project.title}
@@ -81,7 +81,7 @@ const Projects: React.FC = () => {
                             <div className="projects__nav projects__nav--prev" onClick={() => handlePrevImage(index)}>&lt;</div>
                             <div className="projects__nav projects__nav--next" onClick={() => handleNextImage(index)}>&gt;</div>
                         </div>
-                        <div className="projects__info">
+                        <div className={`projects__info ${index % 2 === 0 ? 'right' : 'left'}`}>
                             <h3 className="projects__card-title">{project.title}</h3>
                             <p className="projects__description">{project.description}</p>
                             {project.link && (
