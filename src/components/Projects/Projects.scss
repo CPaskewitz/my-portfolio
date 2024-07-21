@@ -105,6 +105,9 @@
     }
 
     &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         padding: 20px;
         width: 60%;
         text-align: left;

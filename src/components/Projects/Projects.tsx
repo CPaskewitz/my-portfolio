@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Projects.scss';
+import Labels from '../Labels/Labels';
 
 const Projects: React.FC = () => {
     const projects = [
@@ -13,7 +14,12 @@ const Projects: React.FC = () => {
                 '/QuestListRPG_Shop.png',
                 '/QuestListRPG_Stats.png',
             ],
-            link: 'https://quest-list-rpg-5e0cf84376ef.herokuapp.com'
+            link: 'https://quest-list-rpg-5e0cf84376ef.herokuapp.com',
+            skills: [
+                { image: 'reacticon.png', name: 'React' },
+                { image: 'typescripticon.png', name: 'TypeScript' },
+                { image: 'nodeicon.png', name: 'Node.js' }
+            ]
         },
         {
             title: 'PetAdoptr',
@@ -26,7 +32,12 @@ const Projects: React.FC = () => {
                 '/PetAdoptr_Web_Sockets.jpeg',
                 '/PetAdoptr_Knex.jpeg',
             ],
-            link: ''
+            link: '',
+            skills: [
+                { image: 'reacticon.png', name: 'React' },
+                { image: 'nodeicon.png', name: 'Node.js' },
+                { image: 'mysqlicon.png', name: 'MySQL' }
+            ]
         },
         {
             title: 'Leap Into Lessons',
@@ -38,7 +49,12 @@ const Projects: React.FC = () => {
                 'leapintolessons_faq.png',
                 'leapintolessons_booking.png',
             ],
-            link: 'https://leapintolessons.com'
+            link: 'https://leapintolessons.com',
+            skills: [
+                { image: 'wordpress.png', name: 'WordPress' },
+                { image: 'php.png', name: 'PHP' },
+                { image: 'google-maps.png', name: 'Google Maps API' }
+            ]
         },
     ];
 
@@ -87,6 +103,7 @@ const Projects: React.FC = () => {
                             {project.link && (
                                 <a href={project.link} target="_blank" rel="noopener noreferrer" className="projects__link">View Project</a>
                             )}
+                            <Labels labels={project.skills} />
                         </div>
                     </div>
                 ))}
