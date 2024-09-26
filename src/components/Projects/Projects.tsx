@@ -134,6 +134,9 @@ const Projects: React.FC = () => {
                             {project.link && (
                                 <a href={project.link} target="_blank" rel="noopener noreferrer" className="projects__link">View Project</a>
                             )}
+                            {project.github && (
+                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="projects__github-link">Github Link</a>
+                            )}
                             <Labels labels={project.skills} />
                         </div>
                     </div>
