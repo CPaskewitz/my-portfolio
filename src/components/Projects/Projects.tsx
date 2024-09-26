@@ -21,7 +21,11 @@ const Projects: React.FC = () => {
             ],
             link: '',
             skills: [
-
+                { image: 'nextjsicon.png', name: 'Next.js'},
+                { image: 'typescripticon.png', name: 'TypeScript' },
+                { image: 'reduxicon.png', name: 'Redux'},
+                { image: 'tailwindicon.png', name: 'Tailwind'},
+                { image: 'jesticon.png', name: 'Jest'},
             ]
         },
         {
@@ -38,7 +42,6 @@ const Projects: React.FC = () => {
             skills: [
                 { image: 'mongodbicon.png', name: 'MongoDB'},
                 { image: 'reacticon.png', name: 'React' },
-                { image: 'nodeicon.png', name: 'Node.js' },
                 { image: 'typescripticon.png', name: 'TypeScript' },
                 { image: 'restapiicon.png', name: 'Dall-E 3 API'},
                 { image: 'herokuicon.png', name: 'Heroku' }
