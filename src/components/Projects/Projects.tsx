@@ -5,6 +5,23 @@ import Labels from '../Labels/Labels';
 const Projects: React.FC = () => {
     const projects = [
         {
+            title: 'BoguStore',
+            description: 'A mock e-commerce store showcasing unit testing.',
+            images: [
+                '/Bogustore_Home_Page.png',
+                '/Bogustore_Category_Page.png',
+                '/Bogustore_Sale_Page.png',
+                '/Bogustore_Cart_Page.png',
+                '/Bogustore_Shipping_Info.png',
+                '/Bogustore_Payment_Info.png',
+                '/Bogustore_Order_Summary.png'
+            ],
+            link: '',
+            skills: [
+                
+            ]
+        },
+        {
             title: 'QuestListRPG',
             description: 'A task manager app with RPG elements.',
             images: [
