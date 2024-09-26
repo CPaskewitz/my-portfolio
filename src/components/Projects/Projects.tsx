@@ -20,6 +20,7 @@ const Projects: React.FC = () => {
                 '/bogustore_checkout_test.png'
             ],
             link: '',
+            github: 'https://github.com/CPaskewitz/bogustore',
             skills: [
                 { image: 'nextjsicon.png', name: 'Next.js'},
                 { image: 'typescripticon.png', name: 'TypeScript' },
@@ -39,6 +40,7 @@ const Projects: React.FC = () => {
                 '/QuestListRPG_Stats.png',
             ],
             link: 'https://quest-list-rpg-5e0cf84376ef.herokuapp.com',
+            github: 'https://github.com/CPaskewitz/taskmasterrpg',
             skills: [
                 { image: 'mongodbicon.png', name: 'MongoDB'},
                 { image: 'reacticon.png', name: 'React' },
@@ -59,6 +61,7 @@ const Projects: React.FC = () => {
                 '/PetAdoptr_Knex.jpeg',
             ],
             link: '',
+            github: '',
             skills: [
                 { image: 'mysqlicon.png', name: 'MySQL' },
                 { image: 'reacticon.png', name: 'React Native' },
@@ -77,6 +80,7 @@ const Projects: React.FC = () => {
                 'leapintolessons_booking.png',
             ],
             link: 'https://leapintolessons.com',
+            github: '',
             skills: [
                 { image: 'wordpressicon.png', name: 'WordPress' },
                 { image: 'phpicon.png', name: 'PHP' },
