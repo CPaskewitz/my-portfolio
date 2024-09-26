@@ -14,11 +14,14 @@ const Projects: React.FC = () => {
                 '/Bogustore_Cart_Page.png',
                 '/Bogustore_Shipping_Info.png',
                 '/Bogustore_Payment_Info.png',
-                '/Bogustore_Order_Summary.png'
+                '/Bogustore_Order_Summary.png',
+                '/bogustore_productlist_test.png',
+                '/bogustore_cart_test.png',
+                '/bogustore_checkout_test.png'
             ],
             link: '',
             skills: [
-                
+
             ]
         },
         {
