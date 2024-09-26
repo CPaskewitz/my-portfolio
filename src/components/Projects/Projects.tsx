@@ -131,12 +131,18 @@ const Projects: React.FC = () => {
                         <div className={`projects__info ${index % 2 === 0 ? 'right' : 'left'}`}>
                             <h3 className="projects__card-title">{project.title}</h3>
                             <p className="projects__description">{project.description}</p>
-                            {project.link && (
-                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="projects__link">View Project</a>
-                            )}
-                            {project.github && (
-                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="projects__github-link">Github Link</a>
-                            )}
+                            <div className="projects__links">
+                                {project.link && (
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="projects__link">
+                                        View Project
+                                    </a>
+                                )}
+                                {project.github && (
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="projects__github-link">
+                                        View on Github
+                                    </a>
+                                )}
+                            </div>
                             <Labels labels={project.skills} />
                         </div>
                     </div>
