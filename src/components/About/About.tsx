@@ -16,6 +16,10 @@ const About: React.FC = () => {
         { src: 'phpicon.png', alt: 'PHP', bgColor: '#4F5B93' },
         { src: 'restapiicon.png', alt: 'Rest API', bgColor: '#FF6F61' },
         { src: 'herokuicon.png', alt: 'Heroku', bgColor: '#79589F' },
+        { src: 'nextjsicon.png', alt: 'Next.js', bgColor: '#8A2BE2' },
+        { src: 'reduxicon.png', alt: 'Redux', bgColor: '#FF7F50' },
+        { src: 'tailwindicon.png', alt: 'Tailwind', bgColor: '#32CD32' },
+        { src: 'jesticon.png', alt: 'Jest', bgColor: '#FF6347' },
     ];
 
     return (
