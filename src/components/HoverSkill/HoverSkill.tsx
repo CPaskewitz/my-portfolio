@@ -49,7 +49,7 @@ const HoverSkill: React.FC<HoverSkillProps> = ({ src, alt, bgColor }) => {
             onMouseLeave={onLeave}
         >
             <img src={src} alt={alt} className="about__skill-icon" />
-            {hover && <div className="about__skill-text">{alt}</div>}
+            <div className="about__skill-text">{alt}</div>
         </div>
     );
 };
