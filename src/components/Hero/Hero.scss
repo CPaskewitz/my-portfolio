@@ -153,10 +153,9 @@ $easing: all 0.5s cubic-bezier(.55, 0, .1, 1);
         font-size: 1.125rem;
         text-transform: uppercase;
         color: #e5e4e2;
-        animation: fade-slide 3s infinite;
+        animation: fade-slide 2s infinite;
         position: absolute;
         top: 100%;
-        /* Positioning directly under the greeting */
         transform: translateY(0);
         white-space: nowrap;
     }

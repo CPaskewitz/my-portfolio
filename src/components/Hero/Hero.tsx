@@ -20,7 +20,7 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        }, 3000);
+        }, 2000);
 
         return () => clearInterval(interval);
     }, []);
