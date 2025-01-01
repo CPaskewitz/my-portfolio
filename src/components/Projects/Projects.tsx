@@ -39,7 +39,7 @@ const Projects: React.FC = () => {
                 '/QuestListRPG_Shop.png',
                 '/QuestListRPG_Stats.png',
             ],
-            link: 'https://quest-list-rpg-5e0cf84376ef.herokuapp.com',
+            link: '',
             github: 'https://github.com/CPaskewitz/taskmasterrpg',
             skills: [
                 { image: 'mongodbicon.png', name: 'MongoDB'},
