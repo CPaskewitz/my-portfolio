@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import gsap from 'gsap';
 import './HoverSkill.scss';
 
@@ -10,7 +10,6 @@ interface HoverSkillProps {
 
 const HoverSkill: React.FC<HoverSkillProps> = ({ src, alt, bgColor }) => {
     const skillRef = useRef<HTMLDivElement | null>(null);
-    const [hover, setHover] = useState(false);
 
     const onHover = (e: React.MouseEvent<HTMLDivElement>) => {
         const box = skillRef.current!.getBoundingClientRect();
@@ -25,7 +24,6 @@ const HoverSkill: React.FC<HoverSkillProps> = ({ src, alt, bgColor }) => {
             duration: 0.4,
         });
         skillRef.current!.style.zIndex = '10';
-        setHover(true);
     };
 
     const onLeave = () => {
@@ -37,7 +35,6 @@ const HoverSkill: React.FC<HoverSkillProps> = ({ src, alt, bgColor }) => {
             duration: 0.7,
         });
         skillRef.current!.style.zIndex = '1';
-        setHover(false);
     };
 
     return (
