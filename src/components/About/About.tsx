@@ -28,10 +28,10 @@ const About: React.FC = () => {
             <div className="about__description">
                 <h2 className="about__greeting">Hello, World!</h2>
                 <p className='about__greeting-text'>
-                    I started coding games using Unity, which led me to web development. My background in customer service and HR helps me connect with people across teams.
+                    I began by creating interactive experiences in Unity, which led me to web development. Now, I design and build engaging websites from concept to deployment, focusing on a smooth user experience. My background in customer service and HR helps me communicate effectively and collaborate across teams.
                 </p>
                 <p className='about__greeting-text'>
-                    Outside of coding, I enjoy horror movies, gaming, and staying active. Let’s build something together!
+                    I’d love to apply my expertise to your next project and help make it a success.
                 </p>
             </div>
             <h2 className="about__subtitle">My Skills</h2>
