@@ -39,11 +39,15 @@
         transition: color $transition-fast;
 
         &:hover,
-        &:focus {
+        &:focus-visible {
             color: $primary-color;
         }
 
         &:focus {
+            outline: none;
+        }
+
+        &:focus-visible {
             outline: 2px dashed $primary-color;
             outline-offset: 2px;
         }
@@ -64,6 +68,10 @@
         }
 
         &:focus {
+            outline: none;
+        }
+
+        &:focus-visible {
             outline: 2px dashed $primary-color;
             outline-offset: 2px;
         }
@@ -213,8 +221,12 @@
             z-index: -1;
         }
 
-        &:hover,
         &:focus {
+            outline: none;
+        }
+
+        &:hover,
+        &:focus-visible {
             color: $black;
             outline: none;
 
@@ -242,7 +254,7 @@
             }
 
             &:hover,
-            &:focus {
+            &:focus-visible {
                 color: $black;
             }
         }

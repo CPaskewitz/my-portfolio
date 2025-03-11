@@ -65,12 +65,16 @@
         overflow: hidden;
 
         &:focus {
+            outline: none;
+        }
+
+        &:focus-visible {
             outline: 3px solid $white;
             outline-offset: 3px;
         }
 
         &:hover,
-        &:focus {
+        &:focus-visible {
             box-shadow: 0px 5px 20px $black;
             transform: scale(1.05);
 
@@ -122,7 +126,7 @@
     }
 
     &__center:hover .lazy-image,
-    &__center:focus .lazy-image {
+    &__center:focus-visible .lazy-image {
         transform: scale(1.15);
     }
 
@@ -211,7 +215,7 @@
             height: $hero-center-size-tablet;
 
             &:hover,
-            &:focus {
+            &:focus-visible {
                 .hero__outside {
                     width: $hero-center-size-tablet;
                     height: $hero-center-size-tablet;
@@ -258,7 +262,7 @@
             height: $hero-center-size-desktop;
 
             &:hover,
-            &:focus {
+            &:focus-visible {
                 .hero__outside {
                     width: $hero-center-size-desktop;
                     height: $hero-center-size-desktop;

@@ -19,12 +19,16 @@
     will-change: transform;
 
     &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
         outline: 3px solid darken($primary-color, 10%);
         outline-offset: 2px;
     }
 
     &:hover,
-    &:focus {
+    &:focus-visible {
         box-shadow: $shadow-md;
     }
 
@@ -60,7 +64,7 @@
         transition: none !important;
 
         &:hover,
-        &:focus {
+        &:focus-visible {
             transform: none !important;
         }
     }
