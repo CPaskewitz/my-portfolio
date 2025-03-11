@@ -108,8 +108,10 @@ const Projects: React.FC = () => {
     const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
     const [enlargedImageAlt, setEnlargedImageAlt] = useState<string>('');
     const [isPreloading, setIsPreloading] = useState<boolean[]>(projects.map(() => false));
+    const [flippedCards, setFlippedCards] = useState<boolean[]>(projects.map(() => false));
     const modalRef = useRef<HTMLDivElement>(null);
     const lastFocusedElement = useRef<HTMLElement | null>(null);
+    const carouselRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
         projects.forEach((project, projectIndex) => {
@@ -123,10 +125,8 @@ const Projects: React.FC = () => {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (enlargedImage) {
-                if (e.key === 'Escape') {
-                    handleCloseEnlargedImage();
-                }
+            if (enlargedImage && e.key === 'Escape') {
+                handleCloseEnlargedImage();
             }
         };
 
@@ -153,7 +153,11 @@ const Projects: React.FC = () => {
         };
     }, [enlargedImage]);
 
-    const handleNextImage = useCallback((projectIndex: number) => {
+    const handleNextImage = useCallback((projectIndex: number, e?: React.MouseEvent) => {
+        if (e) {
+            e.stopPropagation();
+        }
+
         setIsPreloading(prev => {
             const updated = [...prev];
             updated[projectIndex] = true;
@@ -173,7 +177,11 @@ const Projects: React.FC = () => {
         }, 300);
     }, [projects]);
 
-    const handlePrevImage = useCallback((projectIndex: number) => {
+    const handlePrevImage = useCallback((projectIndex: number, e?: React.MouseEvent) => {
+        if (e) {
+            e.stopPropagation();
+        }
+
         setIsPreloading(prev => {
             const updated = [...prev];
             updated[projectIndex] = true;
@@ -193,13 +201,22 @@ const Projects: React.FC = () => {
         }, 300);
     }, [projects]);
 
-    const handleImageClick = useCallback((image: string, alt: string) => {
+    const handleImageClick = useCallback((image: string, alt: string, e: React.MouseEvent<Element, MouseEvent>) => {
+        e.stopPropagation();
         setEnlargedImage(image);
         setEnlargedImageAlt(alt);
     }, []);
 
     const handleCloseEnlargedImage = useCallback(() => {
         setEnlargedImage(null);
+    }, []);
+
+    const handleCardFlip = useCallback((index: number, isFlipped: boolean) => {
+        setFlippedCards(prev => {
+            const updated = [...prev];
+            updated[index] = isFlipped;
+            return updated;
+        });
     }, []);
 
     const handleKeyboardNavigation = useCallback((e: React.KeyboardEvent, projectIndex: number) => {
@@ -212,24 +229,81 @@ const Projects: React.FC = () => {
         } else if (e.key === 'Enter') {
             e.preventDefault();
             const currentImage = projects[projectIndex].images[currentImageIndex[projectIndex]];
-            handleImageClick(currentImage, `${projects[projectIndex].title} screenshot ${currentImageIndex[projectIndex] + 1}`);
+            handleImageClick(
+                currentImage,
+                `${projects[projectIndex].title} screenshot ${currentImageIndex[projectIndex] + 1}`,
+                e as unknown as React.MouseEvent
+            );
         }
     }, [handleNextImage, handlePrevImage, handleImageClick, projects, currentImageIndex]);
+
+
 
     return (
         <section className="projects" id="projects" aria-labelledby="projects-title">
             <h2 id="projects-title" className="projects__title">Projects</h2>
             <div className="projects__wrapper">
                 {projects.map((project, index) => (
-                    <article
+                    <div
                         key={index}
-                        className={`projects__container ${index % 2 === 0 ? 'rotate-left' : 'rotate-right'}`}
+                        className={`projects__card-container ${flippedCards[index] ? 'is-flipped' : ''}`}
+                        onFocus={() => { }}
+                        tabIndex={-1}
+                        aria-label={`${project.title} project.`}
                     >
+                        {/* Front side - Info */}
+                        <div className="projects__card projects__card--front">
+                            <div className="projects__info">
+                                <h3 className="projects__card-title">{project.title}</h3>
+                                <p className="projects__description">{project.description}</p>
+
+                                <div className="projects__skills">
+                                    <h4 className="projects__skills-title">Technologies</h4>
+                                    <Labels labels={project.skills} />
+                                </div>
+
+                                <div className="projects__links">
+                                    {project.link && (
+                                        <a
+                                            href={project.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="projects__link"
+                                            aria-label={`Visit ${project.title} website`}
+                                        >
+                                            View Project
+                                        </a>
+                                    )}
+                                    {project.github && (
+                                        <a
+                                            href={project.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="projects__github-link"
+                                            aria-label={`View ${project.title} GitHub repository`}
+                                        >
+                                            View on GitHub
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                            <button
+                                className="projects__flip-button"
+                                onClick={() => handleCardFlip(index, true)}
+                                aria-label="View project images"
+                            >
+                                <svg viewBox="0 0 24 24" width="24" height="24" className="projects__flip-icon">
+                                    <path d="M7.8 20.8L2.2 15.2l1.4-1.4 4.6 4.6 1.4-1.4-2-2c2.3-3.3 6-5.5 10.1-5.9C20.3 14.4 22 19 22 19s-2.8-3-6.8-3c-2.1 0-4 .9-5.3 2.2l1.8 1.8-1.4 1.4-2.5-2.6z" />
+                                </svg>
+                                <span>View Images</span>
+                            </button>
+                        </div>
+
+                        {/* Back side - Image carousel */}
                         <div
-                            className={`projects__image-wrapper ${index % 2 === 0 ? 'left' : 'right'}`}
+                            className="projects__card projects__card--back"
+                            ref={el => carouselRefs.current[index] = el}
                             onKeyDown={(e) => handleKeyboardNavigation(e, index)}
-                            tabIndex={0}
-                            role="region"
                             aria-label={`${project.title} image gallery. Use arrow keys to navigate`}
                         >
                             <div className={`projects__image-container ${isPreloading[index] ? 'is-preloading' : ''}`}>
@@ -237,69 +311,52 @@ const Projects: React.FC = () => {
                                     src={project.images[currentImageIndex[index]]}
                                     alt={`${project.title} screenshot ${currentImageIndex[index] + 1}`}
                                     className="projects__image"
-                                    onClick={() => handleImageClick(
+                                    onClick={(e) => handleImageClick(
                                         project.images[currentImageIndex[index]],
-                                        `${project.title} screenshot ${currentImageIndex[index] + 1}`
+                                        `${project.title} screenshot ${currentImageIndex[index] + 1}`,
+                                        e
                                     )}
                                 />
-                            </div>
 
-                            <div className="projects__image-counter" aria-live="polite">
-                                {currentImageIndex[index] + 1}/{project.images.length}
-                            </div>
+                                {project.images.length > 1 && (
+                                    <>
+                                        <div className="projects__image-counter" aria-live="polite">
+                                            {currentImageIndex[index] + 1}/{project.images.length}
+                                        </div>
 
-                            <button
-                                className="projects__nav projects__nav--prev"
-                                onClick={() => handlePrevImage(index)}
-                                aria-label="Previous image"
-                                type="button"
-                            >
-                                <span aria-hidden="true">&lt;</span>
-                            </button>
+                                        <button
+                                            className="projects__nav projects__nav--prev"
+                                            onClick={(e) => handlePrevImage(index, e)}
+                                            aria-label="Previous image"
+                                            type="button"
+                                        >
+                                            <span aria-hidden="true">&lt;</span>
+                                        </button>
 
-                            <button
-                                className="projects__nav projects__nav--next"
-                                onClick={() => handleNextImage(index)}
-                                aria-label="Next image"
-                                type="button"
-                            >
-                                <span aria-hidden="true">&gt;</span>
-                            </button>
-                        </div>
-
-                        <div className={`projects__info ${index % 2 === 0 ? 'right' : 'left'}`}>
-                            <h3 className="projects__card-title">{project.title}</h3>
-                            <p className="projects__description">{project.description}</p>
-                            <div className="projects__links">
-                                {project.link && (
-                                    <a
-                                        href={project.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="projects__link"
-                                        aria-label={`Visit ${project.title} website`}
-                                    >
-                                        View Project
-                                    </a>
+                                        <button
+                                            className="projects__nav projects__nav--next"
+                                            onClick={(e) => handleNextImage(index, e)}
+                                            aria-label="Next image"
+                                            type="button"
+                                        >
+                                            <span aria-hidden="true">&gt;</span>
+                                        </button>
+                                    </>
                                 )}
-                                {project.github && (
-                                    <a
-                                        href={project.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="projects__github-link"
-                                        aria-label={`View ${project.title} GitHub repository`}
-                                    >
-                                        View on Github
-                                    </a>
-                                )}
-                            </div>
-                            <div className="projects__skills">
-                                <h4 className="projects__skills-title">Technologies</h4>
-                                <Labels labels={project.skills} />
+
+                                <button
+                                    className="projects__flip-button projects__flip-button--back"
+                                    onClick={() => handleCardFlip(index, false)}
+                                    aria-label="Back to project info"
+                                >
+                                    <svg viewBox="0 0 24 24" width="24" height="24" className="projects__flip-icon projects__flip-icon--back">
+                                        <path d="M16.2 3.2l5.6 5.6-1.4 1.4-4.6-4.6L14.4 7l2 2c-2.3 3.3-6 5.5-10.1 5.9C3.7 9.6 2 5 2 5s2.8 3 6.8 3c2.1 0 4-.9 5.3-2.2l-1.8-1.8 1.4-1.4 2.5 2.6z" />
+                                    </svg>
+                                    <span>Back</span>
+                                </button>
                             </div>
                         </div>
-                    </article>
+                    </div>
                 ))}
             </div>
 

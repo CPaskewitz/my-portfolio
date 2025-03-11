@@ -26,93 +26,129 @@
     }
 
     &__wrapper {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         gap: $spacing-lg;
-        align-items: center;
-        perspective: 900px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: $spacing-md 0;
+        perspective: 1000px;
     }
 
-    &__container {
+    &__card-container {
         position: relative;
         width: 100%;
-        max-width: 600px;
-        aspect-ratio: 16 / 9;
-        transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-        box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.3);
-        animation: entry 1s linear 1;
-        border-radius: 5px;
-        color: $white;
+        height: 400px;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        border-radius: 10px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+
+        &:focus-visible {
+            outline: 2px solid $primary-color;
+            outline-offset: 4px;
+        }
+
+        &.is-flipped {
+            transform: rotateY(180deg);
+        }
+    }
+
+    &__card {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 10px;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        overflow: hidden;
-        background: linear-gradient(to right, #333 30%, #222 100%);
-        margin-bottom: $spacing-lg;
+        background-color: #222;
+        color: $white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 
-        &:nth-child(odd) {
-            transform: rotateY(33deg) scale(0.7);
-
-            @media (prefers-reduced-motion: reduce) {
-                transform: scale(0.9);
-            }
-
-            &:hover,
-            &:focus-within {
-                transform: rotateY(0deg) scale(1) translateY(10px);
-                z-index: 400;
-
-                @media (prefers-reduced-motion: reduce) {
-                    transform: scale(1);
-                }
-            }
+        &--front {
+            transform: rotateY(0deg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        &:nth-child(even) {
-            flex-direction: column-reverse;
-            transform: rotateY(-33deg) scale(0.7);
-            background: linear-gradient(to left, #333 30%, #222 100%);
-
-            @media (prefers-reduced-motion: reduce) {
-                transform: scale(0.9);
-            }
-
-            &:hover,
-            &:focus-within {
-                transform: rotateY(0deg) scale(1) translateY(10px);
-                z-index: 400;
-
-                @media (prefers-reduced-motion: reduce) {
-                    transform: scale(1);
-                }
-            }
-        }
-
-        @include tablet {
-            flex-direction: row;
-
-            &:nth-child(even) {
-                flex-direction: row-reverse;
-            }
+        &--back {
+            transform: rotateY(180deg);
+            background-color: #1a1a1a;
         }
     }
 
-    &__image-wrapper {
-        position: relative;
-        padding: $spacing-sm;
-        width: 100%;
-        height: auto;
-        overflow: hidden;
-        border-radius: 5px;
+    &__info {
+        padding: $spacing-md;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        text-align: left;
+    }
 
-        &:focus {
-            outline: 2px dashed $primary-color;
-            outline-offset: 2px;
+    &__card-title {
+        font-size: 1.75rem;
+        margin-bottom: $spacing-sm;
+        color: $primary-color;
+    }
+
+    &__description {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: $spacing-md;
+        color: #e0e0e0;
+    }
+
+    &__skills {
+        margin-bottom: $spacing-md;
+    }
+
+    &__skills-title {
+        font-size: 1.1rem;
+        color: #aaa;
+        margin-bottom: $spacing-xs;
+    }
+
+    &__links {
+        display: flex;
+        gap: $spacing-sm;
+        margin-top: auto;
+    }
+
+    &__link,
+    &__github-link {
+        padding: $spacing-xs $spacing-sm;
+        margin-bottom: $spacing-xl;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    &__link {
+        background-color: $primary-color;
+        color: $white;
+
+        &:hover,
+        &:focus-visible {
+            background-color: darken($primary-color, 10%);
+            transform: translateY(-2px);
+            outline: none;
         }
+    }
 
-        @include tablet {
-            width: 40%;
-            height: 100%;
+    &__github-link {
+        background-color: #333;
+        color: $white;
+
+        &:hover,
+        &:focus-visible {
+            background-color: #444;
+            transform: translateY(-2px);
+            outline: none;
         }
     }
 
@@ -120,9 +156,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        overflow: hidden;
 
         &.is-preloading::after {
             content: '';
@@ -131,57 +165,83 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             z-index: 2;
-            border-radius: 5px;
         }
+
+        &.is-preloading::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top-color: $primary-color;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 3;
+        }
+    }
+
+    // Image styles for back of card
+    &__card--back {
+
+        .projects__image,
+        .lazy-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            cursor: zoom-in !important;
+        }
+
+        .lazy-image-container {
+            width: 100% !important;
+            height: 100% !important;
+            display: block !important;
+        }
+    }
+
+    // Default image style (used elsewhere)
+    &__image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        cursor: zoom-in;
     }
 
     &__image-counter {
         position: absolute;
         bottom: $spacing-sm;
         right: $spacing-sm;
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.7);
         color: $white;
-        padding: 2px 8px;
-        border-radius: 12px;
-        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
         z-index: 3;
-    }
-
-    &__image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-        background-size: cover;
-        background-position: center;
-        cursor: zoom-in;
-        border-radius: 5px;
-
-        &:hover {
-            transform: scale(1.05);
-        }
     }
 
     &__nav {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 1.5rem;
-        color: $white;
-        background-color: rgba(0, 0, 0, 0.5);
-        border: none;
         width: 40px;
         height: 40px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: none;
+        color: $white;
+        font-size: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
         cursor: pointer;
         z-index: 10;
-        user-select: none;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, transform 0.3s ease;
 
         &--prev {
             left: $spacing-sm;
@@ -192,84 +252,67 @@
         }
 
         &:hover,
-        &:focus {
+        &:focus-visible {
             background-color: $primary-color;
+            transform: translateY(-50%) scale(1.1);
             outline: none;
         }
     }
 
-    &__info {
+    &__flip-button {
+        position: absolute;
+        bottom: $spacing-sm;
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin: $spacing-sm;
-        width: 100%;
-        text-align: left;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: $white;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        z-index: 5;
+
+        &:hover,
+        &:focus-visible {
+            background-color: $primary-color;
+            transform: translateX(-50%) translateY(-2px);
+            outline: none;
+        }
+
+        &--back {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+
+        span {
+            line-height: 1;
+        }
 
         @include tablet {
-            width: 60%;
+            font-size: 1rem;
+            padding: 10px 18px;
         }
     }
 
-    &__card-title {
-        font-size: 1rem;
-        margin: $spacing-xs 0;
-        color: gold;
-    }
+    &__flip-icon {
+        fill: currentColor;
+        width: 18px;
+        height: 18px;
 
-    &__description {
-        font-size: 0.75rem;
-        margin-bottom: $spacing-xs;
-        line-height: 1.5;
-    }
-
-    &__skills {
-        margin-top: $spacing-sm;
-    }
-
-    &__skills-title {
-        font-size: 0.875rem;
-        color: darken($white, 15%);
-        margin-bottom: $spacing-xs;
-    }
-
-    &__links {
-        display: flex;
-        gap: $spacing-sm;
-        margin-top: $spacing-sm;
-        font-size: 0.875rem;
-    }
-
-    &__link,
-    &__github-link {
-        padding: $spacing-xs $spacing-sm;
-        color: $white;
-        text-decoration: none;
-        font-weight: bold;
-        background-color: $primary-color;
-        border-radius: 4px;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        display: inline-block;
-
-        &:hover,
-        &:focus {
-            background-color: darken($primary-color, 10%);
-            transform: translateY(-2px);
-            text-decoration: none;
-            outline: none;
+        &--back {
+            transform: scaleX(-1);
         }
 
-        &:focus {
-            box-shadow: 0 0 0 2px rgba($primary-color, 0.4);
-        }
-    }
-
-    &__github-link {
-        background-color: #333;
-
-        &:hover,
-        &:focus {
-            background-color: #555;
+        @include tablet {
+            width: 20px;
+            height: 20px;
         }
     }
 
@@ -284,9 +327,8 @@
         justify-content: center;
         align-items: center;
         z-index: 1000;
-        cursor: zoom-out;
-        animation: fadeIn 0.3s ease;
         padding: $spacing-md;
+        animation: fadeIn 0.3s ease;
 
         &:focus {
             outline: none;
@@ -295,58 +337,46 @@
 
     &__enlarged-image-container {
         position: relative;
-        max-width: 100%;
-        max-height: 100%;
-        animation: scaleIn 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        max-width: 90%;
+        max-height: 90%;
+        animation: scaleIn 0.4s ease;
     }
 
     &__enlarged-image {
         max-width: 100%;
         max-height: 80vh;
         object-fit: contain;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 4px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
     }
 
     &__close-enlarged-image {
         position: absolute;
-        top: -40px;
-        right: -40px;
-        width: 40px;
-        height: 40px;
-        background-color: rgba(0, 0, 0, 0.5);
-        border: none;
+        top: -15px;
+        right: -15px;
+        width: 30px;
+        height: 30px;
+        background-color: #000;
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         color: $white;
         cursor: pointer;
-        z-index: 1001;
         transition: background-color 0.3s ease;
+        z-index: 1001;
 
         &:hover,
-        &:focus {
+        &:focus-visible {
             background-color: $primary-color;
             outline: none;
         }
 
         @media (max-width: 600px) {
-            top: -50px;
+            top: -40px;
             right: 0;
-        }
-    }
-
-    @keyframes entry {
-        0% {
-            top: -20%;
-            opacity: 0.1;
-        }
-
-        100% {
-            top: 0%;
-            opacity: 1;
         }
     }
 
@@ -362,168 +392,158 @@
 
     @keyframes scaleIn {
         from {
-            transform: scale(0.8);
+            transform: scale(0.9);
+            opacity: 0;
         }
 
         to {
             transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes spin {
+        to {
+            transform: translate(-50%, -50%) rotate(360deg);
         }
     }
 
     @include tablet {
         padding: 100px;
 
-        &__container {
-            max-width: 700px;
-            aspect-ratio: 16 / 9;
-        }
-
-        &__image-wrapper {
-            padding: $spacing-md;
-        }
-
-        &__title {
-            font-size: 2.5rem;
-            margin-bottom: $spacing-lg;
-        }
-
-        &__info {
-            margin: $spacing-md;
+        &__card-container {
+            height: 450px;
         }
 
         &__card-title {
-            font-size: 1.75rem;
-            margin: $spacing-sm 0;
+            font-size: 2rem;
         }
 
         &__description {
-            font-size: 1.25rem;
-            margin-bottom: $spacing-sm;
+            font-size: 1.1rem;
         }
 
         &__skills-title {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
         }
 
         &__link,
         &__github-link {
-            font-size: 1.125rem;
             padding: $spacing-sm $spacing-md;
-        }
-
-        &__nav {
-            font-size: 2rem;
-            width: 50px;
-            height: 50px;
-
-            &--prev {
-                left: $spacing-md;
-            }
-
-            &--next {
-                right: $spacing-md;
-            }
-        }
-
-        &__image-counter {
-            font-size: 0.875rem;
-            padding: 4px 10px;
+            font-size: 1rem;
         }
     }
 
     @include desktop {
         padding: 120px;
 
-        &__container {
-            max-width: 900px;
-            aspect-ratio: 16 / 9;
-        }
-
-        &__image-wrapper {
-            padding: $spacing-lg;
+        &__card-container {
+            height: 500px;
         }
 
         &__title {
             font-size: 3rem;
-            margin-bottom: $spacing-xl;
-        }
-
-        &__info {
-            margin: $spacing-lg;
         }
 
         &__card-title {
-            font-size: 2rem;
-            margin: $spacing-md 0;
+            font-size: 2.25rem;
         }
 
         &__description {
-            font-size: 1.5rem;
-            margin-bottom: $spacing-md;
+            font-size: 1.25rem;
         }
 
         &__skills-title {
-            font-size: 1.5rem;
-            margin-bottom: $spacing-sm;
-        }
-
-        &__link,
-        &__github-link {
-            font-size: 1.25rem;
-            padding: $spacing-sm $spacing-lg;
+            font-size: 1.35rem;
         }
 
         &__nav {
-            font-size: 2rem;
-            width: 60px;
-            height: 60px;
-
-            &--prev {
-                left: $spacing-lg;
-            }
-
-            &--next {
-                right: $spacing-lg;
-            }
-        }
-
-        &__image-counter {
-            font-size: 1rem;
-            padding: 4px 12px;
-            border-radius: 16px;
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
         }
     }
 
     // Reduced motion support
     @media (prefers-reduced-motion: reduce) {
-        &__container {
-            animation: none;
-        }
-
-        &__image {
+        &__card-container {
             transition: none;
 
-            &:hover {
+            &.is-flipped {
+                transform: none;
+            }
+
+            &.is-flipped .projects__card--front {
+                display: none;
+            }
+
+            &.is-flipped .projects__card--back {
+                transform: none;
+                display: block;
+            }
+        }
+
+        &__card {
+            transition: none;
+
+            &--front {
+                display: block;
+            }
+
+            &--back {
+                display: none;
                 transform: none;
             }
         }
 
         &__link,
-        &__github-link {
+        &__github-link,
+        &__flip-button {
             transition: none;
 
-            &:hover,
-            &:focus {
-                transform: none;
+            &:hover {
+                transform: translateX(-50%);
             }
         }
 
-        &__enlarged-image-overlay {
+        &__nav {
+            transition: none;
+
+            &:hover {
+                transform: translateY(-50%);
+            }
+        }
+
+        &__enlarged-image-overlay,
+        &__enlarged-image-container {
             animation: none;
         }
 
-        &__enlarged-image-container {
-            animation: none;
+        &__image-container {
+            &.is-preloading::before {
+                animation: none;
+            }
+        }
+    }
+
+    // High contrast mode
+    @media (forced-colors: active) {
+        &__card {
+            border: 1px solid CanvasText;
+        }
+
+        &__link,
+        &__github-link,
+        &__flip-button,
+        &__nav,
+        &__close-enlarged-image {
+            border: 1px solid CanvasText;
+
+            &:hover,
+            &:focus-visible {
+                background-color: Highlight;
+                color: HighlightText;
+            }
         }
     }
 }

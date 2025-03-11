@@ -9,7 +9,7 @@ interface LazyImageProps {
     height?: number;
     srcSet?: string;
     sizes?: string;
-    onClick?: () => void;
+    onClick?: (event: React.MouseEvent<Element, MouseEvent>) => void;
 }
 
 const LazyImage: React.FC<LazyImageProps> = ({
