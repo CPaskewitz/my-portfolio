@@ -1,2 +1,74 @@
+// Base values
 $tablet: 768px;
 $desktop: 1280px;
+
+// Colors
+$primary-color: #16A085;
+$background-color: #e5e4e2;
+$text-color: #333;
+$link-color: #20a7d8;
+$link-hover-color: #1a8bb4;
+$white: #fff;
+$black: #000;
+$shadow-color: rgba(0, 0, 0, 0.5);
+$primary-text-color: #e5e4e2;
+$label-color-1: #20a7d8;
+$label-color-2: #CD921E;
+$label-color-3: #c10528;
+
+// Animation
+$transition-fast: 0.3s ease;
+$transition-medium: 0.5s cubic-bezier(.55, 0, .1, 1);
+$transition-slow: 0.8s ease-in-out;
+$animation-duration: 2s;
+$animation-easing: cubic-bezier(.55, 0, .1, 1);
+
+// Spacing
+$spacing-xs: 8px;
+$spacing-sm: 16px;
+$spacing-md: 24px;
+$spacing-lg: 32px;
+$spacing-xl: 48px;
+
+// Shadows
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+// Component specific
+$hero-center-size-mobile: 250px;
+$hero-center-size-tablet: 300px;
+$hero-center-size-desktop: 350px;
+
+// Convert SCSS variables to CSS variables for use in component styles and JS
+:root {
+    --primary-color: #{$primary-color};
+    --background-color: #{$background-color};
+    --text-color: #{$text-color};
+    --link-color: #{$link-color};
+    --link-hover-color: #{$link-hover-color};
+    --white: #{$white};
+    --black: #{$black};
+    --shadow-color: #{$shadow-color};
+    --primary-text-color: #{$primary-text-color};
+
+    --transition-fast: #{$transition-fast};
+    --transition-medium: #{$transition-medium};
+    --transition-slow: #{$transition-slow};
+    --animation-duration: #{$animation-duration};
+    --animation-easing: #{$animation-easing};
+
+    --spacing-xs: #{$spacing-xs};
+    --spacing-sm: #{$spacing-sm};
+    --spacing-md: #{$spacing-md};
+    --spacing-lg: #{$spacing-lg};
+    --spacing-xl: #{$spacing-xl};
+
+    --shadow-sm: #{$shadow-sm};
+    --shadow-md: #{$shadow-md};
+    --shadow-lg: #{$shadow-lg};
+
+    --hero-center-size-mobile: #{$hero-center-size-mobile};
+    --hero-center-size-tablet: #{$hero-center-size-tablet};
+    --hero-center-size-desktop: #{$hero-center-size-desktop};
+}
