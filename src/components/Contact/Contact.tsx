@@ -124,12 +124,9 @@ const Contact: React.FC = () => {
             setErrors({ name: '', email: '', message: '' });
             setTouched({});
 
-            // Removed direct DOM manipulation
         } catch (error) {
             console.error('Error sending email:', error);
             setStatus('error');
-
-            // Removed direct DOM manipulation
         }
     }, [validateForm, errors, formData]);
 
@@ -157,7 +154,6 @@ const Contact: React.FC = () => {
                         </div>
                     </a>
                 </div>
-
                 <div className="contact__form-container">
                     <h3 className="contact__subtitle">Send Me a Message</h3>
 
