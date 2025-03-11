@@ -1,53 +1,341 @@
 @use '../../partials/mixins' as *;
-@use '../../partials//variables' as *;
+@use '../../partials/variables' as *;
 
 .footer {
-    padding: 20px;
+    padding: $spacing-lg $spacing-sm;
     background-color: #121212;
-    text-align: center;
-    color: #fff;
+    color: $white;
+    position: relative;
 
-    &__title {
-        margin-bottom: 16px;
-        font-size: 2rem;
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
-    &__icons {
+    &__top {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-lg;
+        margin-bottom: $spacing-lg;
+
+        @include tablet {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+    }
+
+    &__connect,
+    &__navigation {
+        text-align: center;
+
+        @include tablet {
+            text-align: left;
+        }
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        margin-bottom: $spacing-md;
+        position: relative;
+        display: inline-block;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, $primary-color, transparent);
+            border-radius: 2px;
+        }
+    }
+
+    &__social-links {
         display: flex;
         justify-content: center;
-        gap: 32px;
+        gap: $spacing-lg;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        @include tablet {
+            justify-content: flex-start;
+        }
+    }
+
+    &__social-item {
+        transition: transform 0.3s ease;
+
+        &:hover,
+        &:focus-within {
+            transform: translateY(-5px);
+        }
+    }
+
+    &__social-link {
+        display: block;
+        color: $white;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+
+        &:focus {
+            outline: none;
+
+            .footer__icon-wrapper {
+                outline: 2px solid $primary-color;
+                outline-offset: 4px;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    &__icon-wrapper {
+        position: relative;
+        display: inline-block;
+
+        .lazy-image-container {
+            background-color: transparent !important;
+        }
     }
 
     &__icon {
         width: 50px;
         height: 50px;
-        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 50%;
+        transition:
+            transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+            box-shadow 0.3s ease;
+        filter: brightness(0.9) drop-shadow(0 0 0 transparent) !important;
+        background-color: transparent !important;
 
-        &:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 20px 5px gold;
+        .footer__social-link:hover &,
+        .footer__social-link:focus & {
+            transform: scale(1.1);
+            filter: brightness(1.1) drop-shadow(0 0 0 transparent) !important;
+            box-shadow: 0 0 15px rgba($primary-color, 0.6);
         }
     }
 
+    &__icon-name {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        font-size: 0.875rem;
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+
+        .footer__social-link:hover &,
+        .footer__social-link:focus & {
+            opacity: 1;
+        }
+    }
+
+    &__nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-sm;
+
+        @include tablet {
+            align-items: flex-start;
+        }
+    }
+
+    &__nav-link {
+        color: $white;
+        text-decoration: none;
+        font-size: 1rem;
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease,
+            padding-left 0.2s ease;
+        padding: $spacing-xs 0;
+        display: inline-block;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: $primary-color;
+            transition: width 0.3s ease;
+        }
+
+        &:hover,
+        &:focus {
+            color: $primary-color;
+            transform: translateX(5px);
+
+            &::before {
+                width: 100%;
+            }
+        }
+
+        &:focus {
+            outline: none;
+            text-decoration: underline;
+        }
+    }
+
+    &__bottom {
+        padding-top: $spacing-md;
+        border-top: 1px solid rgba($white, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: $spacing-md;
+
+        @include tablet {
+            flex-direction: row;
+        }
+    }
+
+    &__copyright {
+        font-size: 0.875rem;
+        opacity: 0.6;
+        margin: 0;
+    }
+
+    &__back-to-top {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        background: transparent;
+        border: none;
+        color: $white;
+        cursor: pointer;
+        font-size: 0.875rem;
+        padding: $spacing-xs $spacing-sm;
+        transition: all 0.3s ease;
+        border-radius: 4px;
+
+        &:hover,
+        &:focus {
+            background-color: rgba($white, 0.1);
+            color: $primary-color;
+
+            .footer__arrow-icon {
+                transform: translateY(-5px);
+            }
+        }
+
+        &:focus {
+            outline: 2px solid $primary-color;
+            outline-offset: 2px;
+        }
+    }
+
+    &__arrow-icon {
+        transition: transform 0.3s ease;
+    }
+
     @include tablet {
-        padding: 30px;
+        padding: $spacing-xl $spacing-md;
+
+        &__title {
+            font-size: 1.75rem;
+        }
 
         &__icon {
             width: 60px;
             height: 60px;
         }
+
+        &__nav-link {
+            font-size: 1.125rem;
+        }
     }
 
     @include desktop {
-        padding: 40px;
+        padding: $spacing-xl $spacing-lg;
 
         &__title {
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
 
         &__icon {
-            width: 90px;
-            height: 90px;
+            width: 70px;
+            height: 70px;
+        }
+
+        &__nav-link {
+            font-size: 1.25rem;
+        }
+
+        &__copyright {
+            font-size: 1rem;
+        }
+
+        &__back-to-top {
+            font-size: 1rem;
+            padding: $spacing-sm $spacing-md;
+        }
+    }
+
+    /* Support for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        &__social-item {
+            transition: none;
+
+            &:hover,
+            &:focus-within {
+                transform: none;
+            }
+        }
+
+        &__social-link {
+            transition: none;
+        }
+
+        &__icon {
+            transition: none;
+
+            .footer__social-link:hover &,
+            .footer__social-link:focus & {
+                transform: none;
+            }
+        }
+
+        &__icon-name {
+            transition: none;
+        }
+
+        &__nav-link {
+            transition: none;
+
+            &:hover,
+            &:focus {
+                transform: none;
+
+                &::before {
+                    transition: none;
+                }
+            }
+        }
+
+        &__back-to-top {
+            transition: none;
+
+            &:hover,
+            &:focus {
+                .footer__arrow-icon {
+                    transform: none;
+                }
+            }
+        }
+
+        &__arrow-icon {
+            transition: none;
         }
     }
 }

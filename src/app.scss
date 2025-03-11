@@ -1,8 +1,94 @@
-@import url("https: //fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+@use "./partials/variables" as *;
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: 'Karla', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+
+    &:focus {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+        padding: var(--spacing-sm);
+        background: var(--white);
+        color: var(--black);
+        z-index: 1001;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: var(--shadow-md);
+    }
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: underline;
+    transition: color var(--transition-fast);
+
+    &:hover,
+    &:focus {
+        color: var(--link-hover-color);
+        text-decoration: underline;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode improvements */
+@media (forced-colors: active) {
+    :root {
+        --primary-color: CanvasText;
+    }
+
+    button,
+    a {
+        border: 1px solid CanvasText;
+    }
 }
