@@ -1,0 +1,6 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Specify sitemap location
+Sitemap: https://www.cpaskewitz.com/sitemap.xml
