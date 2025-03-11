@@ -39,36 +39,3 @@ $shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
 $hero-center-size-mobile: 250px;
 $hero-center-size-tablet: 300px;
 $hero-center-size-desktop: 350px;
-
-// Convert SCSS variables to CSS variables for use in component styles and JS
-:root {
-    --primary-color: #{$primary-color};
-    --background-color: #{$background-color};
-    --text-color: #{$text-color};
-    --link-color: #{$link-color};
-    --link-hover-color: #{$link-hover-color};
-    --white: #{$white};
-    --black: #{$black};
-    --shadow-color: #{$shadow-color};
-    --primary-text-color: #{$primary-text-color};
-
-    --transition-fast: #{$transition-fast};
-    --transition-medium: #{$transition-medium};
-    --transition-slow: #{$transition-slow};
-    --animation-duration: #{$animation-duration};
-    --animation-easing: #{$animation-easing};
-
-    --spacing-xs: #{$spacing-xs};
-    --spacing-sm: #{$spacing-sm};
-    --spacing-md: #{$spacing-md};
-    --spacing-lg: #{$spacing-lg};
-    --spacing-xl: #{$spacing-xl};
-
-    --shadow-sm: #{$shadow-sm};
-    --shadow-md: #{$shadow-md};
-    --shadow-lg: #{$shadow-lg};
-
-    --hero-center-size-mobile: #{$hero-center-size-mobile};
-    --hero-center-size-tablet: #{$hero-center-size-tablet};
-    --hero-center-size-desktop: #{$hero-center-size-desktop};
-}
