@@ -1,104 +1,201 @@
+@use "../../partials/variables" as *;
 @use "../../partials/mixins" as *;
 
 .labels {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 8px;
+    gap: 8px;
+    margin-top: $spacing-xs;
+    padding: 0;
+    list-style: none;
 }
 
 .label {
     display: flex;
     align-items: center;
-    margin: 4px;
-    padding: 4px;
-    border-radius: 5px;
-    background-color: #fff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: $white;
+    transition:
+        transform $transition-fast,
+        box-shadow $transition-fast,
+        background-color $transition-fast,
+        color $transition-fast;
+    cursor: default;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 6px;
+    }
 
     &__image {
-        width: 12px;
-        height: 12px;
-        margin-right: 4px;
+        transition: filter $transition-fast;
+        filter: drop-shadow(0 0 0 transparent) !important;
+        background-color: transparent !important;
+    }
+
+    .lazy-image-container {
+        background-color: transparent !important;
     }
 
     &__name {
-        font-size: 0.75rem;
         font-weight: 600;
+        line-height: 1.2;
     }
 
-    &:nth-child(3n + 1) {
-        border: 1px solid #20a7d8;
-        color: #20a7d8;
+    &--color-1 {
+        border: 1px solid $label-color-1;
+        color: $label-color-1;
 
         &:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            background-color: #20a7d8;
-            color: #fff;
+            background-color: $label-color-1;
+            color: $white;
 
-            &__image {
-                filter: invert(1);
+            .label__image {
+                filter: brightness(0) invert(1) !important;
             }
         }
     }
 
-    &:nth-child(3n + 2) {
-        border: 1px solid #CD921E;
-        color: #CD921E;
+    &--color-2 {
+        border: 1px solid $label-color-2;
+        color: $label-color-2;
 
         &:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            background-color: #CD921E;
-            color: #fff;
+            background-color: $label-color-2;
+            color: $white;
 
-            &__image {
-                filter: invert(1);
+            .label__image {
+                filter: brightness(0) invert(1) !important;
             }
         }
     }
 
-    &:nth-child(3n + 3) {
-        border: 1px solid #c10528;
-        color: #c10528;
+    &--color-3 {
+        border: 1px solid $label-color-3;
+        color: $label-color-3;
 
         &:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            background-color: #c10528;
-            color: #fff;
+            background-color: $label-color-3;
+            color: $white;
 
-            &__image {
-                filter: invert(1);
+            .label__image {
+                filter: brightness(0) invert(1) !important;
             }
+        }
+    }
+
+    &--small {
+        padding: 4px 8px;
+
+        .label__icon {
+            margin-right: 4px;
+        }
+
+        .label__name {
+            font-size: 0.75rem;
+        }
+    }
+
+    &--medium {
+        padding: 6px 10px;
+
+        .label__icon {
+            margin-right: 6px;
+        }
+
+        .label__name {
+            font-size: 0.875rem;
+        }
+    }
+
+    &--large {
+        padding: 8px 12px;
+
+        .label__icon {
+            margin-right: 8px;
+        }
+
+        .label__name {
+            font-size: 1rem;
         }
     }
 }
 
 @include tablet {
     .label {
-
-        &__image {
-            width: 24px;
-            height: 24px;
+        &--small {
+            .label__name {
+                font-size: 0.875rem;
+            }
         }
 
-        &__name {
-            font-size: 1rem;
+        &--medium {
+            .label__name {
+                font-size: 1rem;
+            }
+        }
+
+        &--large {
+            .label__name {
+                font-size: 1.125rem;
+            }
         }
     }
 }
 
 @include desktop {
     .label {
-
-        &__image {
-            width: 32px;
-            height: 32px;
+        &--small {
+            .label__name {
+                font-size: 1rem;
+            }
         }
 
-        &__name {
-            font-size: 1.125rem;
+        &--medium {
+            .label__name {
+                font-size: 1.125rem;
+            }
+        }
+
+        &--large {
+            .label__name {
+                font-size: 1.25rem;
+            }
+        }
+    }
+}
+
+// Prefers reduced motion
+@media (prefers-reduced-motion: reduce) {
+    .label {
+        transition: none;
+
+        &:hover {
+            transform: none;
+        }
+
+        .label__image {
+            transition: none;
+        }
+    }
+}
+
+// High contrast mode
+@media (forced-colors: active) {
+    .label {
+        border: 1px solid CanvasText;
+
+        &:hover {
+            background-color: Highlight;
+            color: HighlightText;
         }
     }
 }

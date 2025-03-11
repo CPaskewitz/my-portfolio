@@ -1,0 +1,76 @@
+@use "../../partials/variables" as *;
+
+.lazy-image-container {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    background-color: rgba($background-color, 0.3);
+
+    &.icon-image {
+        background-color: transparent !important;
+
+        .lazy-image {
+            object-fit: contain;
+            background-color: transparent !important;
+            filter: drop-shadow(0 0 0 transparent);
+        }
+
+        .lazy-image-placeholder {
+            background: transparent !important;
+            animation: none;
+        }
+    }
+
+    &:not([style*="height"]) {
+        aspect-ratio: 16 / 9;
+    }
+
+    .lazy-image-placeholder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(110deg, rgba(227, 227, 227, 0.8) 30%, rgba(238, 238, 238, 0.7) 50%, rgba(227, 227, 227, 0.8) 70%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    .lazy-image {
+        position: relative;
+        opacity: 0;
+        transition: opacity $transition-fast;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    &.loaded {
+        .lazy-image {
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Support for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .lazy-image-placeholder {
+        animation: none !important;
+        background: rgba(227, 227, 227, 0.8) !important;
+    }
+
+    .lazy-image {
+        transition: none !important;
+    }
+}
