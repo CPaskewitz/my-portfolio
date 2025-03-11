@@ -23,25 +23,34 @@ const About: React.FC = () => {
     ];
 
     return (
-        <div className="about" id="about">
-            <h1 className="about__title">About</h1>
+        <section className="about" id="about" aria-labelledby="about-title">
+            <h2 id="about-title" className="about__title">About</h2>
+
             <div className="about__description">
-                <h2 className="about__greeting">Hello, World!</h2>
+                <h3 className="about__greeting">Hello, World!</h3>
                 <p className='about__greeting-text'>
                     I began by creating interactive experiences in Unity, which led me to web development. Now, I design and build engaging websites from concept to deployment, focusing on a smooth user experience. My background in customer service and HR helps me communicate effectively and collaborate across teams.
                 </p>
                 <p className='about__greeting-text'>
-                    I’d love to apply my expertise to your next project and help make it a success.
+                    I'd love to apply my expertise to your next project and help make it a success.
                 </p>
             </div>
-            <h2 className="about__subtitle">My Skills</h2>
-            <div className="about__skills">
+
+            <h3 id="skills-title" className="about__subtitle">My Skills</h3>
+
+            <ul className="about__skills" aria-labelledby="skills-title">
                 {skills.map((skill, index) => (
-                    <HoverSkill key={index} src={skill.src} alt={skill.alt} bgColor={skill.bgColor} />
+                    <li key={index} className="about__skill-item">
+                        <HoverSkill
+                            src={skill.src}
+                            alt={skill.alt}
+                            bgColor={skill.bgColor}
+                        />
+                    </li>
                 ))}
-            </div>
-        </div>
+            </ul>
+        </section>
     );
 }
 
-export default About;
+export default React.memo(About);

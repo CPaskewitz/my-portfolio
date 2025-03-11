@@ -1,128 +1,275 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import emailjs from 'emailjs-com';
+import LazyImage from '../LazyImage/LazyImage';
 import './Contact.scss';
 
+interface FormData {
+    name: string;
+    email: string;
+    message: string;
+}
+
+interface FormErrors {
+    name: string;
+    email: string;
+    message: string;
+}
+
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+
 const Contact: React.FC = () => {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
         message: ''
     });
 
-    const [errors, setErrors] = useState({
+    const [errors, setErrors] = useState<FormErrors>({
         name: '',
         email: '',
         message: ''
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const [status, setStatus] = useState<FormStatus>('idle');
+    const [touched, setTouched] = useState<Record<string, boolean>>({});
+    const formRef = useRef<HTMLFormElement>(null);
+    const statusTimeoutRef = useRef<number | null>(null);
+
+    useEffect(() => {
+        if (status === 'success' || status === 'error') {
+            statusTimeoutRef.current = window.setTimeout(() => {
+                setStatus('idle');
+            }, 5000);
+        }
+
+        return () => {
+            if (statusTimeoutRef.current) {
+                clearTimeout(statusTimeoutRef.current);
+            }
+        };
+    }, [status]);
+
+    const validateField = useCallback((name: keyof FormData, value: string): string => {
+        switch (name) {
+            case 'name':
+                return value.trim() ? '' : 'Name is required';
+            case 'email':
+                if (!value.trim()) return 'Email is required';
+                if (!/\S+@\S+\.\S+/.test(value)) return 'Email address is invalid';
+                return '';
+            case 'message':
+                return value.trim() ? '' : 'Message is required';
+            default:
+                return '';
+        }
+    }, []);
+
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
 
-    const validateForm = () => {
-        const newErrors = { name: '', email: '', message: '' };
-        let isValid = true;
+        setFormData(prev => ({ ...prev, [name]: value }));
 
-        if (!formData.name) {
-            newErrors.name = 'Name is required';
-            isValid = false;
+        if (touched[name]) {
+            const errorMessage = validateField(name as keyof FormData, value);
+            setErrors(prev => ({ ...prev, [name]: errorMessage }));
         }
+    }, [validateField, touched]);
 
-        if (!formData.email) {
-            newErrors.email = 'Email is required';
-            isValid = false;
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            newErrors.email = 'Email address is invalid';
-            isValid = false;
-        }
+    const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
 
-        if (!formData.message) {
-            newErrors.message = 'Message is required';
-            isValid = false;
-        }
+        setTouched(prev => ({ ...prev, [name]: true }));
+
+        const errorMessage = validateField(name as keyof FormData, value);
+        setErrors(prev => ({ ...prev, [name]: errorMessage }));
+    }, [validateField]);
+
+    const validateForm = useCallback((): boolean => {
+        const newErrors = {
+            name: validateField('name', formData.name),
+            email: validateField('email', formData.email),
+            message: validateField('message', formData.message)
+        };
 
         setErrors(newErrors);
-        return isValid;
-    };
+        setTouched({ name: true, email: true, message: true });
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        return !Object.values(newErrors).some(error => error);
+    }, [formData, validateField]);
+
+    const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (validateForm()) {
-            emailjs.sendForm(
+        if (!validateForm()) {
+            const firstErrorField = Object.keys(errors).find(key => errors[key as keyof FormErrors]) as keyof FormErrors;
+            if (firstErrorField && formRef.current) {
+                const element = formRef.current.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
+                if (element) element.focus();
+            }
+            return;
+        }
+
+        setStatus('submitting');
+
+        try {
+            await emailjs.sendForm(
                 import.meta.env.VITE_EMAILJS_SERVICE_ID,
                 import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
                 e.currentTarget,
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-            ).then(() => {
-                alert('Form submitted successfully!');
-            }).catch(() => {
-                alert('An error occurred, please try again.');
-            });
+            );
 
+            setStatus('success');
             setFormData({ name: '', email: '', message: '' });
             setErrors({ name: '', email: '', message: '' });
+            setTouched({});
+
+            const statusMessage = document.getElementById('form-status-message');
+            if (statusMessage) {
+                statusMessage.textContent = 'Your message has been sent successfully! Thank you for reaching out.';
+            }
+        } catch (error) {
+            console.error('Error sending email:', error);
+            setStatus('error');
+
+            const statusMessage = document.getElementById('form-status-message');
+            if (statusMessage) {
+                statusMessage.textContent = 'There was an error sending your message. Please try again or contact us directly.';
+            }
         }
-    };
+    }, [validateForm, errors, formData]);
 
     return (
-        <div className="contact" id="contact">
-            <h1 className="contact__title">Contact</h1>
+        <section className="contact" id="contact" aria-labelledby="contact-title">
+            <h2 id="contact-title" className="contact__title">Contact</h2>
+
             <div className="contact__content">
                 <div className="contact__resume">
-                    <p className="contact__resume-text">Download My Resume</p>
-                    <a href="/Corey_Paskewitz_Resume.pdf" download>
-                        <img src="/resumeicon.png" alt="Download Resume" className="contact__resume-icon" />
+                    <h3 className="contact__resume-title">My Resume</h3>
+                    <p className="contact__resume-text">Download my resume to learn more about my experience and qualifications.</p>
+                    <a
+                        href="/Corey_Paskewitz_Resume.pdf"
+                        download
+                        className="contact__resume-link"
+                        aria-label="Download my resume (PDF)"
+                    >
+                        <div className="contact__resume-icon-wrapper">
+                            <LazyImage
+                                src="/resumeicon.png"
+                                alt=""
+                                className="contact__resume-icon"
+                            />
+                            <span className="contact__resume-download-text">Download PDF</span>
+                        </div>
                     </a>
                 </div>
-                <div>
-                    <h2 className="contact__subtitle">Message Me</h2>
-                    <form className="contact__form" onSubmit={handleSubmit}>
+
+                <div className="contact__form-container">
+                    <h3 className="contact__subtitle">Send Me a Message</h3>
+
+                    <div
+                        className={`contact__status-message ${status !== 'idle' ? `contact__status-message--${status}` : ''}`}
+                        aria-live="polite"
+                        id="form-status-message"
+                        role="status"
+                    >
+                        {status === 'success' && 'Your message has been sent successfully! Thank you for reaching out.'}
+                        {status === 'error' && 'There was an error sending your message. Please try again or contact us directly.'}
+                    </div>
+
+                    <form
+                        className={`contact__form ${status === 'submitting' ? 'contact__form--submitting' : ''}`}
+                        onSubmit={handleSubmit}
+                        noValidate
+                        aria-describedby="form-status-message"
+                        ref={formRef}
+                    >
                         <div className="contact__form-group">
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor="name" className="contact__label">Name</label>
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                className={errors.name ? 'error' : ''}
+                                onBlur={handleBlur}
+                                className={`contact__input ${errors.name && touched.name ? 'contact__input--error' : ''}`}
                                 autoComplete="name"
+                                aria-invalid={!!errors.name && touched.name}
+                                aria-describedby={errors.name && touched.name ? "name-error" : undefined}
+                                disabled={status === 'submitting'}
+                                required
                             />
-                            {errors.name && <span className="contact__error-text">{errors.name}</span>}
+                            {errors.name && touched.name && (
+                                <div className="contact__error-text" id="name-error" role="alert">
+                                    {errors.name}
+                                </div>
+                            )}
                         </div>
+
                         <div className="contact__form-group">
-                            <label htmlFor="email">Email</label>
+                            <label htmlFor="email" className="contact__label">Email</label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className={errors.email ? 'error' : ''}
+                                onBlur={handleBlur}
+                                className={`contact__input ${errors.email && touched.email ? 'contact__input--error' : ''}`}
                                 autoComplete="email"
+                                aria-invalid={!!errors.email && touched.email}
+                                aria-describedby={errors.email && touched.email ? "email-error" : undefined}
+                                disabled={status === 'submitting'}
+                                required
                             />
-                            {errors.email && <span className="contact__error-text">{errors.email}</span>}
+                            {errors.email && touched.email && (
+                                <div className="contact__error-text" id="email-error" role="alert">
+                                    {errors.email}
+                                </div>
+                            )}
                         </div>
+
                         <div className="contact__form-group">
-                            <label htmlFor="message">Message</label>
+                            <label htmlFor="message" className="contact__label">Message</label>
                             <textarea
                                 id="message"
                                 name="message"
                                 value={formData.message}
                                 onChange={handleChange}
-                                className={errors.message ? 'error' : ''}
-                                autoComplete="off"
+                                onBlur={handleBlur}
+                                className={`contact__textarea ${errors.message && touched.message ? 'contact__textarea--error' : ''}`}
+                                aria-invalid={!!errors.message && touched.message}
+                                aria-describedby={errors.message && touched.message ? "message-error" : undefined}
+                                disabled={status === 'submitting'}
+                                required
+                                rows={6}
                             ></textarea>
-                            {errors.message && <span className="contact__error-text">{errors.message}</span>}
+                            {errors.message && touched.message && (
+                                <div className="contact__error-text" id="message-error" role="alert">
+                                    {errors.message}
+                                </div>
+                            )}
                         </div>
-                        <button type="submit" className="contact__button">Submit</button>
+
+                        <button
+                            type="submit"
+                            className="contact__button"
+                            disabled={status === 'submitting'}
+                            aria-busy={status === 'submitting'}
+                        >
+                            {status === 'submitting' ? (
+                                <>
+                                    <span className="contact__button-spinner"></span>
+                                    <span>Sending...</span>
+                                </>
+                            ) : 'Send Message'}
+                        </button>
                     </form>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
-export default Contact;
+export default React.memo(Contact);
