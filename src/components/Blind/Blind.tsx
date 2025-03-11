@@ -24,13 +24,28 @@ const Blind: React.FC<BlindProps> = ({ colL, colW, imgSrc1, imgSrc2, rotationY }
     }, [rotationY, colW]);
 
     return (
-        <div className="hero__blind" ref={blindRef} style={{ width: `${colW}px`, height: '100vh', position: 'absolute' }}>
+        <div
+            className="hero__blind"
+            ref={blindRef}
+            style={{
+                width: `${colW}px`,
+                height: '100vh',
+                position: 'absolute'
+            }}
+            aria-hidden="true"
+        >
             <div
                 className="hero__blind-img"
-                style={{ width: '100vw', height: '100vh', backgroundImage: `url(${bgImg})`, left: `-${colL}px` }}
+                style={{
+                    width: '100vw',
+                    height: '100vh',
+                    backgroundImage: `url(${bgImg})`,
+                    left: `-${colL}px`
+                }}
+                role="presentation"
             />
         </div>
     );
 };
 
-export default Blind;
+export default React.memo(Blind);
