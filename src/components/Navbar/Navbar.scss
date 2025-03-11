@@ -53,7 +53,6 @@
         display: block;
         width: 36px;
         height: 36px;
-        padding: 6px;
         border: none;
         background: transparent;
         cursor: pointer;
@@ -86,6 +85,7 @@
             height: 2px;
             background-color: $white;
             transition: transform $transition-medium;
+            left: 0;
         }
 
         &::before {
@@ -93,7 +93,7 @@
         }
 
         &::after {
-            bottom: -8px;
+            top: 8px;
         }
 
         .active & {
