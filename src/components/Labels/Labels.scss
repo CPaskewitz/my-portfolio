@@ -57,10 +57,6 @@
         &:hover {
             background-color: $label-color-1;
             color: $white;
-
-            .label__image {
-                filter: brightness(0) invert(1) !important;
-            }
         }
     }
 
