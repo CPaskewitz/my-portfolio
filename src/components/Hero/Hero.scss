@@ -147,7 +147,7 @@
         height: 100px;
         line-height: 100px;
         margin-top: -50px;
-        margin-left: -50px;
+        margin-left: -100px;
 
         &::after {
             content: 'WELCOME';
@@ -227,7 +227,8 @@
             height: 120px;
             line-height: 120px;
             margin-top: -60px;
-            margin-left: -60px;
+            margin-left: -80px;
+
         }
 
         &__greeting {
@@ -269,7 +270,6 @@
         }
 
         &__outside {
-            // Desktop sizing
             width: calc($hero-center-size-desktop / 2);
             height: calc($hero-center-size-desktop / 2);
             line-height: calc($hero-center-size-desktop / 2);

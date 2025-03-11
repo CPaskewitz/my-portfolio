@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
                 clearTimeout(transitionTimerRef.current);
             }
         };
-    }, [activeImage]);
+    }, []);
 
     const switchImage = useCallback(() => {
         if (isTransitioning) return;
