@@ -124,18 +124,12 @@ const Contact: React.FC = () => {
             setErrors({ name: '', email: '', message: '' });
             setTouched({});
 
-            const statusMessage = document.getElementById('form-status-message');
-            if (statusMessage) {
-                statusMessage.textContent = 'Your message has been sent successfully! Thank you for reaching out.';
-            }
+            // Removed direct DOM manipulation
         } catch (error) {
             console.error('Error sending email:', error);
             setStatus('error');
 
-            const statusMessage = document.getElementById('form-status-message');
-            if (statusMessage) {
-                statusMessage.textContent = 'There was an error sending your message. Please try again or contact us directly.';
-            }
+            // Removed direct DOM manipulation
         }
     }, [validateForm, errors, formData]);
 
@@ -175,6 +169,7 @@ const Contact: React.FC = () => {
                     >
                         {status === 'success' && 'Your message has been sent successfully! Thank you for reaching out.'}
                         {status === 'error' && 'There was an error sending your message. Please try again or contact us directly.'}
+                        {status === 'submitting' && 'Sending your message...'}
                     </div>
 
                     <form
@@ -185,10 +180,10 @@ const Contact: React.FC = () => {
                         ref={formRef}
                     >
                         <div className="contact__form-group">
-                            <label htmlFor="name" className="contact__label">Name</label>
+                            <label htmlFor="name-field" className="contact__label">Name</label>
                             <input
                                 type="text"
-                                id="name"
+                                id="name-field"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
@@ -208,10 +203,10 @@ const Contact: React.FC = () => {
                         </div>
 
                         <div className="contact__form-group">
-                            <label htmlFor="email" className="contact__label">Email</label>
+                            <label htmlFor="email-field" className="contact__label">Email</label>
                             <input
                                 type="email"
-                                id="email"
+                                id="email-field"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -231,9 +226,9 @@ const Contact: React.FC = () => {
                         </div>
 
                         <div className="contact__form-group">
-                            <label htmlFor="message" className="contact__label">Message</label>
+                            <label htmlFor="message-field" className="contact__label">Message</label>
                             <textarea
-                                id="message"
+                                id="message-field"
                                 name="message"
                                 value={formData.message}
                                 onChange={handleChange}
