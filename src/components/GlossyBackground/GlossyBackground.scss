@@ -1,0 +1,95 @@
+@use "../../partials/variables" as *;
+@use "../../partials/mixins" as *;
+
+.glossy-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: overlay;
+    background: transparent;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    overflow: hidden;
+
+    &--mounted {
+        opacity: 1;
+    }
+
+    &__effect {
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        width: 300%;
+        height: 300%;
+        transform: rotate(30deg);
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    // Mode variants
+    &--shine &__effect {
+        background: linear-gradient(to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0) 100%);
+        animation-name: shine-animation;
+    }
+
+    &--shadow &__effect {
+        background: linear-gradient(to right,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0.1) 50%,
+                rgba(0, 0, 0, 0) 100%);
+        animation-name: shadow-animation;
+        mix-blend-mode: multiply;
+    }
+
+    &--shadow {
+        mix-blend-mode: normal;
+    }
+
+    &--slow &__effect {
+        animation-duration: 12s;
+    }
+
+    &--medium &__effect {
+        animation-duration: 8s;
+    }
+
+    &--fast &__effect {
+        animation-duration: 5s;
+    }
+}
+
+@keyframes shine-animation {
+    0% {
+        transform: translateX(-100%) rotate(30deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(30deg);
+    }
+}
+
+@keyframes shadow-animation {
+    0% {
+        transform: translateX(-100%) rotate(30deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(30deg);
+    }
+}
+
+// Reduced motion preference
+@media (prefers-reduced-motion: reduce) {
+    .glossy-background {
+        &__effect {
+            animation: none;
+        }
+    }
+}
