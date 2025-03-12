@@ -5,6 +5,7 @@
     padding: 80px $spacing-sm;
     background-color: #1a1a1a;
     text-align: center;
+    @include glossy-effect('fast');
 
     &__title {
         font-size: 2.5rem;
@@ -33,6 +34,8 @@
         margin: 0 auto;
         padding: $spacing-md 0;
         perspective: 1000px;
+        position: relative;
+        z-index: 2;
     }
 
     &__card-container {

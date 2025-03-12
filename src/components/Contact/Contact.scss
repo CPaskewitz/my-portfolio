@@ -6,6 +6,7 @@
     background-color: $background-color;
     text-align: center;
     position: relative;
+    @include glossy-shadow-effect('slow');
 
     &__title {
         font-size: 2rem;
@@ -40,6 +41,8 @@
         gap: $spacing-lg;
         max-width: 1200px;
         margin: 0 auto;
+        position: relative;
+        z-index: 2;
     }
 
     &__form-container,

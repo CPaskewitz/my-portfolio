@@ -4,10 +4,16 @@
 .about {
     padding: 80px $spacing-sm;
     background-color: $background-color;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include glossy-shadow-effect('slow');
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+    }
 
     &__title {
         margin-bottom: $spacing-xs;
