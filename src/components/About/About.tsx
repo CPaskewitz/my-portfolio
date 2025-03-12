@@ -24,6 +24,7 @@ const About: React.FC = () => {
 
     return (
         <section className="about" id="about" aria-labelledby="about-title">
+            <div className="about__container">
             <h2 id="about-title" className="about__title">About</h2>
 
             <div className="about__description">
@@ -49,6 +50,7 @@ const About: React.FC = () => {
                     </li>
                 ))}
             </ul>
+            </div>
         </section>
     );
 }
