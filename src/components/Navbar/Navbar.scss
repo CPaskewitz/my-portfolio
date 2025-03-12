@@ -28,19 +28,18 @@
     }
 
     &__logo {
-        font-size: 1.75rem;
-        font-weight: 700;
-        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-decoration: none;
         position: relative;
         padding: $spacing-xs;
         z-index: 11;
-        text-transform: uppercase;
-        transition: color $transition-fast;
+        transition: transform $transition-fast;
 
         &:hover,
         &:focus-visible {
-            color: $primary-color;
+            transform: scale(1.05);
         }
 
         &:focus {
@@ -50,6 +49,17 @@
         &:focus-visible {
             outline: 2px dashed $primary-color;
             outline-offset: 2px;
+        }
+    }
+
+    &__logo-image {
+        width: 40px;
+        height: 40px;
+        display: block;
+
+        @include tablet {
+            width: 45px;
+            height: 45px;
         }
     }
 
@@ -310,6 +320,10 @@
         }
 
         &__menu {
+            transition: none;
+        }
+
+        &__logo {
             transition: none;
         }
     }

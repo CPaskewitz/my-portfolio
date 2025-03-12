@@ -62,8 +62,15 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             aria-label="Main navigation"
         >
             <div className="navbar__container">
-                <a href="/" className="navbar__logo" aria-label="Home">
-                    CP
+                <a href="/" className="navbar__logo" aria-label="Corey Paskewitz - Home">
+                    <img
+                        src="/cp-logo.svg"
+                        alt="site-logo"
+                        className="navbar__logo-image"
+                        width="40"
+                        height="40"
+                    />
+                    <span className="visually-hidden">Corey Paskewitz</span>
                 </a>
 
                 <button
