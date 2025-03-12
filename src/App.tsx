@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef, Suspense } from 'react';
-import { Helmet } from 'react-helmet-async';
+import Helmet from './components/Helmet/Helmet';
 import { debounce } from 'lodash';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
+import structuredData from './data/structuredData';
+import { seoData } from './data/seoData';
 import './app.scss';
 
 const Hero = React.lazy(() => import('./components/Hero/Hero'));
@@ -74,24 +76,16 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Corey Paskewitz | Web Developer & Software Engineer</title>
-        <meta name="description" content="Portfolio of Corey Paskewitz, a web developer and software engineer specializing in React, TypeScript, and modern web technologies." />
-        <meta name="keywords" content="web developer, software engineer, react, typescript, portfolio" />
-        <meta property="og:title" content="Corey Paskewitz | Web Developer & Software Engineer" />
-        <meta property="og:description" content="Portfolio of Corey Paskewitz, a web developer and software engineer specializing in React, TypeScript, and modern web technologies." />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Corey Paskewitz | Web Developer & Software Engineer" />
-        <meta name="twitter:description" content="Portfolio of Corey Paskewitz, a web developer and software engineer specializing in React, TypeScript, and modern web technologies." />
+      <Helmet
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        url={seoData.url}
+        type={seoData.type}
+        image={seoData.image}
+      >
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Corey Paskewitz",
-            "jobTitle": "Web Developer & Software Engineer",
-            "knowsAbout": ["React", "TypeScript", "Web Development", "Software Engineering"],
-          })}
+          {JSON.stringify(structuredData)}
         </script>
       </Helmet>
 
@@ -104,13 +98,13 @@ const App: React.FC = () => {
       <main id="main-content">
         <Suspense fallback={<LoadingSpinner />}>
           <Hero projectsRef={projectsRef} />
-          <div ref={aboutRef} id="about">
+          <div ref={aboutRef}>
             <About />
           </div>
-          <div ref={projectsRef} id="projects">
+          <div ref={projectsRef}>
             <Projects />
           </div>
-          <div ref={contactRef} id="contact">
+          <div ref={contactRef}>
             <Contact />
           </div>
         </Suspense>

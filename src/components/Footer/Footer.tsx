@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LazyImage from '../LazyImage/LazyImage';
 import './Footer.scss';
 
@@ -26,6 +26,44 @@ const Footer: React.FC = () => {
             label: 'Connect with me on LinkedIn'
         }
     ];
+
+    // Add structured data to the page
+    useEffect(() => {
+        // This injects the structured data for the organization
+        // You only need to do this once on the site, so the footer is a good place
+        // This is a global schema that applies to the whole site
+        const organizationSchema = {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Corey Paskewitz Web Development",
+            "url": "https://yourportfolio.com",
+            "logo": "https://yourportfolio.com/logo.png",
+            "sameAs": socialLinks.map(link => link.url),
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "your.email@example.com"
+            }
+        };
+
+        // Check if the script already exists to avoid duplicates
+        const existingScript = document.getElementById('organization-schema');
+        if (!existingScript) {
+            const script = document.createElement('script');
+            script.id = 'organization-schema';
+            script.type = 'application/ld+json';
+            script.innerHTML = JSON.stringify(organizationSchema);
+            document.head.appendChild(script);
+        }
+
+        // Clean up on unmount
+        return () => {
+            const script = document.getElementById('organization-schema');
+            if (script) {
+                document.head.removeChild(script);
+            }
+        };
+    }, []);
 
     const scrollToTop = () => {
         window.scrollTo({
