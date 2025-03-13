@@ -6,7 +6,9 @@
     background-color: $background-color;
     text-align: center;
     position: relative;
-    @include glossy-shadow-effect('slow');
+    @include swirling-shadow-effect($shadow-color: #000,
+            $swirl-intensity: 1,
+            $animation-duration: 5s);
 
     &__title {
         font-size: 2rem;
