@@ -6,7 +6,7 @@
     background-color: #121212;
     color: $white;
     position: relative;
-    @include glossy-effect('slow');
+    @include glossy-effect('fast');
 
     &__container {
         max-width: 1200px;
