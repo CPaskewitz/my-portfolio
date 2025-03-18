@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="20.979889mm"
+   width="65.785156mm"
    height="26.458351mm"
-   viewBox="0 0 20.979889 26.458351"
+   viewBox="0 0 65.785157 26.458351"
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="1"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="2.0815414"
-     inkscape:cx="42.276364"
-     inkscape:cy="99.92595"
+     inkscape:zoom="1.7356302"
+     inkscape:cx="134.82135"
+     inkscape:cy="44.94045"
      inkscape:window-width="1728"
      inkscape:window-height="1057"
      inkscape:window-x="0"
@@ -89,7 +89,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-108.53824,-29.706604)">
+     transform="translate(-204.065,-27.776556)">
     <path
        sodipodi:type="star"
        style="fill:#640528;fill-opacity:0.99149;stroke:none;stroke-width:2.35049;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -328,5 +328,65 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.2222px;font-family:'Telugu MN';-inkscape-font-specification:'Telugu MN';stroke-width:0.472"
          x="114.38728"
          y="53.248871">P</tspan></text>
+    <g
+       id="g12"
+       transform="translate(36.393266,-0.66169575)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2778px;line-height:1.25;font-family:Silom;-inkscape-font-specification:Silom;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;fill-opacity:0.987234;stroke:none;stroke-width:0.499999;stroke-dasharray:none;stroke-opacity:1"
+         x="202.37045"
+         y="54.896603"
+         id="text10"><tspan
+           sodipodi:role="line"
+           id="tspan10"
+           style="font-size:35.2778px;fill:#ffffff;stroke:none;stroke-width:0.5"
+           x="202.37045"
+           y="54.896603">C</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.2222px;line-height:1.25;font-family:Kefa;-inkscape-font-specification:Kefa;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;fill-opacity:0.987234;stroke:none;stroke-width:0.472001;stroke-dasharray:none;stroke-opacity:0"
+         x="211.14755"
+         y="51.980518"
+         id="text11"><tspan
+           sodipodi:role="line"
+           id="tspan11"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.2222px;font-family:Kefa;-inkscape-font-specification:Kefa;stroke-width:0.472"
+           x="211.14755"
+           y="51.980518">P</tspan></text>
+      <rect
+         style="fill:#ffffff;fill-opacity:0.987234;stroke-width:0.42622;stroke-opacity:0"
+         id="rect11"
+         width="61.573399"
+         height="3.0358195"
+         x="169.33957"
+         y="41.884621"
+         rx="7.4642506"
+         ry="1.0385945" />
+      <ellipse
+         style="fill:#ffffff;fill-opacity:0.987234;stroke-width:0.417531;stroke-opacity:0"
+         id="path11"
+         ry="2.6645575"
+         rx="2.5483973"
+         cy="43.13731"
+         cx="230.90849" />
+      <path
+         sodipodi:type="star"
+         style="fill:#ffffff;fill-opacity:0.987234;stroke-width:0.472001;stroke-opacity:0"
+         id="path12"
+         inkscape:flatsided="false"
+         sodipodi:sides="3"
+         sodipodi:cx="160.63782"
+         sodipodi:cy="11.553441"
+         sodipodi:r1="7.3716149"
+         sodipodi:r2="8.2544365"
+         sodipodi:arg1="0.90759333"
+         sodipodi:arg2="2.9462666"
+         inkscape:rounded="0.09"
+         inkscape:randomized="0"
+         d="m 165.17611,17.362453 c -1.13457,-0.386506 -11.52443,-3.75799 -12.63577,-4.206938 -0.0821,-0.03317 0.73093,-0.517986 0.79758,-0.576305 0.90201,-0.789308 9.01673,-8.1014525 9.9612,-8.8394239 0.0698,-0.054526 0.0831,0.8919967 0.1003,0.9788737 0.23256,1.1758146 2.5077,11.8594422 2.67457,13.0463622 0.0123,0.0877 -0.81405,-0.374011 -0.89788,-0.402569 z"
+         inkscape:transform-center-x="0.27650039"
+         inkscape:transform-center-y="-0.080560233"
+         transform="matrix(-0.0553089,-0.09904596,0.15186224,-0.05060815,176.13643,59.979695)" />
+    </g>
   </g>
 </svg>
