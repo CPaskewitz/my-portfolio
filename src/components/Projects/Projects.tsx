@@ -20,6 +20,27 @@ interface Project {
 const Projects: React.FC = () => {
     const projects: Project[] = [
       {
+        title: "OAWN",
+        description:
+          "A professional website for the Ontario Animal Welfare Network.",
+        images: [
+          "/oawn-home.png",
+          "/oawn-aboutus.png",
+          "/oawn-members.png",
+          "/oawn-join.png",
+          "/oawn-report.png",
+          "/oawn-animalwelfare.png",
+        ],
+        link: "https://www.oawn.ca",
+        github: "",
+        skills: [
+          { image: "reacticon.png", name: "React" },
+          { image: "typescripticon.png", name: "TypeScript" },
+          { image: "sassicon.png", name: "Sass" },
+          { image: "vercelicon.png", name: "Vercel" },
+        ],
+      },
+      {
         title: "BoguStore",
         description: "A mock e-commerce store showcasing unit testing.",
         images: [
@@ -60,6 +81,7 @@ const Projects: React.FC = () => {
           { image: "mongodbicon.png", name: "MongoDB" },
           { image: "reacticon.png", name: "React" },
           { image: "typescripticon.png", name: "TypeScript" },
+          { image: "sassicon.png", name: "Sass" },
           { image: "restapiicon.png", name: "Dall-E 3 API" },
           { image: "herokuicon.png", name: "Heroku" },
         ],
@@ -82,6 +104,7 @@ const Projects: React.FC = () => {
           { image: "reacticon.png", name: "React Native" },
           { image: "nodeicon.png", name: "Node.js" },
           { image: "typescripticon.png", name: "TypeScript" },
+          { image: "sassincon.png", name: "Sass" },
         ],
       },
       {
