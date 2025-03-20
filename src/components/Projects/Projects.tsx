@@ -104,7 +104,7 @@ const Projects: React.FC = () => {
           { image: "reacticon.png", name: "React Native" },
           { image: "nodeicon.png", name: "Node.js" },
           { image: "typescripticon.png", name: "TypeScript" },
-          { image: "sassincon.png", name: "Sass" },
+          { image: "sassicon.png", name: "Sass" },
         ],
       },
       {
