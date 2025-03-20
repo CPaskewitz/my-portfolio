@@ -3,24 +3,26 @@ import HoverSkill from '../HoverSkill/HoverSkill';
 import './About.scss';
 
 const About: React.FC = () => {
-    const skills = [
-        { src: 'htmlicon.png', alt: 'HTML', bgColor: '#FF5733' },
-        { src: 'cssicon.png', alt: 'CSS', bgColor: '#2980B9' },
-        { src: 'javascripticon.png', alt: 'JavaScript', bgColor: '#FFD700' },
-        { src: 'reacticon.png', alt: 'React', bgColor: '#61DAFB' },
-        { src: 'nodeicon.png', alt: 'Node.js', bgColor: '#F29111' },
-        { src: 'mysqlicon.png', alt: 'MySQL', bgColor: '#68A063' },
-        { src: 'mongodbicon.png', alt: 'MongoDB', bgColor: '#4DB33D' },
-        { src: 'typescripticon.png', alt: 'TypeScript', bgColor: '#3178C6' },
-        { src: 'wordpressicon.png', alt: 'WordPress', bgColor: '#21759B' },
-        { src: 'phpicon.png', alt: 'PHP', bgColor: '#4F5B93' },
-        { src: 'restapiicon.png', alt: 'Rest API', bgColor: '#FF6F61' },
-        { src: 'herokuicon.png', alt: 'Heroku', bgColor: '#79589F' },
-        { src: 'nextjsicon.png', alt: 'Next.js', bgColor: '#8A2BE2' },
-        { src: 'reduxicon.png', alt: 'Redux', bgColor: '#FF7F50' },
-        { src: 'tailwindicon.png', alt: 'Tailwind', bgColor: '#32CD32' },
-        { src: 'jesticon.png', alt: 'Jest', bgColor: '#FF6347' },
-    ];
+   const skills = [
+     { src: "htmlicon.png", alt: "HTML", bgColor: "#E34F26" }, 
+     { src: "cssicon.png", alt: "CSS", bgColor: "#264DE4" },
+     { src: "sassicon.png", alt: "SASS", bgColor: "#700124" }, 
+     { src: "javascripticon.png", alt: "JavaScript", bgColor: "#F7DF1E" }, 
+     { src: "reacticon.png", alt: "React", bgColor: "#61DAFB" }, 
+     { src: "nodeicon.png", alt: "Node.js", bgColor: "#8CC84B" }, 
+     { src: "mysqlicon.png", alt: "MySQL", bgColor: "#E96A09" }, 
+     { src: "mongodbicon.png", alt: "MongoDB", bgColor: "#2E7D32" }, 
+     { src: "typescripticon.png", alt: "TypeScript", bgColor: "#0288D1" }, 
+     { src: "wordpressicon.png", alt: "WordPress", bgColor: "#00BCD4" }, 
+     { src: "phpicon.png", alt: "PHP", bgColor: "#9C27B0" }, 
+     { src: "restapiicon.png", alt: "Rest API", bgColor: "#FF5722" }, 
+     { src: "herokuicon.png", alt: "Heroku", bgColor: "#673AB7" }, 
+     { src: "vercelicon.png", alt: "Vercel", bgColor: "#262821" }, 
+     { src: "nextjsicon.png", alt: "Next.js", bgColor: "#E91E63" }, 
+     { src: "reduxicon.png", alt: "Redux", bgColor: "#7B1FA2" }, 
+     { src: "tailwindicon.png", alt: "Tailwind", bgColor: "#009688" },
+     { src: "jesticon.png", alt: "Jest", bgColor: "#D32F2F" },
+   ];
 
     return (
         <section className="about" id="about" aria-labelledby="about-title">
