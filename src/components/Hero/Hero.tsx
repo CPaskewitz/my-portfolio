@@ -1,128 +1,200 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import LazyImage from '../LazyImage/LazyImage';
-import './Hero.scss';
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import LazyImage from "../LazyImage/LazyImage";
+import "./Hero.scss";
 
 interface HeroProps {
-    projectsRef: React.RefObject<HTMLDivElement>;
+  projectsRef: React.RefObject<HTMLDivElement>;
 }
 
 const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
-    const [currentTextIndex, setCurrentTextIndex] = useState(0);
-    const [activeImage, setActiveImage] = useState(0);
-    const [isTransitioning, setIsTransitioning] = useState(false);
-    const transitionTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [backgrounds, setBackgrounds] = useState({
+    current: "/bgi.jpg",
+    next: "/bg.jpg",
+  });
+  const [rippleState, setRippleState] = useState({
+    active: false,
+    x: 0,
+    y: 0,
+    size: 0,
+  });
 
-    const texts = [
-        { text: 'Corey Paskewitz', bgColor: '#20a7d8' },
-        { text: 'Web Developer', bgColor: '#CD921E' },
-        { text: 'Software Engineer', bgColor: '#c10528' },
-    ];
+  const heroRef = useRef<HTMLElement>(null);
+  const requestRef = useRef<number | null>(null);
 
-    const images = [
-        '/bg.jpg',
-        '/bgi.jpg'
-    ];
+  const texts = [
+    { text: "Corey Paskewitz", bgColor: "#20a7d8" },
+    { text: "Web Developer", bgColor: "#CD921E" },
+    { text: "Software Engineer", bgColor: "#c10528" },
+  ];
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        }, 2000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 2000);
 
-        return () => clearInterval(interval);
-    }, [texts.length]);
+    return () => clearInterval(interval);
+  }, [texts.length]);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            switchImage();
-        }, 7000);
+  useEffect(() => {
+    return () => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
+    };
+  }, []);
 
-        return () => {
-            clearInterval(interval);
-            if (transitionTimerRef.current) {
-                clearTimeout(transitionTimerRef.current);
-            }
-        };
-    }, []);
+  const getMaxRadius = useCallback(() => {
+    if (!heroRef.current) return 1500;
 
-    const switchImage = useCallback(() => {
-        if (isTransitioning) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    const { width, height } = rect;
 
-        setIsTransitioning(true);
+    return Math.ceil(Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) * 1.2);
+  }, []);
 
-        transitionTimerRef.current = setTimeout(() => {
-            setActiveImage((prev) => (prev + 1) % images.length);
+  const handleBackgroundClick = useCallback(
+    (e: React.MouseEvent) => {
+      if ((e.target as HTMLElement).closest(".hero__center")) {
+        return;
+      }
 
-            setTimeout(() => {
-                setIsTransitioning(false);
-            }, 1000);
-        }, 300);
-    }, [isTransitioning, images.length]);
+      if (!heroRef.current) return;
 
-    const currentText = texts[currentTextIndex].text;
-    const currentBgColor = texts[currentTextIndex].bgColor;
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-    const handleCenterClick = useCallback(() => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
+
+      setRippleState({
+        active: true,
+        x,
+        y,
+        size: 0,
+      });
+
+      const startTime = performance.now();
+      const maxRadius = getMaxRadius();
+      const duration = 400;
+
+      const animate = (timestamp: number) => {
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        const easeOut = 1 - Math.pow(1 - progress, 2);
+        const newSize = maxRadius * easeOut;
+
+        setRippleState((prev) => ({
+          ...prev,
+          size: newSize,
+        }));
+
+        if (progress < 1) {
+          requestRef.current = requestAnimationFrame(animate);
+        } else {
+          setBackgrounds((prev) => ({
+            current: prev.next,
+            next: prev.current,
+          }));
+
+          setRippleState({
+            active: false,
+            x: 0,
+            y: 0,
+            size: 0,
+          });
+        }
+      };
+
+      requestRef.current = requestAnimationFrame(animate);
+    },
+    [getMaxRadius]
+  );
+
+  const handleCenterClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (projectsRef.current) {
+        projectsRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    [projectsRef]
+  );
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
         if (projectsRef.current) {
-            projectsRef.current.scrollIntoView({ behavior: 'smooth' });
+          projectsRef.current.scrollIntoView({ behavior: "smooth" });
         }
-    }, [projectsRef]);
+      }
+    },
+    [projectsRef]
+  );
 
-    const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            handleCenterClick();
-        }
-    }, [handleCenterClick]);
+  const currentText = texts[currentTextIndex].text;
+  const currentBgColor = texts[currentTextIndex].bgColor;
 
-    return (
-        <section className="hero" aria-label="Introduction">
-            <div className="hero__background">
-                {images.map((image, index) => (
-                    <div
-                        key={index}
-                        className={`hero__background-image ${index === activeImage ? 'hero__background-image--active' : ''
-                            } ${isTransitioning && index === activeImage ? 'hero__background-image--transitioning' : ''}`}
-                        style={{ backgroundImage: `url(${image})` }}
-                        aria-hidden="true"
-                    />
-                ))}
-            </div>
+  return (
+    <section className="hero" aria-label="Introduction" ref={heroRef}>
+      <div className="hero__background" onClick={handleBackgroundClick}>
+        <div
+          className="hero__background-image hero__background-image--current"
+          style={{ backgroundImage: `url(${backgrounds.current})` }}
+          aria-hidden="true"
+        />
 
-            <div className="hero__content">
-                <div
-                    id="message"
-                    className="hero__center"
-                    onClick={handleCenterClick}
-                    onKeyDown={handleKeyDown}
-                    role="button"
-                    tabIndex={0}
-                    aria-label="View my work"
-                >
-                    <div className="hero__center-image">
-                        <LazyImage
-                            src="/myImage.png"
-                            alt=""
-                            className="hero__profile-image icon-image"
-                        />
-                    </div>
-                    <div className="hero__outside" aria-hidden="true"></div>
-                </div>
+        <div
+          className="hero__background-image hero__background-image--next"
+          style={{
+            backgroundImage: `url(${backgrounds.next})`,
+            clipPath: rippleState.active
+              ? `circle(${rippleState.size}px at ${rippleState.x}px ${rippleState.y}px)`
+              : "circle(0px at 0px 0px)",
+          }}
+          aria-hidden="true"
+        />
+      </div>
 
-                <div className="hero__text-container">
-                    <h1 className="hero__greeting">
-                        Hello I'm
-                        <span
-                            className="hero__animation"
-                            style={{ backgroundColor: currentBgColor }}
-                            aria-live="polite"
-                        >
-                            {currentText}
-                        </span>
-                    </h1>
-                </div>
-            </div>
-        </section>
-    );
+      <div className="hero__content">
+        <div
+          id="message"
+          className="hero__center"
+          onClick={handleCenterClick}
+          onKeyDown={handleKeyDown}
+          role="button"
+          tabIndex={0}
+          aria-label="View my work"
+        >
+          <div className="hero__center-image">
+            <LazyImage
+              src="/myImage.png"
+              alt=""
+              className="hero__profile-image icon-image"
+            />
+          </div>
+          <div className="hero__outside" aria-hidden="true"></div>
+        </div>
+
+        <div className="hero__text-container">
+          <h1 className="hero__greeting">
+            Hello I'm
+            <span
+              className="hero__animation"
+              style={{ backgroundColor: currentBgColor }}
+              aria-live="polite"
+            >
+              {currentText}
+            </span>
+          </h1>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default React.memo(Hero);

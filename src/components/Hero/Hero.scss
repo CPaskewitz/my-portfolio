@@ -13,6 +13,7 @@
     overflow: hidden;
     background-color: $black;
     padding: $spacing-sm;
+    cursor: pointer;
 
     &__background {
         position: absolute;
@@ -31,15 +32,14 @@
         height: 100%;
         background-size: cover;
         background-position: center;
-        opacity: 0;
-        transition: opacity 1.5s ease-in-out;
 
-        &--active {
-            opacity: 1;
+        &--current {
+            z-index: 1;
         }
 
-        &--transitioning {
-            filter: grayscale(50%) brightness(0.8);
+        &--next {
+            z-index: 2;
+            will-change: clip-path;
         }
     }
 
@@ -48,6 +48,7 @@
         color: $white;
         margin: $spacing-sm;
         position: relative;
+        pointer-events: none;
     }
 
     &__center {
@@ -60,9 +61,10 @@
         cursor: pointer;
         border-radius: 100%;
         margin: $spacing-sm auto;
-        transition: $transition-medium;
+        transition: all 0.25s ease;
         box-shadow: 0px 5px 10px $black;
         overflow: hidden;
+        pointer-events: auto;
 
         &:focus {
             outline: none;
@@ -88,7 +90,7 @@
                 height: $hero-center-size-mobile;
                 margin-top: calc($hero-center-size-mobile / -2);
                 margin-left: calc($hero-center-size-mobile / -2);
-                transition: $transition-medium, letter-spacing 1.5s ease-out;
+                transition: all 0.25s ease, letter-spacing 0.8s ease-out;
 
                 &::after {
                     content: 'View my work';
@@ -116,7 +118,7 @@
             object-fit: cover;
             object-position: center top;
             transform: scale(1.01);
-            transition: transform $transition-medium;
+            transition: transform 0.25s ease;
         }
     }
 
@@ -145,7 +147,7 @@
         top: 50%;
         transform: rotate(-135deg) translate(calc($hero-center-size-mobile / -2)) rotate(135deg);
         box-shadow: 0px 5px 10px $shadow-color;
-        transition: $transition-medium;
+        transition: all 0.25s ease;
         z-index: 2;
         width: 100px;
         height: 100px;
@@ -170,6 +172,7 @@
         color: $primary-text-color;
         width: 100%;
         margin: $spacing-sm 0;
+        pointer-events: none;
     }
 
     &__greeting {
@@ -232,7 +235,6 @@
             line-height: 120px;
             margin-top: -60px;
             margin-left: -80px;
-
         }
 
         &__greeting {
@@ -292,7 +294,6 @@
     }
 }
 
-// Add prefers-reduced-motion support
 @media (prefers-reduced-motion: reduce) {
     .hero {
         &__animation {
@@ -304,10 +305,6 @@
         &__center,
         &__outside,
         &__center .lazy-image {
-            transition: none;
-        }
-
-        &__background-image {
             transition: none;
         }
     }
