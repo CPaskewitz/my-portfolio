@@ -78,13 +78,16 @@
     &::after {
         content: "";
         position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
+        // Increase coverage area to prevent edges from showing
+        top: -100%;
+        left: -100%;
+        width: 300%;
+        height: 300%;
         z-index: 1;
         pointer-events: none;
         mix-blend-mode: multiply;
+        // Add transform-origin to keep animations centered
+        transform-origin: center center;
     }
 
     &::before {
@@ -111,36 +114,37 @@
     }
 }
 
+// Modify animations to keep movement more contained
 @keyframes swirl-shadow-base {
     0% {
-        transform: rotate(-10deg) scale(1);
+        transform: rotate(-8deg) scale(1);
         opacity: 0.3;
     }
 
     50% {
-        transform: rotate(10deg) scale(1.1);
+        transform: rotate(8deg) scale(1.05);
         opacity: 0.6;
     }
 
     100% {
-        transform: rotate(-10deg) scale(1);
+        transform: rotate(-8deg) scale(1);
         opacity: 0.3;
     }
 }
 
 @keyframes swirl-shadow-overlay {
     0% {
-        transform: rotate(15deg) translateX(-10%) scale(0.9);
+        transform: rotate(12deg) translateX(-5%) scale(0.95);
         opacity: 0.2;
     }
 
     50% {
-        transform: rotate(-15deg) translateX(10%) scale(1.1);
+        transform: rotate(-12deg) translateX(5%) scale(1.05);
         opacity: 0.5;
     }
 
     100% {
-        transform: rotate(15deg) translateX(-10%) scale(0.9);
+        transform: rotate(12deg) translateX(-5%) scale(0.95);
         opacity: 0.2;
     }
 }
