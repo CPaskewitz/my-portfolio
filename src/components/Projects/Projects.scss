@@ -330,12 +330,14 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.9);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        overflow: hidden; // Prevent page scrolling
         z-index: 1000;
-        padding: $spacing-md;
         animation: fadeIn 0.3s ease;
+
+        // Use flex for centering
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:focus {
             outline: none;
@@ -344,23 +346,44 @@
 
     &__enlarged-image-container {
         position: relative;
-        max-width: 90%;
-        max-height: 90%;
+        max-width: 95%; // Use most of the screen width
+        max-height: 90vh; // Limit height to 90% of viewport
+        overflow-y: auto; // Allow scrolling within the container
+        margin: 0 auto; // Center horizontally
+        padding: $spacing-md 0; // Add some vertical padding
         animation: scaleIn 0.4s ease;
+
+        // For Firefox scrollbar styling
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+
+        // For Chrome/Safari scrollbar styling
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
     }
 
     &__enlarged-image {
-        max-width: 100%;
-        max-height: 80vh;
-        object-fit: contain;
+        display: block;
+        width: 100%; // Take full width of container
+        height: auto; // Maintain aspect ratio
         border-radius: 4px;
         box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
     }
 
     &__close-enlarged-image {
-        position: absolute;
-        top: -15px;
-        right: -15px;
+        position: fixed;
+        top: 16px;
+        right: 16px;
         width: 30px;
         height: 30px;
         background-color: #000;
@@ -381,9 +404,14 @@
             outline: none;
         }
 
-        @media (max-width: 600px) {
-            top: -40px;
-            right: 0;
+        @include tablet {
+            top: 20px;
+            right: 20px;
+        }
+
+        @include desktop {
+            top: 40px;
+            right: 40px;
         }
     }
 
