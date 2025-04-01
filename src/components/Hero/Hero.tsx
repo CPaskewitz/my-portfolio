@@ -9,8 +9,8 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [backgrounds, setBackgrounds] = useState({
-    current: "/bgi.jpg",
-    next: "/bg.jpg",
+    current: "/bgi.webp",
+    next: "/bg.webp",
   });
   const [rippleState, setRippleState] = useState({
     active: false,
@@ -172,7 +172,7 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
         >
           <div className="hero__center-image">
             <LazyImage
-              src="/myImage.png"
+              src="/myImage.webp"
               alt=""
               className="hero__profile-image icon-image"
             />

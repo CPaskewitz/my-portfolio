@@ -25,7 +25,7 @@ const Projects: React.FC = () => {
         "A professional website for the Ontario Animal Welfare Network.",
       images: [
         "/oawn-home.png",
-        "/oawn-aboutus.png",
+        "/oawn-aboutus.webp",
         "/oawn-members.png",
         "/oawn-join.png",
         "/oawn-report.png",
@@ -45,7 +45,7 @@ const Projects: React.FC = () => {
       description: "A mock e-commerce store showcasing unit testing.",
       images: [
         "/Bogustore_Home_Page.png",
-        "/Bogustore_Category_Page.png",
+        "/Bogustore_Category_Page.webp",
         "/Bogustore_Sale_Page.png",
         "/Bogustore_Cart_Page.png",
         "/Bogustore_Shipping_Info.png",
@@ -70,7 +70,7 @@ const Projects: React.FC = () => {
       description: "A task manager app with RPG elements.",
       images: [
         "/QuestListRPG_Home_Page.png",
-        "/QuestListRPG_Login.png",
+        "/QuestListRPG_Login.webp",
         "/QuestListRPG_Levelup.png",
         "/QuestListRPG_Shop.png",
         "/QuestListRPG_Stats.png",
@@ -112,7 +112,7 @@ const Projects: React.FC = () => {
       description: "A wordpress booking site for local summer swim lessons.",
       images: [
         "leap-home.png",
-        "leapintolessons_booking.png",
+        "leapintolessons_booking.webp",
       ],
       link: "https://leapintolessons.com",
       github: "",
