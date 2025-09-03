@@ -139,6 +139,27 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
   const currentText = texts[currentTextIndex].text;
   const currentBgColor = texts[currentTextIndex].bgColor;
 
+  const socialLinks = [
+    {
+      name: 'GitHub',
+      url: 'https://github.com/CPaskewitz',
+      icon: '/githubicon.png',
+      label: 'Visit my GitHub profile'
+    },
+    {
+      name: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/corey-paskewitz',
+      icon: '/linkedinicon.png',
+      label: 'Connect with me on LinkedIn'
+    },
+    {
+      name: 'Resume',
+      url: '/Corey_Paskewitz_Resume.pdf',
+      icon: '/resumeicon.png',
+      label: 'View my resume'
+    }
+  ];
+
   return (
     <section className="hero" aria-label="Introduction" ref={heroRef}>
       <div className="hero__background" onClick={handleBackgroundClick}>
@@ -158,6 +179,25 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
           }}
           aria-hidden="true"
         />
+      </div>
+
+      <div className="hero__social-links">
+        {socialLinks.map((link) => (
+          <a
+            key={link.name}
+            href={link.url}
+            target={link.name === 'Resume' ? '_blank' : '_blank'}
+            rel="noopener noreferrer"
+            className="hero__social-link"
+            aria-label={link.label}
+          >
+            <LazyImage
+              src={link.icon}
+              alt=""
+              className="hero__social-icon icon-image"
+            />
+          </a>
+        ))}
       </div>
 
       <div className="hero__content">
