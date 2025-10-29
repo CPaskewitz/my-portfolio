@@ -11,6 +11,7 @@ import './app.scss';
 const Hero = React.lazy(() => import('./components/Hero/Hero'));
 const About = React.lazy(() => import('./components/About/About'));
 const Projects = React.lazy(() => import('./components/Projects/Projects'));
+const CorvianLabs = React.lazy(() => import('./components/CorvianLabs/CorvianLabs'));
 const Contact = React.lazy(() => import('./components/Contact/Contact'));
 
 const prefetchComponents = () => {
@@ -20,6 +21,7 @@ const prefetchComponents = () => {
 
   setTimeout(() => prefetch(() => import('./components/About/About')), 1000);
   setTimeout(() => prefetch(() => import('./components/Projects/Projects')), 2000);
+  setTimeout(() => prefetch(() => import('./components/CorvianLabs/CorvianLabs')), 2500);
   setTimeout(() => prefetch(() => import('./components/Contact/Contact')), 3000);
 };
 
@@ -28,6 +30,7 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('');
   const projectsRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+  const corvianLabsRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = debounce(() => {
@@ -42,6 +45,7 @@ const App: React.FC = () => {
     const sections = [
       { id: 'about', ref: aboutRef },
       { id: 'projects', ref: projectsRef },
+      { id: 'corvian-labs', ref: corvianLabsRef },
       { id: 'contact', ref: contactRef }
     ];
 
@@ -103,6 +107,9 @@ const App: React.FC = () => {
           </div>
           <div ref={projectsRef}>
             <Projects />
+          </div>
+          <div ref={corvianLabsRef}>
+            <CorvianLabs />
           </div>
           <div ref={contactRef}>
             <Contact />

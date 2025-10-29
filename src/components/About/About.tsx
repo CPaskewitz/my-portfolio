@@ -32,13 +32,13 @@ const About: React.FC = () => {
             <div className="about__description">
                 <h3 className="about__greeting">Hello, World!</h3>
                 <p className='about__greeting-text'>
-                    I'm a Full-stack software engineer passionate about creating engaging web applications that solve real-world problems. I design and build solutions from concept to deployment, focusing on seamless user experiences and modern development practices.
+                    I'm a Full-stack software engineer and founder of Corvian Labs, where I build intelligent SaaS solutions for small businesses and freelancers. I'm passionate about creating engaging web applications that solve real-world problems, from concept to deployment, focusing on seamless user experiences and modern development practices.
                 </p>
                 <p className='about__greeting-text'>
-                    My background in customer service and leadership helps me collaborate effectively and translate ideas into technical solutions that users love.
+                    At Corvian Labs, I'm developing tools that make enterprise-level automation accessible to everyone. My flagship product, ThawMail, uses AI to analyze businesses and generate personalized outreach emails, helping freelancers and agencies scale their client acquisition without expanding headcount.
                 </p>
                 <p className='about__greeting-text'>
-                    Ready to tackle your next project? Let's connect and make it happen.
+                    My background in customer service and leadership helps me collaborate effectively and translate ideas into technical solutions that users love. Ready to tackle your next project? Let's connect and make it happen.
                 </p>
             </div>
 

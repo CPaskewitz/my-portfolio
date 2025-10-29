@@ -110,6 +110,7 @@ const Footer: React.FC = () => {
                             <ul className="footer__nav-links">
                                 <li><a href="#about" className="footer__nav-link">About</a></li>
                                 <li><a href="#projects" className="footer__nav-link">Projects</a></li>
+                                <li><a href="#corvian-labs" className="footer__nav-link">Corvian Labs</a></li>
                                 <li><a href="#contact" className="footer__nav-link">Contact</a></li>
                             </ul>
                         </nav>

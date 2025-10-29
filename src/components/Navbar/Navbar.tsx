@@ -53,6 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     const navLinks = [
         { id: 'about', label: 'About' },
         { id: 'projects', label: 'Projects' },
+        { id: 'corvian-labs', label: 'Corvian Labs' },
         { id: 'contact', label: 'Contact' }
     ];
 
