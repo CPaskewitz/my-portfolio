@@ -20,6 +20,29 @@ interface Project {
 const Projects: React.FC = () => {
   const projects: Project[] = [
     {
+      title: "Leap Into Lessons 2.0",
+      description:
+        "A full-stack booking platform for swim lessons, rebuilt from WordPress with Next.js.",
+      images: [
+        "/LeapIntoLessons2_Hero.webp",
+        "/LeapIntoLessons2_Features.webp",
+        "/LeapIntoLessons2_Testimonials.webp",
+        "/LeapIntoLessons2_Instructors.webp",
+        "/LeapIntoLessons2_FAQ.webp",
+        "/LeapIntoLessons2_Contact.webp",
+      ],
+      link: "https://leapintolessons.com",
+      github: "",
+      skills: [
+        { image: "nextjsicon.png", name: "Next.js" },
+        { image: "reacticon.png", name: "React" },
+        { image: "typescripticon.png", name: "TypeScript" },
+        { image: "tailwindicon.png", name: "Tailwind" },
+        { image: "mongodbicon.png", name: "MongoDB" },
+        { image: "nodeicon.png", name: "Node.js" },
+      ],
+    },
+    {
       title: "OAWN",
       description:
         "A professional website for the Ontario Animal Welfare Network.",
@@ -114,7 +137,7 @@ const Projects: React.FC = () => {
         "leap-home.png",
         "leapintolessons_booking.webp",
       ],
-      link: "https://leapintolessons.com",
+      link: "",
       github: "",
       skills: [
         { image: "wordpressicon.png", name: "WordPress" },
