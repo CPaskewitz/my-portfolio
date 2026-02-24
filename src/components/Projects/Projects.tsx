@@ -22,7 +22,7 @@ const Projects: React.FC = () => {
     {
       title: "Leap Into Lessons 2.0",
       description:
-        "A full-stack booking platform for swim lessons, rebuilt from WordPress with Next.js.",
+        "Modernized booking platform for swim lessons.",
       images: [
         "/LeapIntoLessons2_Hero.webp",
         "/LeapIntoLessons2_Features.webp",
