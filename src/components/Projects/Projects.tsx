@@ -54,7 +54,7 @@ const Projects: React.FC = () => {
         "/oawn-report.webp",
         "/oawn-animalwelfare.webp",
       ],
-      link: "https://www.oawn.ca",
+      link: "https://www.oawn.info",
       github: "",
       skills: [
         { image: "reacticon.png", name: "React" },
