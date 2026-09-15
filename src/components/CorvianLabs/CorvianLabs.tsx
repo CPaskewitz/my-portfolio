@@ -2,6 +2,48 @@ import React from 'react';
 import LazyImage from '../LazyImage/LazyImage';
 import './CorvianLabs.scss';
 
+const services = [
+  {
+    title: 'Website Design & Development',
+    text: 'Custom, mobile-first sites with on-page SEO, WCAG 2.1 AA accessibility targets, and performance budgets from day one. Built for sole proprietors, new businesses, and anyone replacing a DIY builder.',
+    href: 'https://corvianlabs.com/services#websites',
+  },
+  {
+    title: 'Custom Web Apps & Software',
+    text: 'Full-stack applications with authentication and roles, booking and scheduling logic, customer dashboards, admin panels, and email automation. For businesses that need portals, booking systems, or internal tools.',
+    href: 'https://corvianlabs.com/services#web-apps',
+  },
+  {
+    title: 'Consulting & Technical Audits',
+    text: 'Performance, accessibility, and technical SEO audits with plain-language reports and prioritized fixes. Code reviews, legacy and WordPress migrations, and hourly development on existing codebases.',
+    href: 'https://corvianlabs.com/services#consulting',
+  },
+  {
+    title: 'Maintenance & Care Plans',
+    text: 'Predictable monthly support covering dependency updates, hosting and domain management, uptime monitoring, backups, and a block of edit and development hours.',
+    href: 'https://corvianlabs.com/services#care-plans',
+  },
+];
+
+const principles = [
+  {
+    heading: 'Understand the Problem First',
+    text: 'Every project starts with the real business problem, then the simplest tool that solves it well',
+  },
+  {
+    heading: 'Fixed Quotes, No Scope Creep',
+    text: 'Clear pricing agreed up front, with no surprises along the way',
+  },
+  {
+    heading: 'You Own Everything',
+    text: 'Full ownership of code, content, domains, and accounts, with documentation and hand-off',
+  },
+  {
+    heading: 'Built to Last',
+    text: 'Maintainable code, a 30-day post-launch fix period, and support that continues after launch',
+  },
+];
+
 const CorvianLabs: React.FC = () => {
   return (
     <section className="corvian-labs" id="corvian-labs" aria-labelledby="corvian-labs-title">
@@ -18,39 +60,50 @@ const CorvianLabs: React.FC = () => {
           </div>
 
           <div className="corvian-labs__description">
-            <h3 className="corvian-labs__tagline">Building Smart, Accessible SaaS Tools for Small Businesses</h3>
+            <h3 className="corvian-labs__tagline">Websites and web apps that help Ontario businesses ship</h3>
 
             <p className="corvian-labs__text">
-              Corvian Labs is my venture into developing intelligent SaaS solutions that democratize enterprise-level tools for small business owners, freelancers, and agencies. Named after the crow, our approach values adaptability, problem-solving, and innovation in every tool we build.
+              Corvian Labs is my web design and development studio based in Cambridge, Ontario. I design, build, and maintain fast, accessible websites and custom web applications for businesses across Kitchener-Waterloo, Guelph, and remote clients in Canada and the US.
             </p>
 
             <p className="corvian-labs__text">
-              We believe small businesses face the same challenges as large enterprises but rarely have access to the same caliber of tools. Our mission is to change that through workflow automation, AI-powered features, and intuitive design that works out-of-the-box.
+              The studio started as a product company, where I designed and launched my own software, including an AI email-outreach platform and a journaling app that is live on the App Store today. When local businesses began asking for help with their websites, that client work became the most fulfilling part of the job, so it became the focus. The name comes from the crow, an animal known for intelligence, adaptability, and problem-solving.
             </p>
           </div>
 
           <div className="corvian-labs__product">
-            <h3 className="corvian-labs__product-title">Featured Product: ThawMail</h3>
+            <h3 className="corvian-labs__product-title">Services</h3>
 
             <div className="corvian-labs__product-content">
               <div className="corvian-labs__product-info">
-                <p className="corvian-labs__text">
-                  ThawMail is an AI-driven platform that revolutionizes cold email outreach. It analyzes target websites to understand business needs and technology infrastructure, then generates customized, personalized emails based on prospect-specific insights.
-                </p>
+                <div className="corvian-labs__services-grid">
+                  {services.map((service) => (
+                    <a
+                      key={service.title}
+                      href={service.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="corvian-labs__service-card"
+                    >
+                      <h4 className="corvian-labs__service-heading">{service.title}</h4>
+                      <p className="corvian-labs__service-text">{service.text}</p>
+                    </a>
+                  ))}
+                </div>
 
                 <div className="corvian-labs__features">
-                  <h4 className="corvian-labs__features-title">Key Features:</h4>
-                  <ul className="corvian-labs__features-list">
-                    <li>AI-powered website and business analysis</li>
-                    <li>Automated prospect research that saves hours</li>
-                    <li>Personalized email generation that sounds authentic</li>
-                    <li>Smart pricing configuration and recommendations</li>
-                    <li>Copy-and-send workflow through your preferred platform</li>
+                  <h4 className="corvian-labs__features-title">How Projects Run</h4>
+                  <ul className="corvian-labs__features-list corvian-labs__features-list--inline">
+                    <li>Discover</li>
+                    <li>Design</li>
+                    <li>Build</li>
+                    <li>Launch</li>
+                    <li>Support</li>
                   </ul>
                 </div>
 
                 <p className="corvian-labs__text corvian-labs__text--highlight">
-                  Perfect for web developers, design agencies, marketing consultants, and freelancers looking to scale their client acquisition without expanding headcount.
+                  Recent work includes Leap Into Lessons, a swim lesson booking platform, and the Ontario Animal Welfare Network, a non-profit member directory. Both are featured in the Projects section above.
                 </p>
 
                 <div className="corvian-labs__cta">
@@ -64,13 +117,13 @@ const CorvianLabs: React.FC = () => {
                     Visit Corvian Labs
                   </a>
                   <a
-                    href="https://corvianlabs.com/thawmail"
+                    href="https://corvianlabs.com/contact"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="corvian-labs__link corvian-labs__link--secondary"
-                    aria-label="Learn more about ThawMail"
+                    aria-label="Start a project with Corvian Labs"
                   >
-                    Learn About ThawMail
+                    Start a Project
                   </a>
                 </div>
               </div>
@@ -78,24 +131,14 @@ const CorvianLabs: React.FC = () => {
           </div>
 
           <div className="corvian-labs__values">
-            <h3 className="corvian-labs__values-title">Core Principles</h3>
+            <h3 className="corvian-labs__values-title">How I Work</h3>
             <div className="corvian-labs__values-grid">
-              <div className="corvian-labs__value-card">
-                <h4 className="corvian-labs__value-heading">Customer First</h4>
-                <p className="corvian-labs__value-text">Features begin with understanding real business problems</p>
-              </div>
-              <div className="corvian-labs__value-card">
-                <h4 className="corvian-labs__value-heading">Quality Over Speed</h4>
-                <p className="corvian-labs__value-text">Shipping when ready, not when rushed</p>
-              </div>
-              <div className="corvian-labs__value-card">
-                <h4 className="corvian-labs__value-heading">Transparency</h4>
-                <p className="corvian-labs__value-text">Honest pricing and communication without hidden costs</p>
-              </div>
-              <div className="corvian-labs__value-card">
-                <h4 className="corvian-labs__value-heading">Continuous Improvement</h4>
-                <p className="corvian-labs__value-text">Rapid iteration based on user feedback</p>
-              </div>
+              {principles.map((principle) => (
+                <div key={principle.heading} className="corvian-labs__value-card">
+                  <h4 className="corvian-labs__value-heading">{principle.heading}</h4>
+                  <p className="corvian-labs__value-text">{principle.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
