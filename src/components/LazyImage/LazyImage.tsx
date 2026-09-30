@@ -9,6 +9,9 @@ interface LazyImageProps {
     height?: number;
     srcSet?: string;
     sizes?: string;
+    // Above-the-fold images: skip lazy loading so they don't delay LCP
+    eager?: boolean;
+    fetchPriority?: 'high' | 'low' | 'auto';
     onClick?: (event: React.MouseEvent<Element, MouseEvent>) => void;
 }
 
@@ -20,13 +23,17 @@ const LazyImage: React.FC<LazyImageProps> = ({
     height,
     srcSet,
     sizes,
+    eager = false,
+    fetchPriority,
     onClick
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [isInView, setIsInView] = useState(false);
+    const [isInView, setIsInView] = useState(eager);
     const imgRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if (eager) return;
+
         if (!('IntersectionObserver' in window)) {
             setIsInView(true);
             return;
@@ -55,7 +62,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
                 observer.disconnect();
             }
         };
-    }, []);
+    }, [eager]);
 
     const handleError = () => {
         console.error(`Failed to load image: ${src}`);
@@ -80,7 +87,8 @@ const LazyImage: React.FC<LazyImageProps> = ({
                     onError={handleError}
                     width={width}
                     height={height}
-                    loading="lazy"
+                    loading={eager ? 'eager' : 'lazy'}
+                    {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
                     onClick={onClick}
                     style={onClick ? { cursor: 'pointer' } : undefined}
                 />
