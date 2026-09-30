@@ -3,12 +3,12 @@ import Helmet from './components/Helmet/Helmet';
 import { debounce } from 'lodash';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import Hero from './components/Hero/Hero';
 import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 import structuredData from './data/structuredData';
 import { seoData } from './data/seoData';
 import './app.scss';
 
-const Hero = React.lazy(() => import('./components/Hero/Hero'));
 const About = React.lazy(() => import('./components/About/About'));
 const Projects = React.lazy(() => import('./components/Projects/Projects'));
 const CorvianLabs = React.lazy(() => import('./components/CorvianLabs/CorvianLabs'));
@@ -100,8 +100,10 @@ const App: React.FC = () => {
       {isNavbarVisible && <Navbar activeSection={activeSection} />}
 
       <main id="main-content">
+        {/* Hero is eager and outside Suspense so it paints immediately (LCP) and keeps
+            the Footer below the fold while the other sections load (CLS) */}
+        <Hero projectsRef={projectsRef} />
         <Suspense fallback={<LoadingSpinner />}>
-          <Hero projectsRef={projectsRef} />
           <div ref={aboutRef}>
             <About />
           </div>

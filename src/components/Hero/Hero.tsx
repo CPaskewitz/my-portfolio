@@ -195,6 +195,7 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
               src={link.icon}
               alt=""
               className="hero__social-icon icon-image"
+              eager
             />
           </a>
         ))}
@@ -215,6 +216,8 @@ const Hero: React.FC<HeroProps> = ({ projectsRef }) => {
               src="/myImage.webp"
               alt=""
               className="hero__profile-image icon-image"
+              eager
+              fetchPriority="high"
             />
           </div>
           <div className="hero__outside" aria-hidden="true"></div>
