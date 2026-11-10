@@ -1,0 +1,16 @@
+.decode {
+  position: relative;
+  display: inline-block;
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  // While decoding, the real text holds the layout and the overlay shows the glyphs.
+  &--active .decode__text {
+    color: transparent;
+    text-shadow: none;
+  }
+}

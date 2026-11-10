@@ -1,0 +1,40 @@
+@use '../../styles/tokens' as *;
+
+.reticle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+
+  &.is-on {
+    opacity: 1;
+  }
+
+  span {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-color: rgb(var(--mint-rgb) / 0.8);
+    border-style: solid;
+    border-width: 0;
+    transition: border-color var(--dur-fast);
+  }
+
+  span:nth-child(1) { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; }
+  span:nth-child(2) { top: 0; right: 0; border-top-width: 1.5px; border-right-width: 1.5px; }
+  span:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+  span:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+  &.is-locked span {
+    border-color: var(--amber);
+  }
+
+  @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}

@@ -1,28 +1,83 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-CA">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="cp-logo.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preload" as="image" href="/bgi.webp" fetchpriority="high" type="image/webp">
-    <link rel="preload" as="image" href="/myImage.webp" type="image/webp">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap">
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" media="print"
-      onload="this.media='all'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Corey Paskewitz | Full-Stack Developer &amp; Software Engineer</title>
     <meta name="description"
-      content="Portfolio of Corey Paskewitz, a web developer and software engineer specializing in React, TypeScript, and modern web technologies." />
-    <meta name="keywords" content="web developer, software engineer, react, typescript, portfolio" />
+      content="Corey Paskewitz is a full-stack developer and software engineer in Cambridge, Ontario, and the founder of Corvian Labs. Projects, skills, resume and contact." />
     <meta name="author" content="Corey Paskewitz" />
-    <meta name="theme-color" content="#16A085" />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <title>Portfolio - C Paskewitz</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#05080b" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://www.cpaskewitz.com/" />
+
+    <link rel="icon" type="image/svg+xml" href="/cp-logo.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Fonts are self-hosted; preload the two that render above the fold. -->
+    <link rel="preload" href="/fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/myImage.webp" as="image" type="image/webp" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Corey Paskewitz" />
+    <meta property="og:url" content="https://www.cpaskewitz.com/" />
+    <meta property="og:title" content="Corey Paskewitz | Full-Stack Developer &amp; Software Engineer" />
+    <meta property="og:description" content="Projects, skills and the story of the developer behind Corvian Labs." />
+    <meta property="og:image" content="https://www.cpaskewitz.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_CA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Corey Paskewitz | Full-Stack Developer &amp; Software Engineer" />
+    <meta name="twitter:description" content="Projects, skills and the story of the developer behind Corvian Labs." />
+    <meta name="twitter:image" content="https://www.cpaskewitz.com/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://www.cpaskewitz.com/#person",
+            "name": "Corey Paskewitz",
+            "url": "https://www.cpaskewitz.com/",
+            "image": "https://www.cpaskewitz.com/myImage.webp",
+            "jobTitle": "Full-Stack Developer & Software Engineer",
+            "worksFor": { "@id": "https://www.corvianlabs.com/#business" },
+            "address": { "@type": "PostalAddress", "addressLocality": "Cambridge", "addressRegion": "ON", "addressCountry": "CA" },
+            "knowsAbout": ["React", "Next.js", "TypeScript", "Node.js", "MongoDB", "MySQL", "Redux", "Tailwind CSS", "Sass", "WordPress", "PHP", "REST APIs", "Jest", "React Native", "Web accessibility", "Web performance"],
+            "sameAs": ["https://github.com/CPaskewitz", "https://www.linkedin.com/in/corey-paskewitz", "https://www.corvianlabs.com/about"]
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.corvianlabs.com/#business",
+            "name": "Corvian Labs",
+            "url": "https://www.corvianlabs.com/",
+            "founder": { "@id": "https://www.cpaskewitz.com/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://www.cpaskewitz.com/#page",
+            "url": "https://www.cpaskewitz.com/",
+            "name": "Corey Paskewitz | Full-Stack Developer & Software Engineer",
+            "mainEntity": { "@id": "https://www.cpaskewitz.com/#person" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <p style="padding:2rem;font-family:system-ui;color:#e9f2ef;background:#05080b">
+        Corey Paskewitz, full-stack developer in Cambridge, Ontario.
+        <a href="/Corey_Paskewitz_Resume.pdf" style="color:#5cffc8">Download resume (PDF)</a> ·
+        <a href="https://github.com/CPaskewitz" style="color:#5cffc8">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/corey-paskewitz" style="color:#5cffc8">LinkedIn</a>
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

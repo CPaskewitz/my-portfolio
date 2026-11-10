@@ -1,0 +1,172 @@
+@use '../../styles/tokens' as *;
+
+.dossier {
+  &__grid {
+    display: grid;
+    gap: var(--space-6);
+
+    @include desktop {
+      grid-template-columns: 340px minmax(0, 1fr);
+      align-items: start;
+      gap: var(--space-7);
+    }
+  }
+
+  // ---------- ID panel ----------
+  &__id {
+    padding: var(--space-5);
+    display: grid;
+    gap: var(--space-3);
+
+    @include desktop {
+      position: sticky;
+      top: var(--space-6);
+    }
+  }
+
+  &__id-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  &__badge {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    padding: 2px var(--space-2);
+    border: 1px solid rgb(var(--amber-rgb) / 0.45);
+    border-radius: 2px;
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-top: var(--space-2);
+  }
+
+  &__role {
+    color: var(--mint);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__facts {
+    display: grid;
+    gap: var(--space-2);
+    padding-block: var(--space-3);
+    border-block: 1px solid var(--line);
+
+    div {
+      display: grid;
+      grid-template-columns: 6.5rem 1fr;
+      gap: var(--space-3);
+      font-size: var(--step--1);
+    }
+
+    dt {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-faint);
+    }
+  }
+
+  &__cv {
+    width: 100%;
+    margin-top: var(--space-2);
+  }
+
+  // ---------- Log ----------
+  &__log {
+    list-style: none;
+    display: grid;
+    gap: var(--space-6);
+    position: relative;
+    padding-left: var(--space-6);
+
+    // the timeline rail
+    &::before {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      bottom: 6px;
+      width: 1px;
+      background: linear-gradient(var(--mint), var(--rose) 70%, transparent);
+    }
+  }
+
+  &__entry {
+    position: relative;
+    display: grid;
+    gap: var(--space-2);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: calc(var(--space-6) * -1 + 1px);
+      top: 6px;
+      width: 11px;
+      height: 11px;
+      border: 1px solid var(--mint);
+      background: var(--void);
+      transform: rotate(45deg);
+    }
+  }
+
+  &__entry-meta {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+  }
+
+  &__code {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--rose-text);
+  }
+
+  &__entry-title {
+    font-size: var(--step-2);
+  }
+
+  &__entry-body {
+    color: var(--text-dim);
+    max-width: 44rem;
+  }
+}
+
+// Redaction bars that slide away as the entry scrolls in. The text underneath is always
+// full contrast; without scroll-driven animation support there are no bars at all.
+@include motion-ok {
+  @supports (animation-timeline: view()) {
+    .redact {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(180deg, var(--void-3) 0 1.15em, transparent 1.15em 1.6em);
+        transform-origin: right;
+        animation: redact-wipe linear both;
+        animation-timeline: view();
+        animation-range: entry 30% cover 45%;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+@keyframes redact-wipe {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}

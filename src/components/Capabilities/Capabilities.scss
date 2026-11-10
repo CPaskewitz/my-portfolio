@@ -1,0 +1,130 @@
+@use '../../styles/tokens' as *;
+
+.capabilities {
+  &__grid {
+    display: grid;
+    gap: var(--space-4);
+
+    @include tablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include desktop {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  &__group {
+    padding: var(--space-5);
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+    overflow: hidden;
+  }
+
+  &__orbit {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    z-index: -1;
+
+    circle {
+      fill: none;
+      stroke: rgb(var(--mint-rgb) / 0.25);
+      stroke-width: 1;
+    }
+
+    &-outer {
+      stroke: rgb(var(--rose-rgb) / 0.3) !important;
+      stroke-dasharray: 2 5;
+    }
+
+    text {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      fill: var(--text-faint);
+    }
+  }
+
+  &__nodes {
+    transform-origin: 60px 60px;
+
+    circle {
+      fill: var(--mint);
+      stroke: none;
+      transition: r var(--dur);
+
+      &.is-on {
+        fill: var(--amber);
+      }
+    }
+
+    @include motion-ok {
+      animation: orbit 40s linear infinite;
+    }
+  }
+
+  &__name {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    font-size: var(--step-2);
+    padding-right: 80px;
+  }
+
+  &__count {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--rose-text);
+  }
+
+  &__skills {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  &__skill {
+    min-height: 40px;
+    cursor: pointer;
+    font-size: var(--step--1);
+    color: var(--text);
+    transition: border-color var(--dur-fast), background var(--dur-fast), color var(--dur-fast);
+
+    img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+    }
+
+    &:hover {
+      border-color: var(--mint);
+    }
+  }
+
+  &__focus {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+    min-height: 48px;
+    margin-top: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+
+    &:empty {
+      min-height: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
