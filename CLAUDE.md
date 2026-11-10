@@ -38,7 +38,9 @@ archive/           retired components (not compiled); move things here instead o
 
 ## Conventions
 - Content lives in `src/data/*`; components map over it.
-- The resume is HTML in `resume/` rendered to PDF; edit the HTML, re-render, never hand-edit the PDF. Keep the
+- The resume is HTML in `resume/` rendered to PDF; edit the HTML, re-render, never hand-edit the PDF.
+  The public copy never includes the phone number; `render.mjs --with-phone <path>` makes a private copy
+  (it refuses to write that copy into `public/`). Keep the
   site's skill matrix (`src/data/skills.ts`) and the resume's Technical Skills in step.
 - Social card: `art/source/og-card.html` → `node scripts/art/render-svg.mjs art/source/og-card.html public/og-image.png 1200 630`.
 - Remove things by commenting out or moving to `archive/`, never deleting.
@@ -65,10 +67,10 @@ a11y / best practices / SEO 100; CLS 0; 1.96 MB.
 
 ## Status
 Branch `design/core-os`: CORE visual redesign (phases 1–3 + sound done, QA in progress). Resume updated Nov 2026
-(Pawlunteer, help assistants, Salt & Spirit, ThawMail, Pensate; skills from all projects in ~/Projects).
+(help assistants, Salt & Spirit, ThawMail, Pensate; skills from all projects in ~/Projects).
 
 Open items:
-- The resume PDF on the site includes the phone number (as the source resume did); remove it from
-  `resume/resume.html` if the public copy shouldn't have it.
+- Pawlunteer stays off the resume and site until it launches (owner decision, Nov 2026). Only list projects
+  the owner has confirmed are complete.
 - Merge `design/core-os`, deploy to Heroku, check the OG card with LinkedIn Post Inspector.
 - `static.json` security headers aren't applied: Heroku runs `vite preview` (Procfile), not the static buildpack.

@@ -2,7 +2,9 @@
 <!--
   Resume source. Render to the site's downloadable PDF:
     node scripts/resume/render.mjs
-  (writes public/Corey_Paskewitz_Resume.pdf, US Letter)
+  (writes public/Corey_Paskewitz_Resume.pdf, US Letter, without the phone number)
+  Private copy with the phone number:
+    node scripts/resume/render.mjs --with-phone ~/Downloads/<name>.pdf
   Plain single-column layout and real text so applicant-tracking systems parse it cleanly.
 -->
 <html lang="en-CA">
@@ -17,6 +19,8 @@
   header { text-align: center; padding-bottom: 7pt; border-bottom: 1.2pt solid #0b5d57; margin-bottom: 8pt; }
   h1 { font-size: 20pt; letter-spacing: 0.06em; font-weight: 700; }
   .contact { margin-top: 3pt; font-size: 9.4pt; }
+  /* The phone number only appears in the private copy (render.mjs --with-phone). */
+  body:not(.with-phone) .phone { display: none; }
   .contact span + span::before { content: "  |  "; color: #888; white-space: pre; }
   h2 { font-size: 10.6pt; text-transform: uppercase; letter-spacing: 0.1em; color: #0b5d57; border-bottom: 0.6pt solid #c9d6d4; padding-bottom: 2pt; margin: 10pt 0 5pt; }
   p { margin-bottom: 3pt; }
@@ -35,7 +39,7 @@
 <header>
   <h1>COREY PASKEWITZ</h1>
   <p class="contact">
-    <span>Cambridge, ON</span><span><a href="mailto:corey.paskewitz@gmail.com">corey.paskewitz@gmail.com</a></span><span>647-390-8870</span>
+    <span>Cambridge, ON</span><span><a href="mailto:corey.paskewitz@gmail.com">corey.paskewitz@gmail.com</a></span><span class="phone">647-390-8870</span>
   </p>
   <p class="contact">
     <span><a href="https://www.cpaskewitz.com">cpaskewitz.com</a></span><span><a href="https://www.linkedin.com/in/corey-paskewitz">linkedin.com/in/corey-paskewitz</a></span><span><a href="https://github.com/CPaskewitz">github.com/CPaskewitz</a></span><span><a href="https://www.corvianlabs.com">corvianlabs.com</a></span>
@@ -43,7 +47,7 @@
 </header>
 
 <h2>Summary</h2>
-<p>Full-stack software engineer with 4+ years of experience designing, building and shipping production web applications end to end, from database design and APIs to fast, accessible front ends. As founder of Corvian Labs I build multi-tenant SaaS, booking platforms, AI help assistants and e-commerce for clients across Ontario and the US. I treat accessibility (WCAG 2.1 AA), performance, security and maintainability as defaults, backed by automated tests.</p>
+<p>Full-stack software engineer with 4+ years of experience designing, building and shipping production web applications end to end, from database design and APIs to fast, accessible front ends. As founder of Corvian Labs I build booking platforms, AI help assistants, e-commerce and custom web apps for clients across Ontario and the US. I treat accessibility (WCAG 2.1 AA), performance, security and maintainability as defaults, backed by automated tests.</p>
 
 <h2>Technical Skills</h2>
 <div class="skills">
@@ -62,8 +66,6 @@
 <div class="role">
   <div class="role-head"><span><b>Corvian Labs</b> (self-employed), <i>Founder &amp; Software Engineer</i></span><span class="when">40 hrs/week  |  May 2021 – Present</span></div>
   <ul>
-    <li><b>Pawlunteer:</b> building a multi-tenant volunteer-management SaaS for animal shelters (Next.js 16, React 19, TypeScript, PostgreSQL/Prisma, Better Auth, Inngest), launching with a regional SPCA of 400+ volunteers and designed for 1,000+. Covers two-stage applications and screening, shift scheduling with self-serve drops and backfill, tablet clock-in by PIN or QR badge, event-triggered email and SMS, points tracking, reporting, and built-in e-signature for volunteer agreements.</li>
-    <li>Kept Pawlunteer's data in Canada (AWS Montréal for files and SMS, Montréal-hosted Postgres) and scoped every tenant-owned table to its organization, with automated cross-tenant leak tests, a full Content-Security-Policy and audit logging.</li>
     <li><b>Leap Into Lessons:</b> architected and deployed a production booking platform for a swim school (Next.js 14, TypeScript, MongoDB Atlas) with 20+ API endpoints, 9 database models, role-based authentication (NextAuth.js/JWT), real-time availability with concurrency-safe cart holds, and a multi-function admin dashboard, replacing a WordPress site and a spreadsheet.</li>
     <li>Built its email infrastructure (Resend), rate limiting on sensitive endpoints, caching for external API calls, and secure password resets with time-limited tokens.</li>
     <li><b>Website help assistants:</b> built an embeddable AI help chat (Claude API behind a Cloudflare Worker) for an animal charity's Webflow site and for corvianlabs.com. It answers only from the organization's own content, keeps the API key server-side, and has FAQ, hours and contact tabs, an always-visible emergency strip, and keyboard and screen-reader support.</li>
