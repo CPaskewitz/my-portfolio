@@ -1,0 +1,130 @@
+<!doctype html>
+<!--
+  Resume source. Render to the site's downloadable PDF:
+    node scripts/resume/render.mjs
+  (writes public/Corey_Paskewitz_Resume.pdf, US Letter, without the phone number)
+  Private copy with the phone number:
+    node scripts/resume/render.mjs --with-phone ~/Downloads/<name>.pdf
+  Plain single-column layout and real text so applicant-tracking systems parse it cleanly.
+-->
+<html lang="en-CA">
+<head>
+<meta charset="utf-8" />
+<title>Corey Paskewitz – Resume</title>
+<style>
+  @page { size: Letter; margin: 0.55in 0.6in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Helvetica, Arial, sans-serif; font-size: 10.1pt; line-height: 1.32; color: #111; }
+  a { color: #0b5d57; text-decoration: none; }
+  header { text-align: center; padding-bottom: 7pt; border-bottom: 1.2pt solid #0b5d57; margin-bottom: 8pt; }
+  h1 { font-size: 20pt; letter-spacing: 0.06em; font-weight: 700; }
+  .contact { margin-top: 3pt; font-size: 9.4pt; }
+  /* The phone number only appears in the private copy (render.mjs --with-phone). */
+  body:not(.with-phone) .phone { display: none; }
+  .contact span + span::before { content: "  |  "; color: #888; white-space: pre; }
+  h2 { font-size: 10.6pt; text-transform: uppercase; letter-spacing: 0.1em; color: #0b5d57; border-bottom: 0.6pt solid #c9d6d4; padding-bottom: 2pt; margin: 10pt 0 5pt; }
+  p { margin-bottom: 3pt; }
+  .skills p { margin-bottom: 2.2pt; }
+  .role { margin-top: 7pt; break-inside: avoid-page; }
+  .role-head { display: flex; justify-content: space-between; gap: 12pt; }
+  .role-head b { font-size: 10.3pt; }
+  .role-head .when { white-space: nowrap; color: #333; }
+  .sub { font-style: italic; color: #333; margin-bottom: 2pt; }
+  ul { padding-left: 13pt; }
+  li { margin-bottom: 2.4pt; }
+  li b { font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <h1>COREY PASKEWITZ</h1>
+  <p class="contact">
+    <span>Cambridge, ON</span><span><a href="mailto:corey.paskewitz@gmail.com">corey.paskewitz@gmail.com</a></span><span class="phone">647-390-8870</span>
+  </p>
+  <p class="contact">
+    <span><a href="https://www.cpaskewitz.com">cpaskewitz.com</a></span><span><a href="https://www.linkedin.com/in/corey-paskewitz">linkedin.com/in/corey-paskewitz</a></span><span><a href="https://github.com/CPaskewitz">github.com/CPaskewitz</a></span><span><a href="https://www.corvianlabs.com">corvianlabs.com</a></span>
+  </p>
+</header>
+
+<h2>Summary</h2>
+<p>Full-stack software engineer with 4+ years of experience designing, building and shipping production web applications end to end, from database design and APIs to fast, accessible front ends. As founder of Corvian Labs I build booking platforms, AI help assistants, e-commerce and custom web apps for clients across Ontario and the US. I treat accessibility (WCAG 2.1 AA), performance, security and maintainability as defaults, backed by automated tests.</p>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+  <p><b>Languages:</b> TypeScript, JavaScript, SQL, Swift, HTML5, CSS3/Sass</p>
+  <p><b>Front end:</b> React 19, Next.js (App Router), Tailwind CSS, React Hook Form + Zod, Redux, Zustand, Radix UI, TanStack Table, three.js/WebGL</p>
+  <p><b>Back end &amp; data:</b> Node.js, Express, REST APIs, PostgreSQL, Prisma, MongoDB, MySQL, WebSockets, Redis (Upstash), Supabase, Inngest background jobs, multi-tenant data design</p>
+  <p><b>Auth &amp; payments:</b> Better Auth, NextAuth.js, Clerk, role-based access control, JWT, Stripe subscriptions</p>
+  <p><b>AI:</b> Anthropic Claude API, OpenAI API (GPT-4o, vision, DALL·E 3), on-device Apple Foundation Models, content-grounded help assistants, AI-assisted development (Claude Code)</p>
+  <p><b>Cloud &amp; DevOps:</b> Vercel, AWS (S3, SMS, SNS), Cloudflare Workers, Sentry, Resend, Git/GitHub</p>
+  <p><b>Testing &amp; quality:</b> Vitest, Jest (90%+ coverage), Playwright, axe-core, Lighthouse and Core Web Vitals, WCAG 2.1 AA, technical SEO and structured data</p>
+  <p><b>Mobile:</b> SwiftUI, SwiftData, WidgetKit, Live Activities, StoreKit, Capacitor (iOS/Android)</p>
+</div>
+
+<h2>Professional Experience</h2>
+
+<div class="role">
+  <div class="role-head"><span><b>Corvian Labs</b> (self-employed), <i>Founder &amp; Software Engineer</i></span><span class="when">40 hrs/week  |  May 2021 – Present</span></div>
+  <ul>
+    <li><b>Leap Into Lessons:</b> architected and deployed a production booking platform for a swim school (Next.js 14, TypeScript, MongoDB Atlas) with 20+ API endpoints, 9 database models, role-based authentication (NextAuth.js/JWT), real-time availability with concurrency-safe cart holds, and a multi-function admin dashboard, replacing a WordPress site and a spreadsheet.</li>
+    <li>Built its email infrastructure (Resend), rate limiting on sensitive endpoints, caching for external API calls, and secure password resets with time-limited tokens.</li>
+    <li><b>Website help assistants:</b> built an embeddable AI help chat (Claude API behind a Cloudflare Worker) for an animal charity's Webflow site and for corvianlabs.com. It answers only from the organization's own content, keeps the API key server-side, and has FAQ, hours and contact tabs, an always-visible emergency strip, and keyboard and screen-reader support.</li>
+    <li><b>Salt &amp; Spirit Skin Rituals:</b> reworked an Ohio skin care brand's BigCommerce store: concern-based categories, ritual and gift sets, search-focused product copy, and accessibility fixes.</li>
+    <li>Designed and built <b>corvianlabs.com</b> (Next.js 16, React 19, Tailwind CSS v4, three.js hero with a no-GPU fallback): Lighthouse desktop performance 99, accessibility and SEO 100, 0 axe violations.</li>
+    <li><b>ThawMail:</b> designed and launched an AI lead-generation SaaS (Next.js, Express, MongoDB): OpenAI GPT-4o vision on Puppeteer screenshots of prospects' sites to write outreach emails, Clerk authentication, Stripe subscriptions, Sentry monitoring, and Capacitor builds for iOS and Android.</li>
+    <li><b>Pensate:</b> built and published an AI journaling app on the Apple App Store (Swift, SwiftUI, SwiftData) with on-device AI through Apple's Foundation Models, home-screen widgets, Live Activities and StoreKit in-app purchases.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="role-head"><span><b>Ontario Animal Welfare Network</b>, <i>Software Engineer (Contractor)</i></span><span class="when">40 hrs/week  |  Feb 2025 – Mar 2025</span></div>
+  <ul>
+    <li>Built a React/TypeScript website to WCAG 2.1 Level AA, auditing ARIA labelling, keyboard navigation and screen-reader compatibility.</li>
+    <li>Applied structured data and technical SEO, improving organic search visibility by 30%.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="role-head"><span><b>Allied Universal</b>, <i>Human Resource Coordinator &amp; Scheduler</i></span><span class="when">40 hrs/week  |  Jun 2023 – Jan 2024</span></div>
+  <ul>
+    <li>Coordinated scheduling for 400+ employees across multiple enterprise systems, resolving coverage conflicts and achieving 97% client satisfaction.</li>
+    <li>Streamlined data extraction and reporting across platforms to produce accurate monthly billing reports for leadership.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="role-head"><span><b>Allied Universal</b>, <i>Senior Supervisor Team Lead</i></span><span class="when">40 hrs/week  |  Jan 2020 – Jun 2023</span></div>
+  <ul>
+    <li>Diagnosed and resolved badge access control, alarm system and hardware/software integration issues across multiple facility systems.</li>
+    <li>Created and managed JIRA tickets for cross-departmental issue tracking, with reproducible escalation workflows that cut issue closure time by about 25%.</li>
+  </ul>
+</div>
+
+<h2>Technical Projects</h2>
+
+<div class="role">
+  <div class="role-head"><span><b>cpaskewitz.com</b>  |  Portfolio with a WebGL hologram</span><span class="when">Nov 2026</span></div>
+  <ul>
+    <li>React and Vite site with a three.js 2.5D hologram built from a depth map, loaded only after idle on hardware WebGL with a CSS fallback; a command palette, skill-filtered projects, reduced-motion support and 0 axe violations.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="role-head"><span><b>BoguStore</b>  |  Full-Stack E-Commerce Platform</span><span class="when">Sep 2024</span></div>
+  <ul>
+    <li>Built a Next.js e-commerce store with Redux state management, using code splitting to cut subsequent page load times by about 20%.</li>
+    <li>Wrote Jest unit and integration suites with 90% code coverage, contributing to a ~25% reduction in production bugs.</li>
+  </ul>
+</div>
+
+  <ul>
+  </ul>
+</div>
+
+<h2>Education</h2>
+<div class="role">
+  <div class="role-head"><span><b>BrainStation</b>  |  Diploma, Software Engineering</span><span class="when">Completed April 2024</span></div>
+  <p>Intensive full-stack program; built a production-grade application with React, Node.js, Express and MySQL across a complete SDLC.</p>
+</div>
+</body>
+</html>

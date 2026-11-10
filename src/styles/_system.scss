@@ -1,0 +1,226 @@
+// Shared CORE vocabulary: section shell, section head, holo panel, buttons, chips,
+// HUD labels, reveal. Every section uses these, so the site reads as one system.
+@use './tokens' as *;
+
+@property --bracket {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgb(92 255 200 / 0.38);
+}
+
+// ---------- Section shell ----------
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+  padding-left: var(--rail-w);
+
+  &__inner {
+    width: 100%;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+}
+
+// ---------- Section head: "02 // CAPABILITIES" + decoded title ----------
+.section-head {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: clamp(var(--space-6), 4vw, var(--space-7));
+  max-width: 52rem;
+
+  &__eyebrow {
+    @extend .hud-label;
+    color: var(--mint);
+  }
+
+  &__title {
+    font-size: var(--step-4);
+    text-shadow: var(--split);
+  }
+
+  &__lede {
+    color: var(--text-dim);
+    font-size: var(--step-1);
+    max-width: 42rem;
+  }
+}
+
+// ---------- HUD label (mono, tracked, uppercase) ----------
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+// ---------- Holo panel: the one card style ----------
+// Glass on void, a thin mint line, corner brackets, and (where supported) a scan line
+// that sweeps once as the panel enters the viewport.
+.holo-panel {
+  --bracket: var(--line-strong);
+  position: relative;
+  background:
+    linear-gradient(180deg, rgb(var(--mint-rgb) / 0.045), rgb(var(--rose-rgb) / 0.025)),
+    var(--void-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  isolation: isolate;
+
+  // Corner brackets: four L-shapes drawn with gradients, no extra elements.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    border-radius: inherit;
+    background:
+      linear-gradient(var(--bracket), var(--bracket)) top left / 14px 1px,
+      linear-gradient(var(--bracket), var(--bracket)) top left / 1px 14px,
+      linear-gradient(var(--bracket), var(--bracket)) top right / 14px 1px,
+      linear-gradient(var(--bracket), var(--bracket)) top right / 1px 14px,
+      linear-gradient(var(--bracket), var(--bracket)) bottom left / 14px 1px,
+      linear-gradient(var(--bracket), var(--bracket)) bottom left / 1px 14px,
+      linear-gradient(var(--bracket), var(--bracket)) bottom right / 14px 1px,
+      linear-gradient(var(--bracket), var(--bracket)) bottom right / 1px 14px;
+    background-repeat: no-repeat;
+    transition: --bracket var(--dur);
+  }
+
+  @include motion-ok {
+    @supports (animation-timeline: view()) {
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        background: linear-gradient(180deg, transparent 0%, rgb(var(--mint-rgb) / 0.16) 48%, rgb(var(--mint-rgb) / 0.5) 50%, transparent 52%);
+        background-size: 100% 300%;
+        background-repeat: no-repeat;
+        opacity: 0;
+        animation: holo-scan linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 40%;
+        z-index: -1;
+      }
+    }
+  }
+
+  &--interactive {
+    transition: border-color var(--dur), box-shadow var(--dur), transform var(--dur) var(--ease-out);
+
+    &:hover,
+    &:focus-within {
+      --bracket: var(--mint);
+      border-color: var(--line-strong);
+      box-shadow: 0 0 0 1px rgb(var(--mint-rgb) / 0.08), 0 18px 50px -20px rgb(var(--mint-rgb) / 0.25);
+    }
+  }
+}
+
+@keyframes holo-scan {
+  0% { opacity: 1; background-position: 0 100%; }
+  99% { opacity: 1; background-position: 0 0%; }
+  100% { opacity: 0; background-position: 0 0%; }
+}
+
+// ---------- Buttons ----------
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--mint);
+  --btn-line: var(--line-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-line);
+  border-radius: var(--radius);
+  transition: background var(--dur-fast), color var(--dur-fast), box-shadow var(--dur), border-color var(--dur-fast);
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: none;
+    border-color: var(--mint);
+    box-shadow: var(--glow-mint);
+  }
+
+  &--primary {
+    --btn-bg: var(--amber);
+    --btn-fg: var(--text-on-amber);
+    --btn-line: var(--amber);
+
+    &:hover {
+      border-color: var(--amber);
+      box-shadow: 0 0 22px rgb(var(--amber-rgb) / 0.5);
+      color: var(--text-on-amber);
+    }
+  }
+
+  &--rose {
+    --btn-fg: var(--rose-text);
+    --btn-line: var(--line-rose);
+
+    &:hover {
+      border-color: var(--rose);
+      box-shadow: var(--glow-rose);
+    }
+  }
+
+  &__icon {
+    width: 1.1em;
+    height: 1.1em;
+    flex: none;
+  }
+}
+
+// ---------- Chips (tech tags, filters) ----------
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 32px;
+  padding: 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: rgb(var(--mint-rgb) / 0.03);
+
+  &--on {
+    color: var(--void);
+    background: var(--mint);
+    border-color: var(--mint);
+  }
+}
+
+// ---------- Reveal: lift into place on scroll (CSS only, no fade) ----------
+@include motion-ok {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-lift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes reveal-lift {
+  from { transform: translateY(28px); }
+  to { transform: none; }
+}

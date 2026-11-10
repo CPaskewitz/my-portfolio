@@ -1,0 +1,290 @@
+@use '../../styles/tokens' as *;
+
+// Corvian Labs' own palette and type (mirrors corvianlabs.com). Scoped to this section only.
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin-500-italic.woff2') format('woff2');
+}
+
+.uplink {
+  --cl-night: #0a1628;
+  --cl-navy: #0f2744;
+  --cl-teal: #14b8a6;
+  --cl-teal-light: #5eead4;
+  --cl-ice: #38bdf8;
+  --cl-text: #f1f5f9;
+  --cl-text-dim: #cbd5e1;
+  --cl-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  // ---------- handshake strip (still CORE) ----------
+  &__handshake {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    margin-bottom: var(--space-4);
+    color: var(--mint);
+  }
+
+  &__handshake-line {
+    flex: 1;
+    min-width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--mint), var(--cl-teal));
+  }
+
+  &__host {
+    color: var(--text);
+  }
+
+  &__live {
+    color: var(--cl-teal-light);
+  }
+
+  &__dot {
+    @include motion-ok {
+      animation: live-blink 2s steps(2, end) infinite;
+    }
+  }
+
+  // ---------- the Corvian window ----------
+  &__window {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    background: var(--cl-night);
+    border: 1px solid rgb(20 184 166 / 0.35);
+    box-shadow: 0 0 0 1px rgb(var(--mint-rgb) / 0.08), 0 40px 120px -40px rgb(20 184 166 / 0.35);
+    color: var(--cl-text);
+    isolation: isolate;
+  }
+
+  &__sky {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 30%;
+    }
+  }
+
+  // darken the backdrop so text keeps contrast everywhere
+  &__mist {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgb(10 22 40 / 0.94) 0%, rgb(10 22 40 / 0.82) 55%, rgb(10 22 40 / 0.4) 100%),
+      linear-gradient(0deg, var(--cl-night) 0%, transparent 40%);
+  }
+
+  &__raven {
+    position: absolute;
+    z-index: -1;
+    right: -6%;
+    bottom: 60px;
+    width: min(46%, 560px);
+    height: auto;
+    opacity: 0.95;
+    display: none;
+
+    @include desktop {
+      display: block;
+    }
+  }
+
+  &__content {
+    position: relative;
+    padding: clamp(var(--space-5), 5vw, var(--space-8));
+    padding-bottom: calc(clamp(var(--space-5), 5vw, var(--space-8)) + 70px);
+    display: grid;
+    gap: var(--space-4);
+
+    @include desktop {
+      max-width: 62%;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+
+    img {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  &__title {
+    font-family: var(--cl-serif);
+    font-weight: 600;
+    font-size: var(--step-4);
+    letter-spacing: -0.02em;
+    color: var(--cl-text);
+  }
+
+  &__tagline {
+    font-family: var(--cl-serif);
+    font-weight: 600;
+    font-size: var(--step-2);
+    line-height: 1.25;
+
+    em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--cl-teal-light);
+    }
+  }
+
+  &__intro {
+    color: var(--cl-text-dim);
+    font-size: var(--step-1);
+    max-width: 40rem;
+  }
+
+  &__note {
+    color: var(--cl-text-dim);
+    font-size: var(--step--1);
+    font-style: italic;
+  }
+
+  &__services {
+    list-style: none;
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+
+    @include tablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__card {
+    position: relative;
+    padding: var(--space-4);
+    border-radius: 10px;
+    background: rgb(15 39 68 / 0.6);
+    border: 1px solid rgb(148 163 184 / 0.18);
+    backdrop-filter: blur(6px);
+    display: grid;
+    gap: var(--space-1);
+
+    p {
+      color: var(--cl-text-dim);
+      font-size: var(--step--1);
+    }
+
+    &:last-child:nth-child(odd) {
+      @include tablet {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  &__num {
+    font-family: var(--cl-serif);
+    font-size: var(--step-1);
+    color: var(--cl-teal-light);
+  }
+
+  &__card-title {
+    font-family: var(--cl-serif);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  &__principles {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+    font-size: var(--step--1);
+    color: var(--cl-text);
+
+    li::before {
+      content: '✓';
+      margin-right: var(--space-2);
+      color: var(--cl-teal-light);
+    }
+  }
+
+  &__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 48px;
+    padding: 0 var(--space-5);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--cl-text);
+    border: 1px solid rgb(203 213 225 / 0.5);
+    transition: background var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
+
+    &:hover {
+      color: var(--cl-text);
+      border-color: var(--cl-text);
+      background: rgb(255 255 255 / 0.06);
+    }
+
+    &--primary {
+      background: var(--cl-teal);
+      border-color: var(--cl-teal);
+      color: #04201c;
+
+      &:hover {
+        color: #04201c;
+        background: var(--cl-teal-light);
+        border-color: var(--cl-teal-light);
+      }
+    }
+
+    &:focus-visible {
+      outline-color: var(--cl-teal-light);
+    }
+  }
+
+  &__treeline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    pointer-events: none;
+  }
+
+  &__ridge-back {
+    fill: #0c1d33;
+  }
+
+  &__ridge-front {
+    fill: var(--void);
+  }
+}
+
+@keyframes live-blink {
+  50% { opacity: 0.35; }
+}

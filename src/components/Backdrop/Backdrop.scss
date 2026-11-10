@@ -1,0 +1,53 @@
+@use '../../styles/tokens' as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--void);
+
+  &__grid {
+    position: absolute;
+    inset: -20% 0;
+    background-image:
+      linear-gradient(rgb(var(--mint-rgb) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--mint-rgb) / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 20%, transparent 75%);
+    will-change: transform;
+
+    @include motion-ok {
+      @supports (animation-timeline: scroll()) {
+        animation: grid-drift linear both;
+        animation-timeline: scroll(root);
+      }
+    }
+  }
+
+  &__glow {
+    position: absolute;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 50%;
+    filter: blur(40px);
+
+    &--mint {
+      top: -25vmax;
+      right: -20vmax;
+      background: radial-gradient(circle, rgb(var(--mint-rgb) / 0.09), transparent 65%);
+    }
+
+    &--rose {
+      bottom: -30vmax;
+      left: -25vmax;
+      background: radial-gradient(circle, rgb(var(--rose-rgb) / 0.08), transparent 65%);
+    }
+  }
+}
+
+@keyframes grid-drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-12%); }
+}

@@ -1,0 +1,121 @@
+@use '../../styles/tokens' as *;
+
+.palette {
+  margin: 12vh auto auto;
+  width: min(640px, calc(100vw - 2 * var(--space-4)));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  overflow: visible;
+
+  &::backdrop {
+    background: rgb(2 4 6 / 0.75);
+    backdrop-filter: blur(4px);
+  }
+
+  &[open] {
+    @include motion-ok {
+      animation: palette-in 260ms var(--ease-out);
+    }
+  }
+
+  &__panel {
+    display: grid;
+    background: var(--void-2);
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+    border-bottom: 1px solid var(--line);
+    color: var(--mint);
+  }
+
+  &__input {
+    flex: 1;
+    min-height: 60px;
+    background: transparent;
+    border: 0;
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    color: var(--text);
+    caret-color: var(--amber);
+
+    &::placeholder {
+      color: var(--text-faint);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__search:focus-within {
+    box-shadow: inset 0 -2px 0 var(--amber);
+  }
+
+  &__esc {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    color: var(--text-faint);
+  }
+
+  &__list {
+    list-style: none;
+    max-height: min(52vh, 420px);
+    overflow-y: auto;
+    padding: var(--space-2);
+    overscroll-behavior: contain;
+  }
+
+  &__group {
+    padding: var(--space-3) var(--space-3) var(--space-1);
+    color: var(--text-faint);
+    font-size: var(--step--2);
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 44px;
+    padding: 0 var(--space-3);
+    border-radius: 2px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+
+    &.is-active {
+      background: rgb(var(--mint-rgb) / 0.1);
+      border-left-color: var(--mint);
+    }
+  }
+
+  &__hint {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    color: var(--rose-text);
+  }
+
+  &__empty {
+    padding: var(--space-5) var(--space-3);
+    color: var(--text-dim);
+  }
+
+  &__foot {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--line);
+    font-size: var(--step--2);
+    color: var(--text-faint);
+  }
+}
+
+@keyframes palette-in {
+  from { transform: translateY(-8px) scale(0.98); clip-path: inset(0 0 100% 0); }
+  to { transform: none; clip-path: inset(0); }
+}
