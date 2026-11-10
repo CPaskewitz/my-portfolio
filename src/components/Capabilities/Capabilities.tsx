@@ -84,6 +84,19 @@ const Capabilities: React.FC = () => {
                 <span className="hud-label">Focus</span> {skillById(skill)?.name}: {matches}{' '}
                 {matches === 1 ? 'project' : 'projects'}
               </span>
+              {matches === 0 && (
+                <a
+                  href="#corvian-labs"
+                  className="btn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToSection('corvian-labs');
+                  }}
+                >
+                  Used in my studio work
+                  <Icon name="arrowRight" className="btn__icon" />
+                </a>
+              )}
               {matches > 0 && (
                 <a
                   href="#projects"

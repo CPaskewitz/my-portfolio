@@ -33,7 +33,7 @@ export const projects: Project[] = [
       '/LeapIntoLessons2_Contact.webp',
     ],
     link: 'https://leapintolessons.com',
-    skills: ['nextjs', 'react', 'typescript', 'tailwind', 'mongodb', 'node', 'a11y', 'perf'],
+    skills: ['nextjs', 'react', 'typescript', 'tailwind', 'mongodb', 'node', 'auth', 'redis', 'a11y', 'perf'],
   },
   {
     id: 'oawn',
@@ -94,7 +94,7 @@ export const projects: Project[] = [
       '/QuestListRPG_Stats.webp',
     ],
     github: 'https://github.com/CPaskewitz/taskmasterrpg',
-    skills: ['react', 'typescript', 'sass', 'mongodb', 'node', 'rest', 'openai', 'heroku'],
+    skills: ['react', 'typescript', 'sass', 'mongodb', 'node', 'express', 'rest', 'openai', 'heroku'],
   },
   {
     id: 'petadoptr',
@@ -112,17 +112,18 @@ export const projects: Project[] = [
       '/PetAdoptr_Web_Sockets.jpeg',
       '/PetAdoptr_Knex.jpeg',
     ],
-    skills: ['react-native', 'typescript', 'node', 'mysql', 'sass'],
+    skills: ['react-native', 'typescript', 'node', 'express', 'websockets', 'mysql'],
   },
-  {
-    id: 'leap-into-lessons',
-    code: 'PRJ-01',
-    title: 'Leap Into Lessons',
-    kind: 'Client',
-    summary: 'The original WordPress booking site for summer swim lessons.',
-    detail:
-      'A custom WordPress build with PHP booking forms and Google Maps lesson locations. Version 2.0 above replaced it.',
-    images: ['/leap-home.webp', '/leapintolessons_booking.webp'],
-    skills: ['wordpress', 'php', 'rest', 'html', 'css'],
-  },
+  // Archived Nov 2026: superseded by Leap Into Lessons 2.0 above.
+  // {
+  //   id: 'leap-into-lessons',
+  //   code: 'PRJ-01',
+  //   title: 'Leap Into Lessons',
+  //   kind: 'Client',
+  //   summary: 'The original WordPress booking site for summer swim lessons.',
+  //   detail:
+  //     'A custom WordPress build with PHP booking forms and Google Maps lesson locations. Version 2.0 above replaced it.',
+  //   images: ['/leap-home.webp', '/leapintolessons_booking.webp'],
+  //   skills: ['wordpress', 'php', 'rest', 'html', 'css'],
+  // },
 ];

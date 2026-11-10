@@ -9,7 +9,7 @@ import ProjectFile from './ProjectFile';
 import './ProjectionBay.scss';
 
 /** Quick filters shown above the grid (the full set lives in the capability matrix). */
-const QUICK: SkillId[] = ['react', 'nextjs', 'typescript', 'node', 'mongodb', 'a11y', 'wordpress'];
+const QUICK: SkillId[] = ['react', 'nextjs', 'typescript', 'node', 'mongodb', 'openai', 'a11y'];
 
 /**
  * 03 Projects: holo panels with the screenshot in a browser frame, tilting toward a fine

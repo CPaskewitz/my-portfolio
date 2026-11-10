@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const LINES = ['CORE v3.0 boot', 'linking profile… ok', 'loading projects… 6 files', 'uplink: corvian labs… ok', 'projection online'];
+const LINES = ['CORE v3.0 boot', 'linking profile… ok', 'loading projects… 5 files', 'uplink: corvian labs… ok', 'projection online'];
 const KEY = 'core-booted';
 
 /**
@@ -43,8 +43,11 @@ const BootLog: React.FC = () => {
     <div className="boot" aria-hidden="true">
       <div className="boot__scan" />
       <ol className="boot__log">
-        {LINES.slice(0, lines + 1).map((l) => (
-          <li key={l}>&gt; {l}</li>
+        {/* every line is laid out from the start (no size change, no layout shift); they appear in turn */}
+        {LINES.map((l, i) => (
+          <li key={l} style={{ visibility: i <= lines ? 'visible' : 'hidden' }}>
+            &gt; {l}
+          </li>
         ))}
       </ol>
     </div>

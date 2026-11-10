@@ -26,8 +26,11 @@ src/
     seoData.ts, structuredData.ts   meta + JSON-LD
   styles/          tokens, fonts, base, shared system classes
   components/      one folder per component (tsx + scss)
-public/            images, icons, resume PDF, fonts, corvian/ (assets copied from the Corvian repo)
-scripts/art/       imagegen.mjs (OpenAI), tripo.mjs (image → 3D), blender/ scripts
+public/            images, icons, resume PDF, fonts/, holo/depth.webp, og-image.png, corvian/ (assets copied
+                   from the Corvian repo)
+resume/resume.html the resume source; `node scripts/resume/render.mjs` writes public/Corey_Paskewitz_Resume.pdf
+scripts/art/       imagegen.mjs (OpenAI), tripo.mjs (image → 3D), render-svg.mjs (SVG/HTML → PNG),
+                   depth_from_alpha.py (hologram depth map)
 scripts/qa/        shots.mjs, axe.mjs, lighthouse.mjs (Playwright + axe-core + Lighthouse 12)
 art/source/        tracked art sources; art/drafts/ is git-ignored scratch
 archive/           retired components (not compiled); move things here instead of deleting
@@ -35,6 +38,9 @@ archive/           retired components (not compiled); move things here instead o
 
 ## Conventions
 - Content lives in `src/data/*`; components map over it.
+- The resume is HTML in `resume/` rendered to PDF; edit the HTML, re-render, never hand-edit the PDF. Keep the
+  site's skill matrix (`src/data/skills.ts`) and the resume's Technical Skills in step.
+- Social card: `art/source/og-card.html` → `node scripts/art/render-svg.mjs art/source/og-card.html public/og-image.png 1200 630`.
 - Remove things by commenting out or moving to `archive/`, never deleting.
 - Colour, type and spacing come from the CSS custom properties in `src/styles/_tokens.scss`. No raw hex in components.
 - Accessibility: WCAG 2.1 AA, 0 axe violations at desktop and phone. Every animation has a reduced-motion and a
@@ -58,7 +64,11 @@ Lighthouse baseline before the CORE redesign (Nov 2026): mobile perf 72 (LCP 7.9
 a11y / best practices / SEO 100; CLS 0; 1.96 MB.
 
 ## Status
-Branch `design/core-os`: CORE visual redesign in progress.
+Branch `design/core-os`: CORE visual redesign (phases 1–3 + sound done, QA in progress). Resume updated Nov 2026
+(Pawlunteer, help assistants, Salt & Spirit, ThawMail, Pensate; skills from all projects in ~/Projects).
 
 Open items:
+- The resume PDF on the site includes the phone number (as the source resume did); remove it from
+  `resume/resume.html` if the public copy shouldn't have it.
+- Merge `design/core-os`, deploy to Heroku, check the OG card with LinkedIn Post Inspector.
 - `static.json` security headers aren't applied: Heroku runs `vite preview` (Procfile), not the static buildpack.

@@ -5,7 +5,7 @@ import { profile } from '../../data/profile';
 /**
  * Hologram stage: orbit rings with role readouts, the emitter disc and its light cone, and
  * the figure. The figure starts as a CSS hologram treatment of the (already cached) portrait;
- * after load + idle, on hardware WebGL and without reduced motion, the three.js scene
+ * after load + idle, on hardware WebGL, at tablet width and up, without reduced motion, the three.js scene
  * (holoScene.ts, its own chunk) replaces it. Entirely decorative: aria-hidden, no pointer events.
  */
 const HoloStage: React.FC = () => {
@@ -14,7 +14,10 @@ const HoloStage: React.FC = () => {
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return;
+    // Phones keep the CSS hologram: three.js costs ~1.4 s of CPU on a mid-range phone,
+    // plus battery and ~130 KB, for a figure that's 340px wide there.
+    const phone = !window.matchMedia('(min-width: 768px)').matches;
+    if (reduce || phone) return;
     let dispose: (() => void) | undefined;
     let cancelled = false;
     const cancelIdle = afterLoadAndIdle(() => {

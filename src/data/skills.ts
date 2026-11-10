@@ -4,12 +4,12 @@
  */
 
 export type SkillId =
-  | 'html' | 'css' | 'sass' | 'tailwind' | 'javascript' | 'typescript' | 'react' | 'react-native' | 'nextjs' | 'redux'
-  | 'node' | 'php' | 'rest' | 'wordpress'
-  | 'mongodb' | 'mysql'
-  | 'vercel' | 'heroku'
-  | 'jest' | 'a11y' | 'perf'
-  | 'openai' | 'chatbots';
+  | 'react' | 'nextjs' | 'typescript' | 'javascript' | 'tailwind' | 'redux' | 'zustand' | 'threejs' | 'sass'
+  | 'node' | 'express' | 'rest' | 'websockets' | 'postgres' | 'prisma' | 'mongodb' | 'mysql' | 'redis'
+  | 'claude' | 'openai' | 'on-device-ai' | 'chatbots'
+  | 'swiftui' | 'react-native' | 'capacitor'
+  | 'vercel' | 'aws' | 'cloudflare' | 'auth' | 'stripe' | 'heroku'
+  | 'jest' | 'vitest' | 'playwright' | 'a11y' | 'perf';
 
 export interface Skill {
   id: SkillId;
@@ -35,40 +35,60 @@ export const skillGroups: SkillGroup[] = [
       { id: 'nextjs', name: 'Next.js', icon: '/nextjsicon.png' },
       { id: 'typescript', name: 'TypeScript', icon: '/typescripticon.png' },
       { id: 'javascript', name: 'JavaScript', icon: '/javascripticon.png' },
-      { id: 'redux', name: 'Redux', icon: '/reduxicon.png' },
-      { id: 'react-native', name: 'React Native', icon: '/reacticon.png' },
-      { id: 'html', name: 'HTML', icon: '/htmlicon.png' },
-      { id: 'css', name: 'CSS', icon: '/cssicon.png' },
-      { id: 'sass', name: 'Sass', icon: '/sassicon.png' },
       { id: 'tailwind', name: 'Tailwind', icon: '/tailwindicon.png' },
+      { id: 'redux', name: 'Redux', icon: '/reduxicon.png' },
+      { id: 'zustand', name: 'Zustand' },
+      { id: 'threejs', name: 'three.js / WebGL' },
+      { id: 'sass', name: 'Sass', icon: '/sassicon.png' },
     ],
   },
   {
     id: 'backend',
     code: 'BE',
-    name: 'Back end',
+    name: 'Back end & data',
     skills: [
       { id: 'node', name: 'Node.js', icon: '/nodeicon.png' },
+      { id: 'express', name: 'Express' },
       { id: 'rest', name: 'REST APIs', icon: '/restapiicon.png' },
-      { id: 'php', name: 'PHP', icon: '/phpicon.png' },
-      { id: 'wordpress', name: 'WordPress', icon: '/wordpressicon.png' },
+      { id: 'websockets', name: 'WebSockets' },
+      { id: 'postgres', name: 'PostgreSQL' },
+      { id: 'prisma', name: 'Prisma' },
+      { id: 'mongodb', name: 'MongoDB', icon: '/mongodbicon.png' },
+      { id: 'mysql', name: 'MySQL', icon: '/mysqlicon.png' },
+      { id: 'redis', name: 'Redis' },
     ],
   },
   {
-    id: 'data',
-    code: 'DB',
-    name: 'Data',
+    id: 'ai',
+    code: 'AI',
+    name: 'AI',
     skills: [
-      { id: 'mongodb', name: 'MongoDB', icon: '/mongodbicon.png' },
-      { id: 'mysql', name: 'MySQL', icon: '/mysqlicon.png' },
+      { id: 'claude', name: 'Claude API' },
+      { id: 'openai', name: 'OpenAI API' },
+      { id: 'on-device-ai', name: 'On-device AI' },
+      { id: 'chatbots', name: 'Help assistants' },
+    ],
+  },
+  {
+    id: 'mobile',
+    code: 'APP',
+    name: 'Mobile',
+    skills: [
+      { id: 'swiftui', name: 'Swift / SwiftUI' },
+      { id: 'react-native', name: 'React Native', icon: '/reacticon.png' },
+      { id: 'capacitor', name: 'Capacitor' },
     ],
   },
   {
     id: 'infra',
     code: 'OPS',
-    name: 'Deploy',
+    name: 'Cloud, auth & payments',
     skills: [
       { id: 'vercel', name: 'Vercel', icon: '/vercelicon.png' },
+      { id: 'aws', name: 'AWS' },
+      { id: 'cloudflare', name: 'Cloudflare Workers' },
+      { id: 'auth', name: 'Auth & RBAC' },
+      { id: 'stripe', name: 'Stripe' },
       { id: 'heroku', name: 'Heroku', icon: '/herokuicon.png' },
     ],
   },
@@ -77,21 +97,16 @@ export const skillGroups: SkillGroup[] = [
     code: 'QA',
     name: 'Quality',
     skills: [
-      { id: 'jest', name: 'Jest', icon: '/jesticon.png' },
       { id: 'a11y', name: 'Accessibility' },
       { id: 'perf', name: 'Performance' },
-    ],
-  },
-  {
-    id: 'ai',
-    code: 'AI',
-    name: 'AI',
-    skills: [
-      { id: 'openai', name: 'OpenAI APIs' },
-      { id: 'chatbots', name: 'Help assistants' },
+      { id: 'playwright', name: 'Playwright' },
+      { id: 'vitest', name: 'Vitest' },
+      { id: 'jest', name: 'Jest', icon: '/jesticon.png' },
     ],
   },
 ];
+// Retired from the matrix (Nov 2026): HTML, CSS, PHP, WordPress (basics / only used by the
+// original Leap Into Lessons, which is archived in projects.ts).
 
 export const allSkills: Skill[] = skillGroups.flatMap((g) => g.skills);
 
