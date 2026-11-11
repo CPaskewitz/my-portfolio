@@ -7,6 +7,7 @@ const paths = {
   arrowRight: 'M4 12h15m0 0-6-6m6 6-6 6',
   arrowUp: 'M12 20V5m0 0-6 6m6-6 6 6',
   close: 'M5 5l14 14M19 5 5 19',
+  expand: 'M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5',
   chevronLeft: 'M15 5l-7 7 7 7',
   chevronRight: 'M9 5l7 7-7 7',
   command: 'M9 6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6z',

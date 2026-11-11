@@ -5,14 +5,21 @@ import { useCore } from '../../state/CoreContext';
 import { play } from '../../lib/sound';
 import Icon from '../Icon/Icon';
 
+/** Screenshots taller than this (height / width) are full-page captures: the frame shows their top. */
+const TALL_RATIO = 2.5;
+
 /**
  * The project file viewer: a native <dialog> (focus trap, Esc, inert background for free)
- * with a screenshot carousel, the long description, the stack and links.
+ * with a screenshot carousel, the long description, the stack and links. Pressing the
+ * screenshot opens a second, full-screen <dialog> where it shows at full width and scrolls.
  */
 const ProjectFile: React.FC = () => {
   const { openProjectId, openProject } = useCore();
   const ref = useRef<HTMLDialogElement>(null);
+  const zoomRef = useRef<HTMLDialogElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
+  const [tall, setTall] = useState(false);
   const project = projects.find((p) => p.id === openProjectId) ?? null;
 
   useEffect(() => {
@@ -27,17 +34,29 @@ const ProjectFile: React.FC = () => {
     }
   }, [project]);
 
+  // each screenshot in the full-size view starts at its top
+  useEffect(() => {
+    scrollRef.current?.scrollTo(0, 0);
+  }, [index]);
+
   if (!project) return <dialog ref={ref} className="file" aria-label="Project file" />;
 
   const count = project.images.length;
   const go = (d: number) => setIndex((i) => (i + d + count) % count);
+  const src = project.images[index];
+  const alt = `${project.title}, screenshot ${index + 1} of ${count}`;
+  const openZoom = () => {
+    zoomRef.current?.showModal();
+    play('open');
+  };
 
   return (
     <dialog
       ref={ref}
       className="file"
       aria-labelledby="file-title"
-      onClose={() => {
+      onClose={(e) => {
+        if (e.target !== e.currentTarget) return; // the full-size view closing
         play('close');
         openProject(null);
       }}
@@ -66,14 +85,23 @@ const ProjectFile: React.FC = () => {
         </header>
 
         <div className="file__viewer">
-          <div className="file__stage">
+          <button
+            type="button"
+            className={`file__stage${tall ? ' file__stage--tall' : ''}`}
+            onClick={openZoom}
+          >
             <img
-              key={project.images[index]}
-              src={project.images[index]}
-              alt={`${project.title}, screenshot ${index + 1} of ${count}`}
+              key={src}
+              src={src}
+              alt={alt}
               className="file__img"
+              onLoad={(e) => setTall(e.currentTarget.naturalHeight / e.currentTarget.naturalWidth > TALL_RATIO)}
             />
-          </div>
+            <span className="file__enlarge hud-label">
+              <Icon name="expand" className="btn__icon" />
+              View full size
+            </span>
+          </button>
           {count > 1 && (
             <div className="file__controls">
               <button type="button" className="btn" onClick={() => go(-1)}>
@@ -90,6 +118,51 @@ const ProjectFile: React.FC = () => {
             </div>
           )}
         </div>
+
+        <dialog
+          ref={zoomRef}
+          className="zoom"
+          aria-label={`${alt}, full size`}
+          onClose={() => play('close')}
+          onClick={(e) => {
+            // a press on the empty area beside the screenshot closes the full-size view
+            if (e.target === e.currentTarget || e.target === scrollRef.current) zoomRef.current?.close();
+          }}
+        >
+          <div className="zoom__bar">
+            <p className="hud-label zoom__title">
+              <span className="file__code">{project.code}</span> // {project.title}
+            </p>
+            {count > 1 && (
+              <div className="file__controls">
+                <button type="button" className="btn" onClick={() => go(-1)}>
+                  <Icon name="chevronLeft" className="btn__icon" />
+                  <span className="visually-hidden">Previous screenshot</span>
+                </button>
+                <span className="file__counter hud-label" aria-live="polite">
+                  {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
+                </span>
+                <button type="button" className="btn" onClick={() => go(1)}>
+                  <Icon name="chevronRight" className="btn__icon" />
+                  <span className="visually-hidden">Next screenshot</span>
+                </button>
+              </div>
+            )}
+            <button type="button" className="file__close" onClick={() => zoomRef.current?.close()}>
+              <Icon name="close" />
+              <span className="visually-hidden">Close full-size view</span>
+            </button>
+          </div>
+          <div
+            ref={scrollRef}
+            className="zoom__scroll"
+            tabIndex={0}
+            role="region"
+            aria-label="Full-size screenshot (scrolls)"
+          >
+            <img key={src} src={src} alt={alt} className="zoom__img" />
+          </div>
+        </dialog>
 
         <div className="file__info">
           <p className="file__summary">{project.summary}</p>

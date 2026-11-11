@@ -275,22 +275,72 @@
     gap: var(--space-3);
   }
 
+  // The screenshot frame. The image is absolutely placed so it can never grow the frame
+  // (it used to overflow and get cropped). Wide shots fit whole; full-page shots show
+  // their top with a fade, and pressing the frame opens the full-size view.
   &__stage {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
     border: 1px solid var(--line);
     background: var(--void);
     aspect-ratio: 16 / 10;
-    display: grid;
-    place-items: center;
     overflow: hidden;
+    cursor: zoom-in;
+    transition: border-color var(--dur);
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--mint);
+    }
+
+    &--tall::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0;
+      height: 30%;
+      background: linear-gradient(to bottom, transparent, var(--void));
+      pointer-events: none;
+    }
   }
 
   &__img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
 
+    .file__stage--tall & {
+      object-fit: cover;
+      object-position: top;
+    }
+
     @include motion-ok {
       animation: file-img 420ms var(--ease-out);
+    }
+  }
+
+  &__enlarge {
+    position: absolute;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    color: var(--text);
+    background: var(--void);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    transition: color var(--dur), border-color var(--dur);
+
+    .file__stage:hover &,
+    .file__stage:focus-visible & {
+      color: var(--mint);
+      border-color: var(--mint);
     }
   }
 
@@ -333,6 +383,82 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
+  }
+}
+
+// ---------- Full-size screenshot view ----------
+.zoom {
+  width: 100vw;
+  max-width: none;
+  height: 100svh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(2 4 6 / 0.94);
+  color: var(--text);
+  overflow: hidden;
+
+  &[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  &::backdrop {
+    background: transparent;
+  }
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--line);
+    background: var(--void);
+  }
+
+  &__title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__scroll {
+    overflow: auto;
+    overscroll-behavior: contain;
+    display: grid;
+    align-content: safe center;
+    justify-items: center;
+    padding: var(--space-4);
+    cursor: zoom-out;
+
+    &:focus-visible {
+      outline-offset: -4px;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: auto;
+    max-width: min(100%, 1600px);
+    height: auto;
+    cursor: default;
+    box-shadow: 0 0 0 1px var(--line-strong);
+  }
+}
+
+@media (max-width: 599px) {
+  .zoom {
+    &__title {
+      display: none;
+    }
+
+    &__scroll {
+      padding: var(--space-2);
+    }
   }
 }
 
