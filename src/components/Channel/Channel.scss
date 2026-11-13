@@ -95,6 +95,19 @@
     }
   }
 
+  // Reserve the reCAPTCHA iframe's height before it loads (CLS 0): 78px normal, 144px compact.
+  &__captcha {
+    container-type: inline-size;
+  }
+
+  &__captcha-widget {
+    min-height: 78px;
+
+    @container (max-width: 303px) {
+      min-height: 144px;
+    }
+  }
+
   &__submit {
     display: flex;
     flex-wrap: wrap;
