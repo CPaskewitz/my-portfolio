@@ -1,8 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import emailjs from 'emailjs-com';
 import { profile, socialLinks } from '../../data/profile';
 import { corvian } from '../../data/corvian';
 import { play } from '../../lib/sound';
+import { loadRecaptcha, RECAPTCHA_SITE_KEY, type Grecaptcha } from '../../lib/recaptcha';
 import SectionHead from '../SectionHead/SectionHead';
 import ScanSeam from '../ScanSeam/ScanSeam';
 import Icon from '../Icon/Icon';
@@ -27,6 +28,49 @@ const Channel: React.FC = () => {
   const [touched, setTouched] = useState<Record<Field, boolean>>({ name: false, email: false, message: false });
   const [status, setStatus] = useState<Status>('idle');
   const formRef = useRef<HTMLFormElement>(null);
+
+  // reCAPTCHA v2: load Google's script only when the form is close to the viewport, then render the
+  // checkbox once. `captcha` is null until then; `captchaError` covers blocked/failed loads.
+  const captchaRef = useRef<HTMLDivElement>(null);
+  const captchaApi = useRef<{ g: Grecaptcha; id: number } | null>(null);
+  const [captchaError, setCaptchaError] = useState('');
+  const [captchaUnavailable, setCaptchaUnavailable] = useState(false);
+
+  useEffect(() => {
+    const el = captchaRef.current;
+    if (!el) return;
+    let cancelled = false;
+    const start = () => {
+      loadRecaptcha()
+        .then((g) => {
+          if (cancelled || captchaApi.current || !captchaRef.current) return;
+          const id = g.render(captchaRef.current, {
+            sitekey: RECAPTCHA_SITE_KEY,
+            theme: 'dark',
+            // The full widget is 304px wide; on narrow phones use the compact (164px) version.
+            size: captchaRef.current.offsetWidth < 304 ? 'compact' : 'normal',
+            callback: () => setCaptchaError(''),
+            'expired-callback': () => setCaptchaError('Verification expired. Please tick the box again'),
+          });
+          captchaApi.current = { g, id };
+        })
+        .catch(() => !cancelled && setCaptchaUnavailable(true));
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          start();
+        }
+      },
+      { rootMargin: '600px 0px' }
+    );
+    io.observe(el);
+    return () => {
+      cancelled = true;
+      io.disconnect();
+    };
+  }, []);
 
   const onChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -57,12 +101,22 @@ const Channel: React.FC = () => {
       formRef.current?.querySelector<HTMLElement>(`[name="${firstBad}"]`)?.focus();
       return;
     }
+    const captcha = captchaApi.current;
+    if (!captcha || !captcha.g.getResponse(captcha.id)) {
+      setCaptchaError(
+        captcha ? 'Please tick "I\'m not a robot" before sending' : 'Verification is still loading. Try again in a moment'
+      );
+      return;
+    }
+    setCaptchaError('');
+    // Read the form before re-rendering: `sending` disables the inputs, and disabled fields are not submitted.
+    const form = e.currentTarget;
     setStatus('sending');
     try {
       await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        e.currentTarget,
+        form,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
       play('transmit');
@@ -72,6 +126,9 @@ const Channel: React.FC = () => {
     } catch (err) {
       console.error('Error sending message:', err);
       setStatus('error');
+    } finally {
+      // A reCAPTCHA token is single-use; clear the checkbox for the next message.
+      captcha.g.reset(captcha.id);
     }
   };
 
@@ -127,6 +184,21 @@ const Channel: React.FC = () => {
               'Message',
               <textarea id="message-field" name="message" rows={6} required value={values.message} onChange={onChange} onBlur={onBlur} disabled={status === 'sending'} className="channel__input channel__textarea" {...aria('message')} />
             )}
+
+            <div className="channel__field channel__captcha">
+              <div ref={captchaRef} className="channel__captcha-widget" />
+              {captchaUnavailable && (
+                <p className="channel__error" id="captcha-error">
+                  The spam check couldn't load (an ad or tracker blocker may be stopping it). Please reach me on
+                  LinkedIn instead.
+                </p>
+              )}
+              {captchaError && !captchaUnavailable && (
+                <p className="channel__error" id="captcha-error" role="alert">
+                  {captchaError}
+                </p>
+              )}
+            </div>
 
             <div className="channel__submit">
               <button type="submit" className="btn btn--primary" disabled={status === 'sending'} aria-busy={status === 'sending'}>

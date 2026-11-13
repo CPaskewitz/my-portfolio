@@ -76,5 +76,7 @@ Open items:
 - Check the OG card with LinkedIn Post Inspector.
 - CSP is enforced (Nov 2026). Any new external host (script, font, API, image) must be added to `vercel.json` or it
   will be blocked; check the console in `vite preview`.
+- Contact form has reCAPTCHA v2 (`src/lib/recaptcha.ts`, key limited to cpaskewitz.com, so it doesn't render on
+  localhost; test the form on the live site). EmailJS verifies it with the secret key in the template settings.
 - EmailJS is on the free plan (no server-side rate limit); the Gmail service needs reconnecting in the EmailJS
   dashboard when Google revokes its grant (412 "Invalid grant").
