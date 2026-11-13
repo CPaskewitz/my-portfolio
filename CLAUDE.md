@@ -8,7 +8,8 @@ projects Corey, his work and his studio as light in a dark room. It has its own 
 Corvian Labs: the Corvian section is an "uplink" that switches into Corvian's own moonlit navy/teal style.
 
 ## Tech
-- Vite 5 + React 18 + TypeScript (strict) + SCSS. Hosted on Heroku (`Procfile` → `npm start` → `vite preview`).
+- Vite 8 + React 18 + TypeScript (strict) + SCSS. Live site is served by Vercel (static `dist/`); security headers
+  are in `vercel.json` and `vite preview` serves the same set. `Procfile`/`static.json` are Heroku leftovers.
 - Contact form: EmailJS (`VITE_EMAILJS_*` in `.env`; the public key is public by design).
 - 3D: `three` (raw), only in the hero hologram, loaded after load + idle on hardware WebGL only.
 - Fonts: self-hosted variable woff2 in `public/fonts/` (Unbounded display, Geist body, Geist Mono HUD).
@@ -73,4 +74,6 @@ Open items:
 - Pawlunteer stays off the resume and site until it launches (owner decision, Nov 2026). Only list projects
   the owner has confirmed are complete.
 - Merge `design/core-os`, deploy to Heroku, check the OG card with LinkedIn Post Inspector.
-- `static.json` security headers aren't applied: Heroku runs `vite preview` (Procfile), not the static buildpack.
+- CSP ships as `Content-Security-Policy-Report-Only` (Nov 2026). Once a live deploy shows no violations, rename the
+  key in `vercel.json` to `Content-Security-Policy` to enforce it.
+- Confirm whether an old Heroku app still serves this repo; if so, shut it down.
