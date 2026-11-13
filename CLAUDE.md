@@ -9,7 +9,7 @@ Corvian Labs: the Corvian section is an "uplink" that switches into Corvian's ow
 
 ## Tech
 - Vite 8 + React 18 + TypeScript (strict) + SCSS. Live site is served by Vercel (static `dist/`); security headers
-  are in `vercel.json` and `vite preview` serves the same set. `Procfile`/`static.json` are Heroku leftovers.
+  are in `vercel.json` (CSP enforced) and `vite preview` serves the same set. Old Heroku files are in `archive/heroku/`.
 - Contact form: EmailJS (`VITE_EMAILJS_*` in `.env`; the public key is public by design).
 - 3D: `three` (raw), only in the hero hologram, loaded after load + idle on hardware WebGL only.
 - Fonts: self-hosted variable woff2 in `public/fonts/` (Unbounded display, Geist body, Geist Mono HUD).
@@ -73,7 +73,8 @@ Branch `design/core-os`: CORE visual redesign (phases 1–3 + sound done, QA in 
 Open items:
 - Pawlunteer stays off the resume and site until it launches (owner decision, Nov 2026). Only list projects
   the owner has confirmed are complete.
-- Merge `design/core-os`, deploy to Heroku, check the OG card with LinkedIn Post Inspector.
-- CSP ships as `Content-Security-Policy-Report-Only` (Nov 2026). Once a live deploy shows no violations, rename the
-  key in `vercel.json` to `Content-Security-Policy` to enforce it.
-- Confirm whether an old Heroku app still serves this repo; if so, shut it down.
+- Check the OG card with LinkedIn Post Inspector.
+- CSP is enforced (Nov 2026). Any new external host (script, font, API, image) must be added to `vercel.json` or it
+  will be blocked; check the console in `vite preview`.
+- EmailJS is on the free plan (no server-side rate limit); the Gmail service needs reconnecting in the EmailJS
+  dashboard when Google revokes its grant (412 "Invalid grant").
